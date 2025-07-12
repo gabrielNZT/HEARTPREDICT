@@ -17,7 +17,7 @@ def load_and_preprocess_data(file_path):
     df = pd.read_csv(file_path, sep=';')
     
     print(f"Dataset carregado: {df.shape}")
-    print(f"Colunas: {df.columns.tolist()}")
+    print(f"Colunas: {df.colíumns.tolist()}")
     
     # Remover coluna ID (não é útil para predição)
     df = df.drop('id', axis=1)
