@@ -202,7 +202,7 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ## 📞 Contato
 
-- **Equipe de Desenvolvimento**: [seu-email@domain.com]
+- **Equipe de Desenvolvimento**: [gabrielnunescesarino@gmail.com]
 - **Documentação Técnica**: Ver `instructions.md`
 - **Issues**: [GitHub Issues](link-para-issues)
 
