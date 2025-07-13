@@ -63,6 +63,9 @@ class EnhancedPredictionResponse(BaseModel):
     clinical_features: Dict[str, Any]
     interpretation: Dict[str, str]
 
+    class Config:
+        protected_namespaces = ()
+
 class ModelManager:
     """
     Gerenciador thread-safe para o modelo aprimorado
@@ -72,7 +75,7 @@ class ModelManager:
     
     def __new__(cls):
         if cls._instance is None:
-            with cls._lock:
+            with cls._lock: 
                 if cls._instance is None:
                     cls._instance = super(ModelManager, cls).__new__(cls)
                     cls._instance._model = None

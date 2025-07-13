@@ -34,6 +34,7 @@ class PatientData(BaseModel):
         }
 
 class EnhancedPredictionResponse(BaseModel):
+
     user_id: str
     chronic_risk_score: float
     risk_prediction: int
@@ -42,3 +43,5 @@ class EnhancedPredictionResponse(BaseModel):
     model_info: Dict[str, Any]
     clinical_features: Dict[str, Any]
     interpretation: Dict[str, str]
+
+    model_config = {"protected_namespaces": ()}
