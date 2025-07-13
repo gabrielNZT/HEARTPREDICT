@@ -56,9 +56,8 @@ public class AgenteGerenciadorPacientes extends Agent {
 
                 System.out.println("\n[GATEWAY HTTP] Requisição recebida!");
                 System.out.println("[GATEWAY HTTP] Corpo da requisição: " + requestBody);
-                
-                // Envia os dados para o AgenteJulgador
-                enviarDadosParaJulgador(requestBody);
+                     // Envia os dados para o AgenteClassificador
+            enviarDadosParaClassificador(requestBody);
             }
 
             String response = "Requisição recebida com sucesso pelo AgenteGerenciadorPacientes!";
@@ -68,11 +67,11 @@ public class AgenteGerenciadorPacientes extends Agent {
             os.close();
         }
         
-        private void enviarDadosParaJulgador(String dadosJson) {
+        private void enviarDadosParaClassificador(String dadosJson) {
             try {
                 // Valida se é JSON válido antes de enviar
                 if (dadosJson == null || dadosJson.trim().isEmpty()) {
-                    System.err.println("[GATEWAY HTTP] Dados vazios recebidos, não enviando para o AgenteJulgador");
+                    System.err.println("[GATEWAY HTTP] Dados vazios recebidos, não enviando para o AgenteClassificador");
                     return;
                 }
                 
@@ -80,18 +79,18 @@ public class AgenteGerenciadorPacientes extends Agent {
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.readTree(dadosJson); // Isso lança exceção se não for JSON válido
                 
-                // Cria mensagem para o AgenteJulgador
-                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                // Cria mensagem para o AgenteClassificador
+                ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                 msg.setContent(dadosJson);
-                msg.addReceiver(new AID("julgador", AID.ISLOCALNAME));
+                msg.addReceiver(new AID("classificador", AID.ISLOCALNAME));
                 
                 // Envia a mensagem
                 meuAgente.send(msg);
                 
-                System.out.println("[GATEWAY HTTP] Dados enviados para o AgenteJulgador");
+                System.out.println("[GATEWAY HTTP] Dados enviados para o AgenteClassificador");
                 
             } catch (Exception e) {
-                System.err.println("[GATEWAY HTTP] Erro ao enviar dados para o AgenteJulgador: " + e.getMessage());
+                System.err.println("[GATEWAY HTTP] Erro ao enviar dados para o AgenteClassificador: " + e.getMessage());
                 System.err.println("[GATEWAY HTTP] Dados recebidos: " + dadosJson);
                 e.printStackTrace();
             }

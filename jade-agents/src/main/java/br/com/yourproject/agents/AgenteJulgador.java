@@ -29,7 +29,7 @@ public class AgenteJulgador extends Agent {
             // Recebe mensagens com dados de pacientes (apenas do gerenciador)
             MessageTemplate template = MessageTemplate.and(
                 MessageTemplate.MatchPerformative(ACLMessage.INFORM),
-                MessageTemplate.MatchSender(new AID("gerenciador", AID.ISLOCALNAME))
+                MessageTemplate.MatchSender(new AID("classificador", AID.ISLOCALNAME))
             );
             ACLMessage msg = myAgent.receive(template);
             
@@ -67,26 +67,50 @@ public class AgenteJulgador extends Agent {
     }
     
     private String classificarSeriedade(JsonNode dadosPaciente) {
+        // Novo formato de resposta do main_enhanced.py inclui mais informações
         double chronicRiskScore = dadosPaciente.get("chronic_risk_score").asDouble();
         String userId = dadosPaciente.get("user_id").asText();
+        String riskLevel = dadosPaciente.get("risk_level").asText(); // Baixo, Moderado, Alto, Muito Alto
+        int riskPrediction = dadosPaciente.get("risk_prediction").asInt(); // 0 ou 1
+        
+        // Exibir informações detalhadas do modelo aprimorado
+        JsonNode clinicalFeatures = dadosPaciente.get("clinical_features");
+        JsonNode interpretation = dadosPaciente.get("interpretation");
         
         String nivelSeriedade;
         
-        if (chronicRiskScore >= 0.8) {
+        // Usar tanto o score quanto o risk_level para classificação mais precisa
+        if (chronicRiskScore >= 0.8 || "Muito Alto".equals(riskLevel)) {
             nivelSeriedade = "CRÍTICO";
-        } else if (chronicRiskScore >= 0.6) {
+        } else if (chronicRiskScore >= 0.6 || "Alto".equals(riskLevel)) {
             nivelSeriedade = "ALTO";
-        } else if (chronicRiskScore >= 0.4) {
+        } else if (chronicRiskScore >= 0.4 || "Moderado".equals(riskLevel)) {
             nivelSeriedade = "MÉDIO";
-        } else if (chronicRiskScore >= 0.2) {
+        } else if (chronicRiskScore >= 0.2 || "Baixo".equals(riskLevel)) {
             nivelSeriedade = "BAIXO";
         } else {
             nivelSeriedade = "MÍNIMO";
         }
         
-        System.out.println("\n[JULGADOR] Classificação do paciente " + userId + ":");
+        System.out.println("\n[JULGADOR] Classificação APRIMORADA do paciente " + userId + ":");
         System.out.println("[JULGADOR] Chronic Risk Score: " + chronicRiskScore);
-        System.out.println("[JULGADOR] Nível de Seriedade: " + nivelSeriedade);
+        System.out.println("[JULGADOR] Risk Level (IA): " + riskLevel);
+        System.out.println("[JULGADOR] Risk Prediction: " + (riskPrediction == 1 ? "POSITIVO" : "NEGATIVO"));
+        System.out.println("[JULGADOR] Nível de Seriedade Final: " + nivelSeriedade);
+        
+        // Exibir informações clínicas se disponíveis
+        if (clinicalFeatures != null) {
+            System.out.println("[JULGADOR] Características Clínicas:");
+            System.out.println("[JULGADOR]   - BMI: " + clinicalFeatures.get("bmi"));
+            System.out.println("[JULGADOR]   - Categoria BMI: " + clinicalFeatures.get("bmi_category"));
+            System.out.println("[JULGADOR]   - Categoria PA: " + clinicalFeatures.get("blood_pressure_category"));
+            System.out.println("[JULGADOR]   - Categoria Idade: " + clinicalFeatures.get("age_category"));
+        }
+        
+        // Exibir interpretações clínicas se disponíveis
+        if (interpretation != null && interpretation.get("overall") != null) {
+            System.out.println("[JULGADOR] Interpretação Clínica: " + interpretation.get("overall").asText());
+        }
         
         return nivelSeriedade;
     }

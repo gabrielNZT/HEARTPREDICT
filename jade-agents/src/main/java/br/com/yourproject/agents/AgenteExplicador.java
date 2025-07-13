@@ -64,35 +64,48 @@ public class AgenteExplicador extends Agent {
     
     private String gerarExplicacao(String dadosJson) throws Exception {
         try {
-            // Parse dos dados do paciente
+            // Parse dos dados do paciente com novo formato
             JsonNode dadosPaciente = objectMapper.readTree(dadosJson);
             
-            // Extrai informações relevantes
+            // Extrai informações do novo formato JSON
             String userId = dadosPaciente.get("user_id").asText();
             double chronicRiskScore = dadosPaciente.get("chronic_risk_score").asDouble();
+            String riskLevel = dadosPaciente.get("risk_level").asText();
+            int riskPrediction = dadosPaciente.get("risk_prediction").asInt();
             
-            JsonNode features = dadosPaciente.get("features_used");
-            int age = features.get("age").asInt();
-            String gender = features.get("gender").asText();
-            double bmi = features.get("bmi").asDouble();
-            String bloodPressure = features.get("blood_pressure").asText();
-            int cholesterolLevel = features.get("cholesterol_level").asInt();
-            int glucoseLevel = features.get("glucose_level").asInt();
+            // Informações do modelo
+            JsonNode modelInfo = dadosPaciente.get("model_info");
+            String modelName = modelInfo.get("model_name").asText();
+            double rocAuc = modelInfo.get("roc_auc").asDouble();
             
-            JsonNode lifestyle = features.get("lifestyle_factors");
-            boolean smoking = lifestyle.get("smoking").asBoolean();
-            boolean alcohol = lifestyle.get("alcohol").asBoolean();
-            boolean physicalActivity = lifestyle.get("physical_activity").asBoolean();
+            // Features clínicas
+            JsonNode clinicalFeatures = dadosPaciente.get("clinical_features");
+            double bmi = clinicalFeatures.get("bmi").asDouble();
+            String bmiCategory = clinicalFeatures.get("bmi_category").asText();
+            String bloodPressureCategory = clinicalFeatures.get("blood_pressure_category").asText();
+            String ageCategory = clinicalFeatures.get("age_category").asText();
+            int lifestyleScore = clinicalFeatures.get("lifestyle_score").asInt();
+            int pressurePulse = clinicalFeatures.get("pressure_pulse").asInt();
             
-            // Cria o prompt detalhado para o Gemini
-            String prompt = construirPrompt(userId, chronicRiskScore, age, gender, bmi, 
-                                          bloodPressure, cholesterolLevel, glucoseLevel, 
-                                          smoking, alcohol, physicalActivity);
+            // Interpretações automáticas do modelo
+            JsonNode interpretation = dadosPaciente.get("interpretation");
+            String bmiInterpretation = interpretation.get("bmi").asText();
+            String bloodPressureInterpretation = interpretation.get("blood_pressure").asText();
+            String lifestyleInterpretation = interpretation.get("lifestyle").asText();
+            String overallInterpretation = interpretation.get("overall").asText();
+            
+            // Cria o prompt otimizado para o Gemini
+            String prompt = construirPromptOtimizado(userId, chronicRiskScore, riskLevel, 
+                                                   riskPrediction, modelName, rocAuc,
+                                                   bmi, bmiCategory, bloodPressureCategory, 
+                                                   ageCategory, lifestyleScore, pressurePulse,
+                                                   bmiInterpretation, bloodPressureInterpretation,
+                                                   lifestyleInterpretation, overallInterpretation);
             
             // Chama a API do Gemini
             String explicacao = geminiClient.gerarExplicacao(prompt);
             
-            System.out.println("[EXPLICADOR] Explicação gerada para paciente: " + userId);
+            System.out.println("[EXPLICADOR] Explicação gerada para paciente: " + userId + " (Risco: " + riskLevel + ")");
             
             return explicacao;
             
@@ -102,91 +115,48 @@ public class AgenteExplicador extends Agent {
         }
     }
     
-    private String construirPrompt(String userId, double chronicRiskScore, int age, String gender, 
-                                 double bmi, String bloodPressure, int cholesterolLevel, 
-                                 int glucoseLevel, boolean smoking, boolean alcohol, 
-                                 boolean physicalActivity) {
-        
-        // Determina o nível de risco
-        String nivelRisco;
-        if (chronicRiskScore >= 0.8) {
-            nivelRisco = "CRÍTICO";
-        } else if (chronicRiskScore >= 0.6) {
-            nivelRisco = "ALTO";
-        } else if (chronicRiskScore >= 0.4) {
-            nivelRisco = "MÉDIO";
-        } else if (chronicRiskScore >= 0.2) {
-            nivelRisco = "BAIXO";
-        } else {
-            nivelRisco = "MÍNIMO";
-        }
-        
-        // Interpreta os valores categóricos
-        String cholesterolDesc = interpretarColesterol(cholesterolLevel);
-        String glucoseDesc = interpretarGlicose(glucoseLevel);
-        String bmiDesc = interpretarIMC(bmi);
+    private String construirPromptOtimizado(String userId, double chronicRiskScore, String riskLevel,
+                                          int riskPrediction, String modelName, double rocAuc,
+                                          double bmi, String bmiCategory, String bloodPressureCategory,
+                                          String ageCategory, int lifestyleScore, int pressurePulse,
+                                          String bmiInterpretation, String bloodPressureInterpretation,
+                                          String lifestyleInterpretation, String overallInterpretation) {
         
         StringBuilder prompt = new StringBuilder();
-        prompt.append("Você é um especialista em cardiologia. Analise os dados do paciente e forneça uma explicação detalhada, educativa e empática sobre o risco cardiovascular.\n\n");
+        prompt.append("Você é um cardiologista experiente. Forneça uma explicação CONCISA e CLARA sobre o risco cardiovascular do paciente.\n\n");
         
-        prompt.append("**DADOS DO PACIENTE:**\n");
-        prompt.append("- ID: ").append(userId).append("\n");
-        prompt.append("- Idade: ").append(age).append(" anos\n");
-        prompt.append("- Gênero: ").append(gender).append("\n");
-        prompt.append("- IMC: ").append(bmi).append(" (").append(bmiDesc).append(")\n");
-        prompt.append("- Pressão Arterial: ").append(bloodPressure).append(" mmHg\n");
-        prompt.append("- Nível de Colesterol: ").append(cholesterolDesc).append("\n");
-        prompt.append("- Nível de Glicose: ").append(glucoseDesc).append("\n");
-        prompt.append("- Fumante: ").append(smoking ? "Sim" : "Não").append("\n");
-        prompt.append("- Consumo de Álcool: ").append(alcohol ? "Sim" : "Não").append("\n");
-        prompt.append("- Atividade Física: ").append(physicalActivity ? "Sim" : "Não").append("\n");
-        prompt.append("- **Score de Risco Crônico: ").append(String.format("%.2f", chronicRiskScore)).append(" (").append(nivelRisco).append(")**\n\n");
+        prompt.append("**DADOS ANALISADOS:**\n");
+        prompt.append("• Paciente: ").append(userId).append("\n");
+        prompt.append("• Score de Risco: ").append(String.format("%.2f", chronicRiskScore)).append(" (").append(riskLevel).append(")\n");
+        prompt.append("• Predição: ").append(riskPrediction == 1 ? "POSITIVO para doença cardiovascular" : "NEGATIVO para doença cardiovascular").append("\n");
+        prompt.append("• Modelo: ").append(modelName).append(" (Precisão: ").append(String.format("%.1f%%", rocAuc * 100)).append(")\n\n");
         
-        prompt.append("**SOLICITAÇÃO:**\n");
-        prompt.append("Forneça uma explicação abrangente que inclua:\n");
-        prompt.append("1. **Interpretação do Score de Risco**: Explique o que significa o score de ").append(String.format("%.2f", chronicRiskScore)).append(" em termos simples\n");
-        prompt.append("2. **Principais Fatores de Risco**: Identifique quais fatores mais contribuem para o risco\n");
-        prompt.append("3. **Recomendações Personalizadas**: Sugira mudanças específicas no estilo de vida\n");
-        prompt.append("4. **Próximos Passos**: Orientações sobre acompanhamento médico\n");
-        prompt.append("5. **Prognóstico**: Explique as perspectivas se as recomendações forem seguidas\n\n");
+        prompt.append("**ACHADOS CLÍNICOS:**\n");
+        prompt.append("• IMC: ").append(bmi).append(" (").append(bmiCategory).append(")\n");
+        prompt.append("• Pressão Arterial: ").append(bloodPressureCategory.replace("_", " ")).append("\n");
+        prompt.append("• Categoria Etária: ").append(ageCategory.replace("_", " ")).append("\n");
+        prompt.append("• Score de Estilo de Vida: ").append(lifestyleScore).append("\n");
+        prompt.append("• Pressão de Pulso: ").append(pressurePulse).append(" mmHg\n\n");
+        
+        prompt.append("**INTERPRETAÇÕES AUTOMÁTICAS:**\n");
+        prompt.append("• IMC: ").append(bmiInterpretation).append("\n");
+        prompt.append("• Pressão Arterial: ").append(bloodPressureInterpretation).append("\n");
+        prompt.append("• Estilo de Vida: ").append(lifestyleInterpretation).append("\n");
+        prompt.append("• Avaliação Geral: ").append(overallInterpretation).append("\n\n");
+        
+        prompt.append("**TAREFA:**\n");
+        prompt.append("Baseado nos dados acima, forneça uma explicação em linguagem simples que inclua:\n");
+        prompt.append("1. **O que significa o score ").append(String.format("%.2f", chronicRiskScore)).append("?**\n");
+        prompt.append("2. **Principais fatores contribuindo para o risco**\n");
+        prompt.append("3. **2-3 recomendações práticas específicas**\n");
+        prompt.append("4. **Urgência do acompanhamento médico**\n\n");
         
         prompt.append("**DIRETRIZES:**\n");
-        prompt.append("- Use linguagem clara e acessível\n");
-        prompt.append("- Seja empático e encorajador\n");
-        prompt.append("- Forneça informações baseadas em evidências\n");
-        prompt.append("- Estruture a resposta de forma organizada\n");
-        prompt.append("- Limite a resposta a aproximadamente 500 palavras\n");
+        prompt.append("• Seja direto e objetivo (máximo 400 palavras)\n");
+        prompt.append("• Use linguagem acessível\n");
+        prompt.append("• Foque no que é mais importante\n");
+        prompt.append("• Seja empático mas realista\n");
         
         return prompt.toString();
-    }
-    
-    private String interpretarColesterol(int level) {
-        switch (level) {
-            case 0: return "Normal";
-            case 1: return "Acima do Normal";
-            case 2: return "Muito Alto";
-            default: return "Não especificado";
-        }
-    }
-    
-    private String interpretarGlicose(int level) {
-        switch (level) {
-            case 0: return "Normal";
-            case 1: return "Acima do Normal";
-            case 2: return "Muito Alto";
-            default: return "Não especificado";
-        }
-    }
-    
-    private String interpretarIMC(double bmi) {
-        if (bmi < 18.5) {
-            return "Abaixo do peso";
-        } else if (bmi < 25) {
-            return "Peso normal";
-        } else if (bmi < 30) {
-            return "Sobrepeso";
-        } else {
-            return "Obesidade";
-        }
     }
 }
