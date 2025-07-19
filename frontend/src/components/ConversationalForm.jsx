@@ -23,6 +23,94 @@ export const questions = [
     inputProps: { placeholder: 'Digite o nome ou apelido 😊' },
   },
   {
+    key: 'ap_hi',
+    label: '🩺 Pressão sistólica (maior)',
+    type: 'number',
+    rules: [
+      { required: true, message: 'Pressão sistólica obrigatória' },
+      {
+        validator: (_, value) => {
+          const num = Number(value);
+          if (!value || isNaN(num) || num < 80 || num > 250) {
+            return Promise.reject('Valor inválido para pressão sistólica');
+          }
+          return Promise.resolve();
+        },
+      },
+    ],
+    inputProps: {
+      min: 80,
+      max: 250,
+      placeholder: 'Ex: 120',
+      help: 'A pressão sistólica é o número MAIOR na medição, geralmente entre 100 e 140 para adultos. Se não souber, use o valor do seu último exame ou peça orientação médica.'
+    },
+  },
+  {
+    key: 'ap_lo',
+    label: '🩺 Pressão diastólica (menor)',
+    type: 'number',
+    rules: [
+      { required: true, message: 'Pressão diastólica obrigatória' },
+      {
+        validator: (_, value) => {
+          const num = Number(value);
+          if (!value || isNaN(num) || num < 40 || num > 150) {
+            return Promise.reject('Valor inválido para pressão diastólica');
+          }
+          return Promise.resolve();
+        },
+      },
+    ],
+    inputProps: {
+      min: 40,
+      max: 150,
+      placeholder: 'Ex: 80',
+      help: 'A pressão diastólica é o número MENOR na medição, geralmente entre 60 e 90 para adultos. Se não souber, use o valor do seu último exame ou peça orientação médica.'
+    },
+  },
+  {
+    key: 'cholesterol',
+    label: '🧪 Nível de colesterol',
+    type: 'select',
+    options: [
+      { value: 1, label: 'Normal' },
+      { value: 2, label: 'Acima do normal' },
+      { value: 3, label: 'Muito acima do normal' },
+    ],
+    rules: [{ required: true, message: 'Selecione o nível de colesterol' }],
+  },
+  {
+    key: 'gluc',
+    label: '🧪 Nível de glicose',
+    type: 'select',
+    options: [
+      { value: 1, label: 'Normal' },
+      { value: 2, label: 'Acima do normal' },
+      { value: 3, label: 'Muito acima do normal' },
+    ],
+    rules: [{ required: true, message: 'Selecione o nível de glicose' }],
+  },
+  {
+    key: 'alco',
+    label: '🍷 Você consome álcool?',
+    type: 'select',
+    options: [
+      { value: 1, label: 'Sim' },
+      { value: 0, label: 'Não' },
+    ],
+    rules: [{ required: true, message: 'Selecione uma opção' }],
+  },
+  {
+    key: 'active',
+    label: '🏃 Você pratica atividade física regularmente?',
+    type: 'select',
+    options: [
+      { value: 1, label: 'Sim' },
+      { value: 0, label: 'Não' },
+    ],
+    rules: [{ required: true, message: 'Selecione uma opção' }],
+  },
+  {
     key: 'age',
     label: '🎂 Qual a sua idade?',
     type: 'number',
@@ -38,16 +126,16 @@ export const questions = [
         },
       },
     ],
-    inputProps: { min: 1, max: 120, placeholder: 'Ex: 35' },
+    inputProps: { min: 1, max: 120, placeholder: 'Ex: 28' }, // exemplo ajustado
   },
   {
     key: 'gender',
     label: '🧑‍⚕️ Qual o seu gênero?',
     type: 'select',
     options: [
-      { value: 'male', label: 'Masculino 👨' },
-      { value: 'female', label: 'Feminino 👩' },
-      { value: 'other', label: 'Outro 🧑' },
+      { value: 2, label: 'Masculino 👨' },
+      { value: 1, label: 'Feminino 👩' },
+      { value: 3, label: 'Outro 🧑' },
     ],
     rules: [{ required: true, message: 'Selecione o gênero' }],
   },
@@ -67,7 +155,7 @@ export const questions = [
         },
       },
     ],
-    inputProps: { min: 50, max: 250, placeholder: 'Ex: 168' },
+    inputProps: { min: 50, max: 250, placeholder: 'Ex: 172' }, // exemplo ajustado
   },
   {
     key: 'weight',
@@ -88,12 +176,12 @@ export const questions = [
     inputProps: { min: 20, max: 300, step: 0.1, inputMode: 'decimal', pattern: '[0-9]+([.,][0-9]{1,2})?', placeholder: 'Ex: 72.5' },
   },
   {
-    key: 'smoker',
+    key: 'smoke',
     label: '🚬 Você é fumante?',
     type: 'select',
     options: [
-      { value: true, label: 'Sim 👍' },
-      { value: false, label: 'Não 👎' },
+      { value: 1, label: 'Sim 👍' },
+      { value: 0, label: 'Não 👎' },
     ],
     rules: [{ required: true, message: 'Selecione uma opção' }],
   },
@@ -103,24 +191,26 @@ export function ConversationalForm({ step, onStep }) {
   const [form] = Form.useForm();
   const current = questions[step];
 
-  // Estado para guardar o nome do usuário após o primeiro passo
   const [nomeUsuario, setNomeUsuario] = useState('');
 
-  // Atualiza o nome do usuário após o primeiro passo
   const nomeForm = Form.useWatch('nome', form);
-  // Atualiza o estado apenas no passo 0, quando o nome é informado
   if (step === 0 && nomeForm && nomeForm !== nomeUsuario) {
     setNomeUsuario(nomeForm);
   }
 
-  // Textos intermediários personalizados
   const interTexts = [
-    'Que bom te conhecer! 😊 Vamos começar sua jornada de saúde.',
-    nomeUsuario ? `Perfeito, ${nomeUsuario}! Agora me conte sua idade. Isso é essencial para sua análise! 🎂` : 'Perfeito! Agora me conte sua idade. Isso é essencial para sua análise! 🎂',
-    nomeUsuario ? `Ótimo, ${nomeUsuario}! Qual o seu gênero? O algoritmo considera isso na sua avaliação. 🧑‍⚕️` : 'Ótimo! Qual o seu gênero? O algoritmo considera isso na sua avaliação. 🧑‍⚕️',
-    nomeUsuario ? `Excelente, ${nomeUsuario}! Sua altura nos ajuda a calcular métricas importantes para você. 📏` : 'Excelente! Sua altura nos ajuda a calcular métricas importantes para você. 📏',
-    nomeUsuario ? `Quase terminando, ${nomeUsuario}! Agora preciso saber seu peso. ⚖️` : 'Quase terminando! Agora preciso saber seu peso. ⚖️',
-    nomeUsuario ? `Última pergunta, ${nomeUsuario}! Você fuma? Isso impacta significativamente no seu risco cardíaco. 🚬` : 'Última pergunta! Você fuma? Isso impacta significativamente no seu risco cardíaco. 🚬',
+    '👋 Olá! Para começarmos, como você deseja ser chamado?',
+    nomeUsuario ? `Ótimo, ${nomeUsuario}! Agora informe sua pressão sistólica (maior). Se não souber, consulte seu último exame ou pergunte ao médico. 🩺` : 'Ótimo! Agora informe sua pressão sistólica (maior). Se não souber, consulte seu último exame ou pergunte ao médico. 🩺',
+    nomeUsuario ? `Perfeito, ${nomeUsuario}! Agora informe sua pressão diastólica (menor). 🩺` : 'Perfeito! Agora informe sua pressão diastólica (menor). 🩺',
+    nomeUsuario ? `Agora vamos para o colesterol, ${nomeUsuario}. Se não souber, escolha a opção mais próxima. 🧪` : 'Agora vamos para o colesterol. Se não souber, escolha a opção mais próxima. 🧪',
+    nomeUsuario ? `E o nível de glicose, ${nomeUsuario}? 🧪` : 'E o nível de glicose? 🧪',
+    nomeUsuario ? `Você consome álcool, ${nomeUsuario}? �` : 'Você consome álcool? 🍷',
+    nomeUsuario ? `Pratica atividade física regularmente, ${nomeUsuario}? 🏃` : 'Pratica atividade física regularmente? 🏃',
+    nomeUsuario ? `Agora sua idade, ${nomeUsuario}. Isso é essencial para sua análise! 🎂` : 'Agora sua idade. Isso é essencial para sua análise! 🎂',
+    nomeUsuario ? `Qual o seu gênero, ${nomeUsuario}? O algoritmo considera isso na sua avaliação. 🧑‍⚕️` : 'Qual o seu gênero? O algoritmo considera isso na sua avaliação. 🧑‍⚕️',
+    nomeUsuario ? `Sua altura nos ajuda a calcular métricas importantes para você, ${nomeUsuario}. 📏` : 'Sua altura nos ajuda a calcular métricas importantes para você. 📏',
+    nomeUsuario ? `Agora preciso saber seu peso, ${nomeUsuario}. ⚖️` : 'Agora preciso saber seu peso. ⚖️',
+    nomeUsuario ? `Você é fumante, ${nomeUsuario}? Isso impacta significativamente no seu risco cardíaco. 🚬` : 'Você é fumante? Isso impacta significativamente no seu risco cardíaco. 🚬',
   ];
   const handleNext = (values) => {
     const value = values[current.key];
@@ -144,55 +234,26 @@ export function ConversationalForm({ step, onStep }) {
       const selected = current.options.find(opt => opt.value === value);
       if (selected) displayValue = selected.label;
     }
-    // Salva o nome do usuário no estado ao finalizar o primeiro passo
     if (current.key === 'nome' && value) {
       setNomeUsuario(value);
     }
-    // Chama o callback para avançar o passo
     if (typeof onStep === 'function') {
       onStep(displayValue, isValid ? null : errorMsg);
     }
-    // Limpa o campo para o próximo passo, exceto o nome
     if (current.key !== 'nome') {
       form.resetFields();
     }
   };
 
   return (
-    <div key={step} className="animate-slide-in-right" style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'flex-end', 
-      marginBottom: 'var(--space-3)',
-      position: 'relative'
-    }}>
-      {/* Texto intermediário com design moderno */}
-      <div key={step} className="animate-fade-in" style={{ 
-        fontSize: '1rem',
-        color: 'var(--neutral-600)',
-        marginBottom: 'var(--space-3)',
-        textAlign: 'right',
-        fontWeight: 500,
-        lineHeight: 1.4,
-        background: 'linear-gradient(135deg, rgba(24, 144, 255, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%)',
-        padding: 'var(--space-2) var(--space-4)',
-        borderRadius: 'var(--radius-lg)',
-        border: '1px solid rgba(24, 144, 255, 0.1)',
-        backdropFilter: 'blur(10px)'
-      }}>
-        {interTexts[step]}
-      </div>
+    <div key={step} className={`animate-slide-in-right ${styles.formContainer}`}>
+      <div key={step} className={`animate-fade-in ${styles.interText}`}>{interTexts[step]}</div>
 
       <Form
         form={form}
         layout="vertical"
         onFinish={handleNext}
-        style={{ 
-          maxWidth: 380, 
-          minWidth: 240, 
-          width: '100%', 
-          margin: 0 
-        }}
+        className={styles.form}
         onKeyDown={e => {
           if (e.key === 'Enter') {
             e.preventDefault();
@@ -207,33 +268,27 @@ export function ConversationalForm({ step, onStep }) {
               size="large"
               autoFocus
               placeholder={current.inputProps?.placeholder || 'Escreva aqui...'}
-              style={{ 
-                fontSize: '1.125rem',
-                padding: 'var(--space-4) var(--space-5)',
-                borderRadius: 'var(--radius-lg)',
-                border: '2px solid rgba(24, 144, 255, 0.1)',
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)'
-              }}
+              className={styles.input}
             />
           </Form.Item>
         )}
         {current.type === 'number' && (
-          <Form.Item name={current.key} label={false} rules={current.rules} style={{ marginBottom: 0 }}>
+          <Form.Item name={current.key} label={false} rules={current.rules} style={{ marginBottom: 0 }} help={(
+            <>
+              {current.inputProps?.help && (
+                <div className={styles.helpText}>
+                  {current.inputProps.help}
+                </div>
+              )}
+            </>
+          )}>
             <Input
               type="number"
               size="large"
               {...current.inputProps}
               autoFocus
-              placeholder="Digite aqui..."
-              style={{ 
-                fontSize: '1.125rem',
-                padding: 'var(--space-4) var(--space-5)',
-                borderRadius: 'var(--radius-lg)',
-                border: '2px solid rgba(24, 144, 255, 0.1)',
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)'
-              }}
+              placeholder={current.inputProps?.placeholder || 'Digite aqui...'}
+              className={styles.input}
             />
           </Form.Item>
         )}
@@ -246,21 +301,12 @@ export function ConversationalForm({ step, onStep }) {
               pattern="[0-9]+([.,][0-9]{1,2})?"
               autoFocus
               placeholder="Ex: 72.5"
-              style={{ 
-                fontSize: '1.125rem',
-                padding: 'var(--space-4) var(--space-5)',
-                borderRadius: 'var(--radius-lg)',
-                border: '2px solid rgba(24, 144, 255, 0.1)',
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)'
-              }}
+              className={styles.input}
               onChange={e => {
-                // Mascara: permite apenas números e ponto ou vírgula
                 const val = e.target.value.replace(/[^0-9.,]/g, '');
                 form.setFieldsValue({ [current.key]: val });
               }}
               onBlur={e => {
-                // Normaliza para ponto
                 const val = e.target.value.replace(',', '.');
                 form.setFieldsValue({ [current.key]: val });
               }}
@@ -269,36 +315,20 @@ export function ConversationalForm({ step, onStep }) {
         )}
         {current.type === 'select' && (
           <Form.Item name={current.key} label={false} rules={current.rules} style={{ marginBottom: 0 }}>
-            <div style={{
-              display: 'flex',
-              gap: 'var(--space-3)',
-              flexWrap: 'wrap',
-              justifyContent: 'flex-end',
-              marginBottom: 'var(--space-3)'
-            }}>
+            <div className={styles.selectGroup}>
               {current.options.map(opt => (
                 <button
                   key={opt.value}
                   type="button"
                   onClick={() => {
                     form.setFieldsValue({ [current.key]: opt.value });
-                    setTimeout(() => form.submit(), 100); // garante submit após setFieldsValue
+                    setTimeout(() => form.submit(), 100);
                   }}
-                  style={{
-                    minWidth: 120,
-                    padding: 'var(--space-4) var(--space-5)',
-                    fontSize: '1.125rem',
-                    borderRadius: 'var(--radius-lg)',
-                    background: form.getFieldValue(current.key) === opt.value ? 'var(--primary-500)' : 'rgba(255,255,255,0.9)',
-                    color: form.getFieldValue(current.key) === opt.value ? '#fff' : 'var(--neutral-900)',
-                    fontWeight: 600,
-                    border: form.getFieldValue(current.key) === opt.value ? '2px solid var(--primary-500)' : '2px solid rgba(24, 144, 255, 0.1)',
-                    boxShadow: form.getFieldValue(current.key) === opt.value ? 'var(--shadow-md)' : 'none',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    outline: 'none',
-                    marginBottom: 'var(--space-2)'
-                  }}
+                  className={
+                    form.getFieldValue(current.key) === opt.value
+                      ? `${styles.selectBtn} ${styles.selected}`
+                      : styles.selectBtn
+                  }
                   tabIndex={0}
                 >
                   {opt.label}
@@ -307,40 +337,13 @@ export function ConversationalForm({ step, onStep }) {
             </div>
           </Form.Item>
         )}
-        {/* Botão de submit invisível para garantir envio ao pressionar Enter nos outros campos */}
         {current.type !== 'select' && <button type="submit" style={{ display: 'none' }} />}
       </Form>
-      
-      {/* Instrução modernizada */}
-      <div className="animate-fade-in" style={{ 
-        fontSize: '0.875rem',
-        color: 'var(--neutral-500)',
-        marginTop: 'var(--space-2)',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 'var(--space-2)',
-        fontWeight: 500,
-        background: 'rgba(24, 144, 255, 0.05)',
-        padding: 'var(--space-2) var(--space-3)',
-        borderRadius: 'var(--radius-md)',
-        border: '1px solid rgba(24, 144, 255, 0.1)'
-      }}>
-        <span style={{ 
-          background: 'var(--gradient-primary)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          fontWeight: 700
-        }}>
-          Enter
-        </span>
+
+      <div className={`animate-fade-in ${styles.instruction}`}>
+        <span className={styles.instructionEnter}>Enter</span>
         para enviar
-        <span style={{ 
-          fontSize: '1.125rem', 
-          color: 'var(--primary-500)',
-          animation: 'pulse 2s ease-in-out infinite'
-        }}>
-          ⚡
-        </span>
+        <span className={styles.instructionIcon}>⚡</span>
       </div>
     </div>
   );

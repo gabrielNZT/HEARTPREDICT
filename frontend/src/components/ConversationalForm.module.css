@@ -1,3 +1,109 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: var(--space-3);
+  position: relative;
+}
+
+.interText {
+  font-size: 1rem;
+  color: var(--neutral-600);
+  margin-bottom: var(--space-3);
+  text-align: right;
+  font-weight: 500;
+  line-height: 1.4;
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(24, 144, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.form {
+  max-width: 380px;
+  min-width: 240px;
+  width: 100%;
+  margin: 0;
+}
+
+.input {
+  font-size: 1.125rem;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(24, 144, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.helpText {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: var(--space-2);
+  font-weight: 400;
+  background: rgba(24, 144, 255, 0.04);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(24, 144, 255, 0.08);
+}
+
+.selectGroup {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: var(--space-3);
+}
+
+.selectBtn {
+  min-width: 120px;
+  padding: var(--space-4) var(--space-5);
+  font-size: 1.125rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.9);
+  color: var(--neutral-900);
+  font-weight: 600;
+  border: 2px solid rgba(24, 144, 255, 0.1);
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  margin-bottom: var(--space-2);
+}
+
+.selected {
+  background: var(--primary-500);
+  color: #fff;
+  border: 2px solid var(--primary-500);
+  box-shadow: var(--shadow-md);
+}
+
+.instruction {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+  background: rgba(24, 144, 255, 0.05);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(24, 144, 255, 0.1);
+}
+
+.instructionEnter {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.instructionIcon {
+  font-size: 1.125rem;
+  color: var(--primary-500);
+  animation: pulse 2s ease-in-out infinite;
+}
 
 :global(.ant-select-selector) {
   background: transparent !important;
