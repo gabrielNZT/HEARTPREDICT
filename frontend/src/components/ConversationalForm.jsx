@@ -192,6 +192,7 @@ export function ConversationalForm({ step, onStep }) {
   const current = questions[step];
 
   const [nomeUsuario, setNomeUsuario] = useState('');
+  const [formValues, setFormValues] = useState({});
 
   const nomeForm = Form.useWatch('nome', form);
   if (step === 0 && nomeForm && nomeForm !== nomeUsuario) {
@@ -238,21 +239,23 @@ export function ConversationalForm({ step, onStep }) {
       setNomeUsuario(value);
     }
 
+    const updatedValues = { ...formValues, ...values };
+    setFormValues(updatedValues);
+
     // Monta o objeto patient_data rigorosamente conforme o exemplo
-    const allValues = form.getFieldsValue();
     const patient_data = {
-      user_id: allValues.nome || '',
-      age: allValues.age ? Number(allValues.age) : undefined,
-      gender: allValues.gender ? Number(allValues.gender) : undefined,
-      height: allValues.height ? Number(allValues.height) : undefined,
-      weight: allValues.weight ? parseFloat(allValues.weight) : undefined,
-      ap_hi: allValues.ap_hi ? Number(allValues.ap_hi) : undefined,
-      ap_lo: allValues.ap_lo ? Number(allValues.ap_lo) : undefined,
-      cholesterol: allValues.cholesterol ? Number(allValues.cholesterol) : undefined,
-      gluc: allValues.gluc ? Number(allValues.gluc) : undefined,
-      smoke: typeof allValues.smoke !== 'undefined' ? Number(allValues.smoke) : undefined,
-      alco: typeof allValues.alco !== 'undefined' ? Number(allValues.alco) : undefined,
-      active: typeof allValues.active !== 'undefined' ? Number(allValues.active) : undefined,
+      user_id: updatedValues.nome || '',
+      age: updatedValues.age ? Number(updatedValues.age) : undefined,
+      gender: updatedValues.gender !== undefined ? Number(updatedValues.gender) : undefined,
+      height: updatedValues.height ? Number(updatedValues.height) : undefined,
+      weight: updatedValues.weight ? parseFloat(updatedValues.weight) : undefined,
+      ap_hi: updatedValues.ap_hi ? Number(updatedValues.ap_hi) : undefined,
+      ap_lo: updatedValues.ap_lo ? Number(updatedValues.ap_lo) : undefined,
+      cholesterol: updatedValues.cholesterol !== undefined ? Number(updatedValues.cholesterol) : undefined,
+      gluc: updatedValues.gluc !== undefined ? Number(updatedValues.gluc) : undefined,
+      smoke: updatedValues.smoke !== undefined ? Number(updatedValues.smoke) : undefined,
+      alco: updatedValues.alco !== undefined ? Number(updatedValues.alco) : undefined,
+      active: updatedValues.active !== undefined ? Number(updatedValues.active) : undefined,
     };
 
     if (typeof onStep === 'function') {

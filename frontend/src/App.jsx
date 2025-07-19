@@ -19,7 +19,7 @@ export default function App() {
   const { loading, messages, sendPatientData } = useRiskAssessment();
   const [started, setStarted] = useState(false);
 
-  const handleFormStep = (value, errorMsg) => {
+  const handleFormStep = (value, errorMsg, patient_data = {}) => {
     if (errorMsg) {
       setChatMessages((prev) => [
         ...prev,
@@ -47,7 +47,7 @@ export default function App() {
         ...prev,
         { text: 'Dados enviados. Aguarde a análise...', sender: 'system' },
       ]);
-      sendPatientData(updatedAnswers);
+      sendPatientData(patient_data);
     }
   };
 
