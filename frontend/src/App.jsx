@@ -8,7 +8,6 @@ import WelcomeScreen from './components/WelcomeScreen';
 import LoadingOverlay from './components/LoadingOverlay';
 import './styles/animations.css';
 import { useRiskAssessment } from './hooks/useRiskAssessment';
-import RiskAnalysisResult from './components/RiskAnalysisResult';
 
 export default function App() {
   const [chatMessages, setChatMessages] = useState([
@@ -147,9 +146,6 @@ export default function App() {
               style={{ marginTop: 'var(--space-4)' }} 
             />
           </div>
-        )}
-        {messages && messages.length > 0 && messages[messages.length - 1].explanation && (
-          <RiskAnalysisResult explanation={messages[messages.length - 1].explanation} />
         )}
       </div>
 

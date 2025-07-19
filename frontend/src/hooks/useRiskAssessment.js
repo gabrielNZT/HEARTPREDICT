@@ -29,10 +29,35 @@ export function useRiskAssessment() {
       const result = await response.json();
       console.log('Resposta do backend:', result);
 
-      if (result.success) {
+      if (result.success && result.explanation) {
+        // Cria uma mensagem formatada para o chat
+        const explanation = result.explanation;
+        const formattedText = `🏥 **Análise Cardiovascular Completa**
+
+👤 **Paciente:** ${explanation.patientName}
+📊 **Score de Risco:** ${explanation.riskScore} (${explanation.riskLevel})
+🔍 **Predição:** ${explanation.predictionStatus}
+
+💡 **Resumo:** ${explanation.predictionSummary}
+
+🎯 **Fatores Analisados:**
+${explanation.contributingFactors.map(factor => 
+  `• **${factor.factorName}:** ${factor.factorValue} ${factor.riskType === 'alerta' ? '⚠️' : factor.riskType === 'sucesso' ? '✅' : '🚨'}
+  ${factor.details}`
+).join('\n\n')}
+
+💪 **Recomendações:**
+${explanation.recommendations.map((rec, index) => 
+  `${index + 1}. **${rec.title}**
+  ${rec.details}`
+).join('\n\n')}
+
+📈 **Sobre o Modelo:** ${explanation.modelInfo.disclaimer}`;
+
         const explanationMessage = {
-          text: result.explanation || 'Análise concluída com sucesso!',
-          sender: 'llm'
+          text: formattedText,
+          sender: 'llm',
+          isStructured: true
         };
         
         setMessages([explanationMessage]);

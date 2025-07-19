@@ -1,7 +1,85 @@
-export function MessageBubble({ message, sender, isError = false, animationDelay = 0 }) {
+export function MessageBubble({ message, sender, isError = false, animationDelay = 0, isStructured = false }) {
   const isUser = sender === 'user';
   const isSystem = sender === 'system';
   const isLLM = sender === 'llm';
+  
+  // Função para renderizar markdown simples
+  const renderMarkdownText = (text) => {
+    // Converter markdown para JSX
+    const lines = text.split('\n');
+    return lines.map((line, index) => {
+      // Headers com emojis
+      if (line.includes('**') && (line.includes('🏥') || line.includes('👤') || line.includes('📊') || line.includes('🔍') || line.includes('💡') || line.includes('🎯') || line.includes('💪') || line.includes('📈'))) {
+        const content = line.replace(/\*\*/g, '');
+        return <div key={index} style={{ 
+          fontSize: '1.1rem', 
+          fontWeight: 'bold', 
+          margin: '12px 0 8px 0',
+          color: isLLM ? '#047857' : '#065f46',
+          borderBottom: '1px solid rgba(5, 95, 70, 0.2)',
+          paddingBottom: '4px'
+        }}>{content}</div>;
+      }
+      
+      // Lista com bullet points
+      if (line.startsWith('• ')) {
+        const content = line.slice(2);
+        // Procurar por texto em negrito dentro da linha
+        const parts = content.split('**');
+        return (
+          <div key={index} style={{ 
+            marginLeft: '16px', 
+            margin: '6px 0 6px 16px',
+            lineHeight: '1.6'
+          }}>
+            • {parts.map((part, partIndex) => 
+              partIndex % 2 === 1 ? 
+                <strong key={partIndex} style={{ color: isLLM ? '#065f46' : '#374151' }}>{part}</strong> : 
+                part
+            )}
+          </div>
+        );
+      }
+      
+      // Lista numerada
+      if (/^\d+\.\s/.test(line)) {
+        const parts = line.split('**');
+        return (
+          <div key={index} style={{ 
+            marginLeft: '16px', 
+            margin: '8px 0 8px 16px',
+            lineHeight: '1.6'
+          }}>
+            {parts.map((part, partIndex) => 
+              partIndex % 2 === 1 ? 
+                <strong key={partIndex} style={{ color: isLLM ? '#065f46' : '#374151' }}>{part}</strong> : 
+                part
+            )}
+          </div>
+        );
+      }
+      
+      // Texto normal com suporte a negrito
+      if (line.trim()) {
+        const parts = line.split('**');
+        return (
+          <div key={index} style={{ 
+            margin: '4px 0',
+            lineHeight: '1.6'
+          }}>
+            {parts.map((part, partIndex) => 
+              partIndex % 2 === 1 ? 
+                <strong key={partIndex} style={{ color: isLLM ? '#065f46' : '#374151' }}>{part}</strong> : 
+                part
+            )}
+          </div>
+        );
+      }
+      
+      // Linha vazia
+      return <div key={index} style={{ height: '8px' }} />;
+    });
+  };
   
   return (
     <div 
@@ -105,7 +183,7 @@ export function MessageBubble({ message, sender, isError = false, animationDelay
 
         {/* Conteúdo da mensagem */}
         <div style={{ marginTop: isSystem || isLLM || isError ? 'var(--space-2)' : 0 }}>
-          {message}
+          {isStructured ? renderMarkdownText(message) : message}
         </div>
 
         {/* Efeito de brilho para mensagens do usuário */}

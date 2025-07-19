@@ -140,7 +140,7 @@ public class AgenteExplicador extends Agent {
                                           String lifestyleInterpretation, String overallInterpretation) {
         
         StringBuilder prompt = new StringBuilder();
-        prompt.append("Você é um cardiologista experiente. Forneça uma explicação CONCISA e CLARA sobre o risco cardiovascular do paciente.\n\n");
+        prompt.append("Você é um cardiologista experiente. Forneça uma explicação em formato JSON estruturado.\n\n");
         
         prompt.append("**DADOS ANALISADOS:**\n");
         prompt.append("• Paciente: ").append(userId).append("\n");
@@ -155,24 +155,56 @@ public class AgenteExplicador extends Agent {
         prompt.append("• Score de Estilo de Vida: ").append(lifestyleScore).append("\n");
         prompt.append("• Pressão de Pulso: ").append(pressurePulse).append(" mmHg\n\n");
         
-        prompt.append("**INTERPRETAÇÕES AUTOMÁTICAS:**\n");
-        prompt.append("• IMC: ").append(bmiInterpretation).append("\n");
-        prompt.append("• Pressão Arterial: ").append(bloodPressureInterpretation).append("\n");
-        prompt.append("• Estilo de Vida: ").append(lifestyleInterpretation).append("\n");
-        prompt.append("• Avaliação Geral: ").append(overallInterpretation).append("\n\n");
-        
         prompt.append("**TAREFA:**\n");
-        prompt.append("Baseado nos dados acima, forneça uma explicação em linguagem simples que inclua:\n");
-        prompt.append("1. **O que significa o score ").append(String.format("%.2f", chronicRiskScore)).append("?**\n");
-        prompt.append("2. **Principais fatores contribuindo para o risco**\n");
-        prompt.append("3. **2-3 recomendações práticas específicas**\n");
-        prompt.append("4. **Urgência do acompanhamento médico**\n\n");
+        prompt.append("Retorne APENAS um JSON válido seguindo este formato exato:\n\n");
+        prompt.append("{\n");
+        prompt.append("  \"patientName\": \"").append(userId).append("\",\n");
+        prompt.append("  \"riskScore\": ").append(String.format("%.2f", chronicRiskScore)).append(",\n");
+        prompt.append("  \"riskLevel\": \"").append(riskLevel.toLowerCase()).append("\",\n");
+        prompt.append("  \"predictionStatus\": \"").append(riskPrediction == 1 ? "positiva" : "negativa").append("\",\n");
+        prompt.append("  \"predictionSummary\": \"[Explicação de 1-2 frases sobre o que significa essa predição]\",\n");
+        prompt.append("  \"contributingFactors\": [\n");
+        prompt.append("    {\n");
+        prompt.append("      \"factorName\": \"IMC\",\n");
+        prompt.append("      \"factorValue\": \"").append(String.format("%.1f", bmi)).append("\",\n");
+        prompt.append("      \"riskType\": \"").append(bmi > 25 ? "alerta" : "sucesso").append("\",\n");
+        prompt.append("      \"details\": \"[Interpretação do IMC]\"\n");
+        prompt.append("    },\n");
+        prompt.append("    {\n");
+        prompt.append("      \"factorName\": \"Pressão Arterial\",\n");
+        prompt.append("      \"factorValue\": \"").append(bloodPressureCategory.replace("_", " ")).append("\",\n");
+        prompt.append("      \"riskType\": \"").append(bloodPressureCategory.contains("normal") ? "sucesso" : "alerta").append("\",\n");
+        prompt.append("      \"details\": \"[Interpretação da pressão arterial]\"\n");
+        prompt.append("    },\n");
+        prompt.append("    {\n");
+        prompt.append("      \"factorName\": \"Estilo de Vida\",\n");
+        prompt.append("      \"factorValue\": \"Score ").append(lifestyleScore).append("\",\n");
+        prompt.append("      \"riskType\": \"").append(lifestyleScore >= 2 ? "sucesso" : "alerta").append("\",\n");
+        prompt.append("      \"details\": \"[Interpretação do estilo de vida]\"\n");
+        prompt.append("    }\n");
+        prompt.append("  ],\n");
+        prompt.append("  \"recommendations\": [\n");
+        prompt.append("    {\n");
+        prompt.append("      \"title\": \"[Título da recomendação 1]\",\n");
+        prompt.append("      \"details\": \"[Detalhes específicos e práticos]\"\n");
+        prompt.append("    },\n");
+        prompt.append("    {\n");
+        prompt.append("      \"title\": \"[Título da recomendação 2]\",\n");
+        prompt.append("      \"details\": \"[Detalhes específicos e práticos]\"\n");
+        prompt.append("    }\n");
+        prompt.append("  ],\n");
+        prompt.append("  \"modelInfo\": {\n");
+        prompt.append("    \"accuracy\": ").append(String.format("%.1f", rocAuc * 100)).append(",\n");
+        prompt.append("    \"disclaimer\": \"Este modelo tem uma precisão de ").append(String.format("%.1f%%", rocAuc * 100)).append(", o que significa que existe uma margem de erro.\"\n");
+        prompt.append("  }\n");
+        prompt.append("}\n\n");
         
-        prompt.append("**DIRETRIZES:**\n");
-        prompt.append("• Seja direto e objetivo (máximo 400 palavras)\n");
-        prompt.append("• Use linguagem acessível\n");
-        prompt.append("• Foque no que é mais importante\n");
-        prompt.append("• Seja empático mas realista\n");
+        prompt.append("**DIRETRIZES IMPORTANTES:**\n");
+        prompt.append("• Retorne APENAS o JSON, sem texto adicional\n");
+        prompt.append("• Use aspas duplas para todas as strings\n");
+        prompt.append("• Seja conciso mas informativo\n");
+        prompt.append("• Use linguagem acessível ao paciente\n");
+        prompt.append("• Para riskType use apenas: 'sucesso', 'alerta' ou 'perigo'\n");
         
         return prompt.toString();
     }

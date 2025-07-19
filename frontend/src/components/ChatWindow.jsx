@@ -27,6 +27,7 @@ export function ChatWindow({ messages, children }) {
           message={msg.text} 
           sender={msg.sender}
           isError={msg.error}
+          isStructured={msg.isStructured}
           animationDelay={idx * 100}
         />
       ))}

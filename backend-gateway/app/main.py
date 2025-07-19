@@ -5,7 +5,7 @@ import httpx
 import json
 import asyncio
 import logging
-from typing import Optional
+from typing import Optional, List
 import uuid
 from datetime import datetime, timedelta
 
@@ -41,18 +41,71 @@ class PatientData(BaseModel):
     alco: int  # 0=no, 1=yes
     active: int  # 0=no, 1=yes
 
+class ContributingFactor(BaseModel):
+    factorName: str
+    factorValue: str
+    riskType: str  # sucesso, alerta, perigo
+    details: str
+
+class Recommendation(BaseModel):
+    title: str
+    details: str
+
+class ModelInfo(BaseModel):
+    accuracy: float
+    disclaimer: str
+
+class StructuredExplanation(BaseModel):
+    patientName: str
+    riskScore: float
+    riskLevel: str
+    predictionStatus: str
+    predictionSummary: str
+    contributingFactors: List[ContributingFactor]
+    recommendations: List[Recommendation]
+    modelInfo: ModelInfo
+
 class ExplanationData(BaseModel):
-    explanation: str
+    explanation: str  # Raw JSON string from agent
 
 class PredictionResponse(BaseModel):
     success: bool
     patient_data: Optional[PatientData] = None
     prediction: Optional[dict] = None
-    explanation: Optional[str] = None
+    explanation: Optional[StructuredExplanation] = None
     error: Optional[str] = None
 
 # URL do AgenteGerenciadorPacientes
 JADE_AGENT_URL = "http://localhost:8888/registrar"
+
+def parse_explanation_json(explanation_text: str) -> Optional[StructuredExplanation]:
+    """
+    Converte o texto de explicação JSON do agente para objeto estruturado
+    """
+    try:
+        # Remove possíveis caracteres extras antes/depois do JSON
+        explanation_text = explanation_text.strip()
+        
+        # Tenta encontrar JSON válido no texto
+        start_idx = explanation_text.find('{')
+        end_idx = explanation_text.rfind('}') + 1
+        
+        if start_idx == -1 or end_idx == 0:
+            logger.error("JSON não encontrado na explicação")
+            return None
+        
+        json_text = explanation_text[start_idx:end_idx]
+        explanation_dict = json.loads(json_text)
+        
+        # Valida e cria o objeto estruturado
+        return StructuredExplanation(**explanation_dict)
+        
+    except json.JSONDecodeError as e:
+        logger.error(f"Erro ao decodificar JSON da explicação: {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Erro ao processar explicação estruturada: {e}")
+        return None
 
 @app.post("/predict", response_model=PredictionResponse)
 async def predict_cardiac_risk(patient_data: PatientData):
@@ -125,7 +178,7 @@ async def predict_cardiac_risk(patient_data: PatientData):
             detail=f"Erro interno do servidor: {str(e)}"
         )
 
-async def wait_for_explanation(user_id: str, timeout: int = 60) -> Optional[str]:
+async def wait_for_explanation(user_id: str, timeout: int = 60) -> Optional[StructuredExplanation]:
     """
     Aguarda a explicação do agente explicador via polling
     """
@@ -142,11 +195,18 @@ async def wait_for_explanation(user_id: str, timeout: int = 60) -> Optional[str]
     while (datetime.now() - start_time).seconds < timeout:
         # Verifica se recebemos a explicação
         if user_id in pending_explanations and pending_explanations[user_id]["explanation"]:
-            explanation = pending_explanations[user_id]["explanation"]
+            explanation_text = pending_explanations[user_id]["explanation"]
             # Remove da lista de pendentes
             del pending_explanations[user_id]
             logger.info(f"Explicação recebida para usuário {user_id}")
-            return explanation
+            
+            # Processa o JSON estruturado
+            structured_explanation = parse_explanation_json(explanation_text)
+            if structured_explanation:
+                return structured_explanation
+            else:
+                logger.error(f"Falha ao processar explicação JSON para usuário {user_id}")
+                return None
         
         # Aguarda um pouco antes de verificar novamente
         await asyncio.sleep(1)
