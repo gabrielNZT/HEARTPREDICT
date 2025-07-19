@@ -154,8 +154,7 @@ export default function WelcomeScreen({ onStart }) {
           fontSize: '0.875rem',
           fontWeight: 500
         }}>
-          <span style={{ fontSize: '1.125rem' }}>�️</span>
-          Seus dados são criptografados e usados apenas para esta avaliação
+          Seus dados serão usados apenas para esta avaliação
         </div>
       </div>
     </div>
