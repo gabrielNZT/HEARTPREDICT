@@ -1,43 +1,65 @@
 import { useState } from 'react';
-import axios from 'axios';
+
+const BACKEND_URL = 'http://localhost:8000';
 
 export function useRiskAssessment() {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [error, setError] = useState(null);
 
   const sendPatientData = async (patientData) => {
     setLoading(true);
-    setMessages((prev) => [
-      ...prev,
-      { text: 'Processando análise de risco...', sender: 'system' },
-    ]);
+    setError(null);
+    
     try {
-      await axios.post('/api/risk-assessment', patientData);
-      const eventSource = new window.EventSource('/api/risk-assessment/stream');
-      eventSource.onmessage = (event) => {
-        setMessages((prev) => [
-          ...prev,
-          { text: event.data, sender: 'system' },
-        ]);
-        setLoading(false);
-        eventSource.close();
+      console.log('Enviando dados para o backend:', patientData);
+      
+      const response = await fetch(`${BACKEND_URL}/predict`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(patientData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Resposta do backend:', result);
+
+      if (result.success) {
+        const explanationMessage = {
+          text: result.explanation || 'Análise concluída com sucesso!',
+          sender: 'llm'
+        };
+        
+        setMessages([explanationMessage]);
+      } else {
+        throw new Error(result.error || 'Erro desconhecido na análise');
+      }
+
+    } catch (err) {
+      console.error('Erro ao enviar dados:', err);
+      setError(err.message);
+      
+      const errorMessage = {
+        text: `Erro na análise: ${err.message}. Tente novamente.`,
+        sender: 'system',
+        error: true
       };
-      eventSource.onerror = () => {
-        setMessages((prev) => [
-          ...prev,
-          { text: 'Erro ao receber resposta do backend.', sender: 'system' },
-        ]);
-        setLoading(false);
-        eventSource.close();
-      };
-    } catch (error) {
-      setMessages((prev) => [
-        ...prev,
-        { text: 'Erro ao enviar dados.', sender: 'system' },
-      ]);
+      
+      setMessages([errorMessage]);
+    } finally {
       setLoading(false);
     }
   };
 
-  return { loading, messages, sendPatientData };
+  return {
+    loading,
+    messages,
+    error,
+    sendPatientData
+  };
 }

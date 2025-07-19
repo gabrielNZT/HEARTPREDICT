@@ -45,6 +45,17 @@ public class AgenteGerenciadorPacientes extends Agent {
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            // Configurar CORS
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+            
+            // Handle preflight OPTIONS request
+            if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+            
             String requestBody = "";
             if ("POST".equals(exchange.getRequestMethod())) {
                 InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "utf-8");

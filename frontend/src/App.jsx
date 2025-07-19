@@ -1,13 +1,14 @@
-
 import { useState } from 'react';
 import { Spin, Skeleton } from 'antd';
 import { ChatWindow } from './components/ChatWindow';
 import { ConversationalForm } from './components/ConversationalForm';
-import { useRiskAssessment } from './hooks/useRiskAssessment';
 import { Header } from './components/Header';
 import { questions } from './components/ConversationalForm';
 import WelcomeScreen from './components/WelcomeScreen';
+import LoadingOverlay from './components/LoadingOverlay';
 import './styles/animations.css';
+import { useRiskAssessment } from './hooks/useRiskAssessment';
+import RiskAnalysisResult from './components/RiskAnalysisResult';
 
 export default function App() {
   const [chatMessages, setChatMessages] = useState([
@@ -147,7 +148,16 @@ export default function App() {
             />
           </div>
         )}
+        {messages && messages.length > 0 && messages[messages.length - 1].explanation && (
+          <RiskAnalysisResult explanation={messages[messages.length - 1].explanation} />
+        )}
       </div>
+
+      {/* Loading overlay durante processamento da IA */}
+      <LoadingOverlay 
+        isLoading={loading} 
+        message="Analisando seus dados com inteligência artificial..."
+      />
 
       {/* Media queries para responsividade */}
       <style jsx>{`

@@ -295,6 +295,110 @@ body {
   animation: rotate 1s linear infinite;
 }
 
+/* Loading dots animation */
+@keyframes loadingDots {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  animation: loadingDots 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+/* Loading overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn var(--duration-normal) var(--easing-default);
+}
+
+.loading-content {
+  text-align: center;
+  animation: scaleIn var(--duration-normal) var(--easing-spring);
+}
+
+.loading-text {
+  color: var(--neutral-700);
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Medical loading animation */
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0.5));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.8));
+  }
+}
+
+.medical-loader {
+  color: #ef4444;
+  font-size: 48px;
+  animation: heartPulse 1.5s ease-in-out infinite;
+}
+
+/* AI Processing animation */
+@keyframes aiThinking {
+  0%, 100% { opacity: 0.3; }
+  33% { opacity: 1; }
+  66% { opacity: 0.3; }
+}
+
+.ai-thinking {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.ai-thinking .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  animation: aiThinking 1.5s ease-in-out infinite;
+}
+
+.ai-thinking .dot:nth-child(1) { animation-delay: 0s; }
+.ai-thinking .dot:nth-child(2) { animation-delay: 0.3s; }
+.ai-thinking .dot:nth-child(3) { animation-delay: 0.6s; }
+
 /* Responsividade */
 @media (max-width: 768px) {
   .mobile-stack {

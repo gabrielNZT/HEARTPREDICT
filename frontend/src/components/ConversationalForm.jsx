@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Form, Input, Select } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import LoadingOverlay from './LoadingOverlay';
 import styles from './ConversationalForm.module.css';
 import '../antd-select-override.css';
+import { useRiskAssessment } from '../hooks/useRiskAssessment';
 
 export const questions = [
   {
@@ -190,6 +192,7 @@ export const questions = [
 export function ConversationalForm({ step, onStep }) {
   const [form] = Form.useForm();
   const current = questions[step];
+  const { assessRisk, loading, result, error } = useRiskAssessment();
 
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [formValues, setFormValues] = useState({});

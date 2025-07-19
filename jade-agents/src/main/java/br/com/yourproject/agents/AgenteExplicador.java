@@ -7,20 +7,30 @@ import jade.lang.acl.MessageTemplate;
 import br.com.yourproject.services.GeminiClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AgenteExplicador extends Agent {
 
     private static final String GEMINI_API_KEY = System.getenv("GEMINI_API_KEY") != null ? 
         System.getenv("GEMINI_API_KEY") : "SUA_CHAVE_DE_API_VAI_AQUI";
+    
+    private static final String BACKEND_GATEWAY_URL = "http://localhost:8000";
 
     private GeminiClient geminiClient;
     private ObjectMapper objectMapper;
+    private HttpClient httpClient;
 
     @Override
     protected void setup() {
         System.out.println("Olá! Eu sou o " + getLocalName() + ", pronto para gerar explicações.");
         this.geminiClient = new GeminiClient(GEMINI_API_KEY);
         this.objectMapper = new ObjectMapper();
+        this.httpClient = HttpClient.newHttpClient();
 
         // Adiciona um comportamento para ouvir continuamente por pedidos de explicação
         addBehaviour(new CyclicBehaviour() {
@@ -37,7 +47,14 @@ public class AgenteExplicador extends Agent {
                         // 2. Processa o pedido de explicação
                         String explicacao = gerarExplicacao(msg.getContent());
                         
-                        // 3. Envia a explicação de volta
+                        // 3. Extrair user_id dos dados
+                        JsonNode dadosPaciente = objectMapper.readTree(msg.getContent());
+                        String userId = dadosPaciente.get("user_id").asText();
+                        
+                        // 4. Envia explicação para o backend-gateway
+                        enviarExplicacaoParaBackend(userId, explicacao);
+                        
+                        // 5. Envia a explicação de volta para o agente solicitante
                         ACLMessage reply = msg.createReply();
                         reply.setPerformative(ACLMessage.INFORM);
                         reply.setContent(explicacao);
@@ -158,5 +175,43 @@ public class AgenteExplicador extends Agent {
         prompt.append("• Seja empático mas realista\n");
         
         return prompt.toString();
+    }
+    
+    private void enviarExplicacaoParaBackend(String userId, String explicacao) {
+        try {
+            // Prepara os dados para envio
+            Map<String, String> data = new HashMap<>();
+            data.put("explanation", explicacao);
+            
+            String jsonData = objectMapper.writeValueAsString(data);
+            
+            System.out.println("[EXPLICADOR] Enviando dados para backend: " + jsonData);
+            
+            // Cria a requisição HTTP com HTTP/1.1 explícito
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BACKEND_GATEWAY_URL + "/explanation/" + userId))
+                    .header("Content-Type", "application/json")
+                    .header("Accept", "application/json")
+                    .version(HttpClient.Version.HTTP_1_1)  // Força HTTP/1.1
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonData))
+                    .build();
+            
+            // Envia a requisição
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            
+            System.out.println("[EXPLICADOR] Response status: " + response.statusCode());
+            System.out.println("[EXPLICADOR] Response body: " + response.body());
+            
+            if (response.statusCode() == 200) {
+                System.out.println("[EXPLICADOR] Explicação enviada com sucesso para backend-gateway (userId: " + userId + ")");
+            } else {
+                System.err.println("[EXPLICADOR] Erro ao enviar explicação para backend: " + response.statusCode());
+                System.err.println("[EXPLICADOR] Response: " + response.body());
+            }
+            
+        } catch (Exception e) {
+            System.err.println("[EXPLICADOR] Erro ao enviar explicação para backend: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
