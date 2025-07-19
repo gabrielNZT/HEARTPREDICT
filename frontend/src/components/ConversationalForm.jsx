@@ -204,7 +204,7 @@ export function ConversationalForm({ step, onStep }) {
     nomeUsuario ? `Perfeito, ${nomeUsuario}! Agora informe sua pressão diastólica (menor). 🩺` : 'Perfeito! Agora informe sua pressão diastólica (menor). 🩺',
     nomeUsuario ? `Agora vamos para o colesterol, ${nomeUsuario}. Se não souber, escolha a opção mais próxima. 🧪` : 'Agora vamos para o colesterol. Se não souber, escolha a opção mais próxima. 🧪',
     nomeUsuario ? `E o nível de glicose, ${nomeUsuario}? 🧪` : 'E o nível de glicose? 🧪',
-    nomeUsuario ? `Você consome álcool, ${nomeUsuario}? �` : 'Você consome álcool? 🍷',
+    nomeUsuario ? `Você consome álcool, ${nomeUsuario}? 🍷` : 'Você consome álcool? 🍷',
     nomeUsuario ? `Pratica atividade física regularmente, ${nomeUsuario}? 🏃` : 'Pratica atividade física regularmente? 🏃',
     nomeUsuario ? `Agora sua idade, ${nomeUsuario}. Isso é essencial para sua análise! 🎂` : 'Agora sua idade. Isso é essencial para sua análise! 🎂',
     nomeUsuario ? `Qual o seu gênero, ${nomeUsuario}? O algoritmo considera isso na sua avaliação. 🧑‍⚕️` : 'Qual o seu gênero? O algoritmo considera isso na sua avaliação. 🧑‍⚕️',
@@ -237,8 +237,26 @@ export function ConversationalForm({ step, onStep }) {
     if (current.key === 'nome' && value) {
       setNomeUsuario(value);
     }
+
+    // Monta o objeto patient_data rigorosamente conforme o exemplo
+    const allValues = form.getFieldsValue();
+    const patient_data = {
+      user_id: allValues.nome || '',
+      age: allValues.age ? Number(allValues.age) : undefined,
+      gender: allValues.gender ? Number(allValues.gender) : undefined,
+      height: allValues.height ? Number(allValues.height) : undefined,
+      weight: allValues.weight ? parseFloat(allValues.weight) : undefined,
+      ap_hi: allValues.ap_hi ? Number(allValues.ap_hi) : undefined,
+      ap_lo: allValues.ap_lo ? Number(allValues.ap_lo) : undefined,
+      cholesterol: allValues.cholesterol ? Number(allValues.cholesterol) : undefined,
+      gluc: allValues.gluc ? Number(allValues.gluc) : undefined,
+      smoke: typeof allValues.smoke !== 'undefined' ? Number(allValues.smoke) : undefined,
+      alco: typeof allValues.alco !== 'undefined' ? Number(allValues.alco) : undefined,
+      active: typeof allValues.active !== 'undefined' ? Number(allValues.active) : undefined,
+    };
+
     if (typeof onStep === 'function') {
-      onStep(displayValue, isValid ? null : errorMsg);
+      onStep(displayValue, isValid ? null : errorMsg, patient_data);
     }
     if (current.key !== 'nome') {
       form.resetFields();
@@ -343,7 +361,7 @@ export function ConversationalForm({ step, onStep }) {
       <div className={`animate-fade-in ${styles.instruction}`}>
         <span className={styles.instructionEnter}>Enter</span>
         para enviar
-        <span className={styles.instructionIcon}>⚡</span>
+        <ArrowRightOutlined style={{ fontSize: '1.125rem', color: 'var(--primary-500)', marginLeft: '0.5em' }} />
       </div>
     </div>
   );
