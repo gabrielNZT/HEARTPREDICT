@@ -1,0 +1,31 @@
+.bubble {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 60%;
+  word-break: break-word;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  padding: 10px 16px;
+  transition: background 0.2s;
+}
+.user {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+.user .bubble {
+  background: linear-gradient(90deg, #1976d2 60%, #63a4ff 100%);
+  color: #fff;
+  align-self: flex-end;
+}
+.system {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+.system .bubble {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e3f0ff;
+  align-self: flex-start;
+}

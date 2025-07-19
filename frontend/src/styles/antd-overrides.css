@@ -1,0 +1,202 @@
+/* HeartPredict - Ant Design Custom Overrides */
+
+/* Select personalizado */
+.ant-select {
+  border-radius: var(--radius-lg) !important;
+}
+
+.ant-select-selector {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid rgba(24, 144, 255, 0.1) !important;
+  border-radius: var(--radius-lg) !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all var(--duration-normal) var(--easing-default) !important;
+  padding: var(--space-3) var(--space-4) !important;
+  min-height: 48px !important;
+}
+
+.ant-select-selector:hover,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--primary-500) !important;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ant-select-selection-placeholder {
+  color: var(--neutral-400) !important;
+  font-size: 1.125rem !important;
+}
+
+.ant-select-selection-item {
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+  color: var(--neutral-700) !important;
+}
+
+/* Dropdown personalizado */
+.ant-select-dropdown {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid rgba(24, 144, 255, 0.2) !important;
+  box-shadow: var(--shadow-xl) !important;
+  backdrop-filter: blur(20px) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.ant-select-item {
+  padding: var(--space-3) var(--space-4) !important;
+  font-size: 1.125rem !important;
+  border-radius: var(--radius-md) !important;
+  margin: 2px !important;
+  transition: all var(--duration-fast) var(--easing-default) !important;
+}
+
+.ant-select-item-option-active {
+  background: rgba(24, 144, 255, 0.1) !important;
+  color: var(--primary-600) !important;
+}
+
+.ant-select-item-option-selected {
+  background: var(--gradient-primary) !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+/* Input personalizado */
+.ant-input {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid rgba(24, 144, 255, 0.1) !important;
+  border-radius: var(--radius-lg) !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all var(--duration-normal) var(--easing-default) !important;
+  font-size: 1.125rem !important;
+  padding: var(--space-3) var(--space-4) !important;
+  min-height: 48px !important;
+}
+
+.ant-input:hover,
+.ant-input:focus {
+  border-color: var(--primary-500) !important;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Form personalizado */
+.ant-form-item {
+  margin-bottom: 0 !important;
+}
+
+.ant-form-item-label {
+  font-weight: 600 !important;
+  color: var(--neutral-700) !important;
+}
+
+/* Button personalizado */
+.ant-btn {
+  border-radius: var(--radius-lg) !important;
+  font-weight: 600 !important;
+  transition: all var(--duration-normal) var(--easing-spring) !important;
+  min-height: 48px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ant-btn-primary {
+  background: var(--gradient-primary) !important;
+  border: none !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.ant-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-xl) !important;
+  background: var(--gradient-primary) !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Spin personalizado */
+.ant-spin {
+  color: var(--primary-500) !important;
+}
+
+.ant-spin-dot-item {
+  background-color: var(--primary-500) !important;
+}
+
+/* Card personalizado */
+.ant-card {
+  border-radius: var(--radius-xl) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(20px) !important;
+  background: var(--gradient-card) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.ant-card-body {
+  padding: var(--space-6) !important;
+}
+
+/* Skeleton personalizado */
+.ant-skeleton-title,
+.ant-skeleton-paragraph > li {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+  background-size: 200px 100% !important;
+  animation: shimmer 1.5s infinite !important;
+}
+
+/* Scrollbar personalizada para elementos Ant Design */
+.ant-select-dropdown::-webkit-scrollbar,
+.ant-cascader-menu::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.ant-select-dropdown::-webkit-scrollbar-track,
+.ant-cascader-menu::-webkit-scrollbar-track {
+  background: var(--neutral-100) !important;
+}
+
+.ant-select-dropdown::-webkit-scrollbar-thumb,
+.ant-cascader-menu::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+/* Loading states modernos */
+.ant-spin-blur {
+  opacity: 0.7 !important;
+  transition: opacity var(--duration-normal) var(--easing-default) !important;
+}
+
+/* Tooltip personalizado */
+.ant-tooltip {
+  font-family: var(--font-family-primary) !important;
+}
+
+.ant-tooltip-inner {
+  background: var(--gradient-primary) !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+}
+
+/* Message personalizado */
+.ant-message {
+  font-family: var(--font-family-primary) !important;
+}
+
+.ant-message-notice-content {
+  border-radius: var(--radius-lg) !important;
+  backdrop-filter: blur(20px) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Notification personalizado */
+.ant-notification {
+  font-family: var(--font-family-primary) !important;
+}
+
+.ant-notification-notice {
+  border-radius: var(--radius-lg) !important;
+  backdrop-filter: blur(20px) !important;
+  box-shadow: var(--shadow-xl) !important;
+}
