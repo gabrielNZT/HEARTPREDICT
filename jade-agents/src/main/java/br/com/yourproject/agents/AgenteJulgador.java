@@ -159,6 +159,8 @@ public class AgenteJulgador extends Agent {
         System.out.println("[JULGADOR] - Ajustar medicação se necessário");
         System.out.println("[JULGADOR] - Aumentar frequência de monitoramento");
         // TODO: Implementar ações específicas
+
+        solicitarExplicacao(dadosPaciente);
     }
     
     private void realizarAcaoMedia(JsonNode dadosPaciente) {
@@ -168,6 +170,8 @@ public class AgenteJulgador extends Agent {
         System.out.println("[JULGADOR] - Orientar sobre mudanças no estilo de vida");
         System.out.println("[JULGADOR] - Monitoramento semanal");
         // TODO: Implementar ações específicas
+
+        solicitarExplicacao(dadosPaciente);
     }
     
     private void realizarAcaoBaixa(JsonNode dadosPaciente) {
@@ -177,6 +181,8 @@ public class AgenteJulgador extends Agent {
         System.out.println("[JULGADOR] - Incentivar hábitos saudáveis");
         System.out.println("[JULGADOR] - Monitoramento mensal");
         // TODO: Implementar ações específicas
+
+        solicitarExplicacao(dadosPaciente);
     }
     
     private void realizarAcaoMinima(JsonNode dadosPaciente) {
@@ -186,6 +192,8 @@ public class AgenteJulgador extends Agent {
         System.out.println("[JULGADOR] - Manter estilo de vida saudável");
         System.out.println("[JULGADOR] - Monitoramento trimestral");
         // TODO: Implementar ações específicas
+
+        solicitarExplicacao(dadosPaciente);
     }
     
     private void solicitarExplicacao(JsonNode dadosPaciente) {
