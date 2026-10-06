@@ -1,0 +1,4 @@
+1280 marcado: ['Nenhuma destas']
+1280 após Continuar: /#/p/agravantes ['Erro:\nSelecione pelo menos uma opção ou marque “Nenhuma destas”.']
+390 marcado: ['Nenhuma destas']
+390 após Continuar: /#/p/agravantes ['Erro:\nSelecione pelo menos uma opção ou marque “Nenhuma destas”.']

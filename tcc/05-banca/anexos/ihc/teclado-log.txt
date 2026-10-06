@@ -1,0 +1,74 @@
+carregou  -> h1 "Calcule o seu risco de infarto e AVC nos próx" | anel visível: não
+Shift+Tab -> a "HeartPredict Risco cardiovascular em 10 anos" | anel visível: sim
+Shift+Tab -> a "Pular para o conteúdo" | anel visível: sim
+Tab       -> a "HeartPredict Risco cardiovascular em 10 anos" | anel visível: sim
+Tab       -> button[submit] "Começar" | anel visível: sim
+Enter     -> h1 "Qual é a sua idade?" | anel visível: não || url=/#/p/idade | h1='Qual é a sua idade?'
+Tab       -> input[text] "campo-idade" | anel visível: sim
+digita '58'
+Enter     -> h1 "Qual é o seu sexo?" | anel visível: não || url=/#/p/sexo | h1='Qual é o seu sexo?'
+## sexo: Tab entra no grupo, seta escolhe, Enter envia?
+Tab       -> input[radio] "feminino" | anel visível: sim
+ArrowDown -> input[radio](marcado) "masculino" | anel visível: sim || url=/#/p/sexo | h1='Qual é o seu sexo?'
+Enter     -> h1 "Você já teve infarto, AVC ou outra doença car" | anel visível: não || url=/#/p/dcv_previa | h1='Você já teve infarto, AVC ou outra doença cardiovascula'
+Tab       -> input[radio] "sim" | anel visível: sim
+ArrowDown -> input[radio](marcado) "nao" | anel visível: sim || url=/#/p/dcv_previa | h1='Você já teve infarto, AVC ou outra doença cardiovascula'
+Enter     -> h1 "Você tem diabetes?" | anel visível: não || url=/#/p/diabetes | h1='Você tem diabetes?'
+Tab       -> input[radio] "sim" | anel visível: sim
+ArrowDown -> input[radio](marcado) "nao" | anel visível: sim || url=/#/p/diabetes | h1='Você tem diabetes?'
+Enter     -> h1 "Qual é o seu colesterol total?" | anel visível: não || url=/#/p/colesterol_total | h1='Qual é o seu colesterol total?'
+Tab       -> input[text] "campo-colesterol_total" | anel visível: sim
+digita '210'
+Enter     -> h1 "Qual é o seu HDL?" | anel visível: não || url=/#/p/hdl | h1='Qual é o seu HDL?'
+Tab       -> input[text] "campo-hdl" | anel visível: sim
+digita '44'
+Enter     -> h1 "Qual é o seu LDL? (opcional)" | anel visível: não || url=/#/p/ldl | h1='Qual é o seu LDL? (opcional)'
+Tab       -> input[text] "campo-ldl" | anel visível: sim
+Enter     -> h1 "Qual é a sua pressão sistólica?" | anel visível: não || url=/#/p/pas | h1='Qual é a sua pressão sistólica?'
+Tab       -> input[text] "campo-pas" | anel visível: sim
+digita '140'
+Enter     -> h1 "Você toma remédio para pressão alta?" | anel visível: não || url=/#/p/anti_hipertensivo | h1='Você toma remédio para pressão alta?'
+Tab       -> input[radio] "sim" | anel visível: sim
+ArrowDown -> input[radio](marcado) "nao" | anel visível: sim || url=/#/p/anti_hipertensivo | h1='Você toma remédio para pressão alta?'
+Enter     -> h1 "Você toma remédio para baixar o colesterol?" | anel visível: não || url=/#/p/estatina | h1='Você toma remédio para baixar o colesterol?'
+Tab       -> input[radio] "sim" | anel visível: sim
+ArrowDown -> input[radio](marcado) "nao" | anel visível: sim || url=/#/p/estatina | h1='Você toma remédio para baixar o colesterol?'
+Enter     -> h1 "Você fuma atualmente?" | anel visível: não || url=/#/p/tabagismo | h1='Você fuma atualmente?'
+## tabagismo: Espaço no 1º rádio (Sim)
+Tab       -> input[radio] "sim" | anel visível: sim
+Space     -> input[radio](marcado) "sim" | anel visível: sim || url=/#/p/tabagismo | h1='Você fuma atualmente?'
+Enter     -> h1 "O que o seu exame mostra sobre a função dos r" | anel visível: não || url=/#/p/renal | h1='O que o seu exame mostra sobre a função dos rins?'
+## renal: seta para 'Só a creatinina', Tab para o campo revelado
+Tab       -> input[radio] "tfge" | anel visível: sim
+ArrowDown -> input[radio](marcado) "creatinina" | anel visível: sim || url=/#/p/renal | h1='O que o seu exame mostra sobre a função dos rins?'
+Tab       -> input[text] "campo-renal-valor" | anel visível: sim
+digita '1,1'
+Enter     -> h1 "Alguma destas situações se aplica a você?" | anel visível: não || url=/#/p/agravantes | h1='Alguma destas situações se aplica a você?'
+## agravantes: Espaço marca caixa; Enter envia
+Tab       -> input[checkbox] "historia_familiar_prematura" | anel visível: sim
+Space     -> input[checkbox](marcado) "historia_familiar_prematura" | anel visível: sim || url=/#/p/agravantes | h1='Alguma destas situações se aplica a você?'
+Enter     -> h1 "Confira suas respostas" | anel visível: não || url=/#/revisao | h1='Confira suas respostas'
+## revisão: Tab até Confirmar
+Tab       -> button[button] "Alterar idade" | anel visível: sim
+Tab       -> button[button] "Alterar sexo" | anel visível: sim
+Tab       -> button[button] "Alterar doença cardiovascular prévia" | anel visível: sim
+Tab       -> button[button] "Alterar diabetes" | anel visível: sim
+Tab       -> button[button] "Alterar colesterol total" | anel visível: sim
+Tab       -> button[button] "Alterar hdl" | anel visível: sim
+Tab       -> button[button] "Alterar ldl" | anel visível: sim
+Tab       -> button[button] "Alterar pressão sistólica" | anel visível: sim
+Tab       -> button[button] "Alterar remédio para pressão" | anel visível: sim
+Tab       -> button[button] "Alterar remédio para colesterol" | anel visível: sim
+Tab       -> button[button] "Alterar fuma atualmente" | anel visível: sim
+Tab       -> button[button] "Alterar função dos rins" | anel visível: sim
+Tab       -> button[button] "Alterar situações que ajustam a categoria" | anel visível: sim
+Tab       -> button[submit] "Confirmar e ver o resultado" | anel visível: sim
+## Shift+Tab volta ao último Alterar
+Shift+Tab -> button[button] "Alterar situações que ajustam a categoria" | anel visível: sim
+Tab       -> button[submit] "Confirmar e ver o resultado" | anel visível: sim
+Enter     -> h1 "Seu resultado" | anel visível: não || url=/#/resultado | h1='Seu resultado'
+## resultado
+Tab       -> summary "Como ler esta seção" | anel visível: sim
+Enter     -> summary "Como ler esta seção" | anel visível: sim || url=/#/resultado | h1='Seu resultado'
+Tab       -> button[submit] "Tentar de novo" | anel visível: sim
+Tab       -> button[submit] "Imprimir ou salvar em PDF" | anel visível: sim

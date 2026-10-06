@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException
+import os
+
+from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import httpx
@@ -15,17 +17,29 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="HeartPredict Gateway", version="1.0.0")
 
+from avaliacao import router as avaliacao_router  # noqa: E402
+
+app.include_router(avaliacao_router)
+
 # Storage temporário para aguardar respostas dos agentes
 pending_explanations = {}
 
-# Configurar CORS
+# CORS: só as origens da interface (parecer de Engenharia/Ética). Outras origens via CORS_ORIGENS,
+# separadas por vírgula.
+ORIGENS = os.environ.get(
+    "CORS_ORIGENS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://127.0.0.1:4173")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite qualquer host
-    allow_credentials=False,  # Necessário quando allow_origins=["*"]
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=[o.strip() for o in ORIGENS.split(",") if o.strip()],
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
+
+# Fluxo legado (XGBoost/Kaggle via JADE, versão inicial do projeto). Desligado por padrão: registra dados
+# de saúde, aceita explicações sem autenticação e não pertence ao escopo atual (D019). Para reproduzir
+# a versão inicial: HABILITAR_FLUXO_LEGADO=1.
+legado = APIRouter(tags=["legado"])
 
 class PatientData(BaseModel):
     user_id: str
@@ -52,7 +66,7 @@ class Recommendation(BaseModel):
     details: str
 
 class ModelInfo(BaseModel):
-    accuracy: float
+    rocAuc: float
     disclaimer: str
 
 class StructuredExplanation(BaseModel):
@@ -101,19 +115,19 @@ def parse_explanation_json(explanation_text: str) -> Optional[StructuredExplanat
         return StructuredExplanation(**explanation_dict)
         
     except json.JSONDecodeError as e:
-        logger.error(f"Erro ao decodificar JSON da explicação: {e}")
+        logger.error("Erro ao decodificar JSON da explicação")
         return None
     except Exception as e:
-        logger.error(f"Erro ao processar explicação estruturada: {e}")
+        logger.error("Erro ao processar explicação estruturada: %s", type(e).__name__)
         return None
 
-@app.post("/predict", response_model=PredictionResponse)
+@legado.post("/predict", response_model=PredictionResponse)
 async def predict_cardiac_risk(patient_data: PatientData):
     """
     Endpoint principal para predição de risco cardíaco
     """
     try:
-        logger.info(f"Recebendo dados do paciente: {patient_data.user_id}")
+        logger.info("Recebendo dados")
         
         # Converte os dados para o formato esperado pelo chronic-risk-service
         chronic_service_data = {
@@ -131,7 +145,7 @@ async def predict_cardiac_risk(patient_data: PatientData):
             "active": patient_data.active
         }
         
-        logger.info(f"Enviando dados para JADE Agent: {chronic_service_data}")
+        logger.info("Enviando dados para JADE Agent")
         
         # Envia dados para o AgenteGerenciadorPacientes
         async with httpx.AsyncClient(timeout=30.0) as client:
@@ -171,18 +185,17 @@ async def predict_cardiac_risk(patient_data: PatientData):
             status_code=503,
             detail="Serviço de análise temporariamente indisponível"
         )
+    except HTTPException:
+        raise  # preserva 408/500 já decididos acima (antes viravam 500)
     except Exception as e:
-        logger.error(f"Erro interno: {str(e)}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Erro interno do servidor: {str(e)}"
-        )
+        logger.error("Erro interno: %s", type(e).__name__)
+        raise HTTPException(status_code=500, detail="Erro interno do servidor")
 
 async def wait_for_explanation(user_id: str, timeout: int = 60) -> Optional[StructuredExplanation]:
     """
     Aguarda a explicação do agente explicador via polling
     """
-    logger.info(f"Aguardando explicação para usuário {user_id}")
+    logger.info("Aguardando explicação")
     
     # Registra que estamos aguardando explicação para este usuário
     pending_explanations[user_id] = {
@@ -198,14 +211,14 @@ async def wait_for_explanation(user_id: str, timeout: int = 60) -> Optional[Stru
             explanation_text = pending_explanations[user_id]["explanation"]
             # Remove da lista de pendentes
             del pending_explanations[user_id]
-            logger.info(f"Explicação recebida para usuário {user_id}")
+            logger.info("Explicação recebida")
             
             # Processa o JSON estruturado
             structured_explanation = parse_explanation_json(explanation_text)
             if structured_explanation:
                 return structured_explanation
             else:
-                logger.error(f"Falha ao processar explicação JSON para usuário {user_id}")
+                logger.error("Falha ao processar explicação JSON")
                 return None
         
         # Aguarda um pouco antes de verificar novamente
@@ -215,7 +228,7 @@ async def wait_for_explanation(user_id: str, timeout: int = 60) -> Optional[Stru
     if user_id in pending_explanations:
         del pending_explanations[user_id]
     
-    logger.warning(f"Timeout aguardando explicação para usuário {user_id}")
+    logger.warning("Timeout aguardando explicação")
     return None
 
 @app.get("/health")
@@ -225,29 +238,32 @@ async def health_check():
     """
     return {"status": "healthy", "service": "HeartPredict Gateway"}
 
-@app.post("/explanation/{user_id}")
+@legado.post("/explanation/{user_id}")
 async def receive_explanation(user_id: str, explanation_data: ExplanationData):
     """
     Endpoint para receber explicações do agente explicador
     """
-    logger.info(f"Recebendo explicação para usuário {user_id}: {explanation_data.explanation}")
+    logger.info("Recebendo explicação do agente explicador")
     
     # Armazena a explicação para o usuário correspondente
     if user_id in pending_explanations:
         pending_explanations[user_id]["explanation"] = explanation_data.explanation
-        logger.info(f"Explicação armazenada para usuário {user_id}")
+        logger.info("Explicação armazenada")
     else:
-        logger.warning(f"Explicação recebida para usuário {user_id} que não está aguardando")
+        logger.warning("Explicação recebida que não está aguardando")
     
     return {"status": "explanation_received", "user_id": user_id}
 
-@app.get("/pending")
+@legado.get("/pending")
 async def get_pending_explanations():
     """
     Endpoint para debug - lista explicações pendentes
     """
     return {"pending_explanations": list(pending_explanations.keys())}
 
+if os.environ.get("HABILITAR_FLUXO_LEGADO") == "1":
+    app.include_router(legado)
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

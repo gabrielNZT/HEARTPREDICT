@@ -1,0 +1,22 @@
+test_agravante_desconhecido_quebra_o_prompt (test_nucleo_propriedades.TestCasosDeBorda) ... ok
+test_agravante_feminino_aceito_para_homem (test_nucleo_propriedades.TestCasosDeBorda) ... ok
+test_creatinina_zero_levanta_valueerror_generico (test_nucleo_propriedades.TestCasosDeBorda) ... ok
+test_idade_decimal_truncada_no_prompt (test_nucleo_propriedades.TestCasosDeBorda) ... ok
+test_ldl_nan_quebra_o_prompt (test_nucleo_propriedades.TestCasosDeBorda) ... ok
+test_risco_minimo_e_maximo_da_faixa (test_nucleo_propriedades.TestCasosDeBorda) ... 
+  [faixa] risco mínimo aprox. 0.034%, máximo aprox. 41.0%
+ok
+test_string_com_virgula_nao_vira_entrada_invalida (test_nucleo_propriedades.TestCasosDeBorda) ... ok
+test_existe_caso_exibido_5_0_mas_categoria_baixo (test_nucleo_propriedades.TestLimitesDeCategoria) ... 
+  [limite] entrada={'idade': 55, 'colesterol_total': 256.0} risco=4.9510% exibido=5.0 categoria=baixo regra='escore PREVENT 5,0% → baixo (Tabela 4.1)'
+ok
+test_concorda_com_definicao_por_permutacoes (test_nucleo_propriedades.TestPropriedadesShapley) ... ok
+test_eficiencia (test_nucleo_propriedades.TestPropriedadesShapley) ... ok
+test_jogador_nulo (test_nucleo_propriedades.TestPropriedadesShapley) ... ok
+test_risco_em_0_1_e_monotono_no_tabagismo (test_nucleo_propriedades.TestPropriedadesShapley) ... ok
+test_tabagismo_nunca_reduz_risco_na_faixa (test_nucleo_propriedades.TestPropriedadesShapley) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 8.709s
+
+OK

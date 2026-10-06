@@ -1,0 +1,62 @@
+.inicio__lead {
+  font-size: var(--texto-g);
+  margin-bottom: var(--e3);
+}
+
+.inicio__secao {
+  margin-top: var(--e6);
+}
+
+.inicio__secao h2 {
+  font-size: var(--texto-g);
+}
+
+.passos {
+  padding-left: 1.5rem;
+}
+
+.passos li {
+  padding-left: 0.25rem;
+}
+
+/* Revisão: lista de definição com ação por linha */
+.revisao {
+  margin: var(--e3) 0 0;
+  max-width: var(--medida);
+  border-top: 1px solid var(--linha-suave);
+}
+
+.revisao__linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: var(--e1) var(--e2);
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--linha-suave);
+}
+
+.revisao dt {
+  font-weight: 700;
+}
+
+.revisao dd {
+  margin: 0;
+}
+
+.revisao__acao .botao {
+  min-height: 2.75rem;
+}
+
+@media (max-width: 36rem) {
+  .revisao__linha {
+    grid-template-columns: 1fr auto;
+  }
+  .revisao dd.numero {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .revisao__acao {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}

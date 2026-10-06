@@ -1,0 +1,1677 @@
+{
+ "eficiencia_max_erro": 4.440892098500626e-15,
+ "permutacoes_max_dif": 3.7694292132073315e-12,
+ "forma_fechada_max_dif": 3.1086244689504383e-15,
+ "shap_versao": "0.42.1",
+ "shap_kernel_max_dif": 3.9968028886505635e-15,
+ "shap_exact_max_dif": 3.1086244689504383e-15,
+ "simetria_idade_vs_pas": [
+  5.666666666666659,
+  5.666666666666659
+ ],
+ "jogador_nulo_estatina": 0.0,
+ "eficiencia_jogo_sintetico": [
+  13.69999999999998,
+  13.7
+ ],
+ "linearidade_max_dif": 0.0,
+ "sensibilidade_resumo_(n_vinhetas_com_mudanca_de_24)": {
+  "prob_sinal": 0,
+  "prob_top3": 4,
+  "alt_sinal": 18,
+  "alt_top3": 14,
+  "inter_sinal": 4,
+  "inter_top3": 4,
+  "n_var_nz": 0
+ },
+ "por_vinheta": [
+  {
+   "id": "V01",
+   "risco_pct": 0.3,
+   "sinais_base": {
+    "idade": -1,
+    "hdl": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "nao_hdl"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "phi_base": {
+    "idade": -1.5673,
+    "nao_hdl": -0.0692,
+    "hdl": -0.1541,
+    "pas": -0.3472,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": -1.553,
+    "nao_hdl": -0.1183,
+    "hdl": -0.1267,
+    "pas": -0.2056,
+    "anti_hipertensivo": -0.0742,
+    "estatina": 0.0131,
+    "diabetes": -0.1077,
+    "tabagismo": -0.0843,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": -1.4398,
+    "nao_hdl": -0.0918,
+    "hdl": -0.1814,
+    "pas": -0.4249,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V02",
+   "risco_pct": 1.4,
+   "sinais_base": {
+    "idade": -1,
+    "nao_hdl": 1,
+    "hdl": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "pas",
+    "diabetes"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "nao_hdl",
+    "hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "nao_hdl",
+    "hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "nao_hdl",
+    "diabetes"
+   ],
+   "top3_inter": [
+    "idade",
+    "nao_hdl",
+    "hdl"
+   ],
+   "phi_base": {
+    "idade": -0.9072,
+    "nao_hdl": 0.1422,
+    "hdl": 0.0589,
+    "pas": -0.0384,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": -0.9001,
+    "nao_hdl": 0.1018,
+    "hdl": 0.0782,
+    "pas": 0.0759,
+    "anti_hipertensivo": -0.063,
+    "estatina": 0.0057,
+    "diabetes": -0.085,
+    "tabagismo": -0.0688,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": -0.923,
+    "nao_hdl": 0.1571,
+    "hdl": 0.0657,
+    "pas": -0.0445,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V03",
+   "risco_pct": 2.8,
+   "sinais_base": {
+    "idade": -1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "tabagismo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "pas"
+   ],
+   "flip_interacao_ao_fator": [
+    "pas"
+   ],
+   "top3_base": [
+    "idade",
+    "tabagismo",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "tabagismo",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "tabagismo",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "tabagismo",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": -1.0465,
+    "nao_hdl": 0.2804,
+    "hdl": 0.142,
+    "pas": 0.1007,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.4782,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": -1.0372,
+    "nao_hdl": 0.2465,
+    "hdl": 0.162,
+    "pas": 0.2189,
+    "anti_hipertensivo": -0.0613,
+    "estatina": -0.0023,
+    "diabetes": -0.0891,
+    "tabagismo": 0.4065,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": -1.207,
+    "nao_hdl": 0.3177,
+    "hdl": 0.1629,
+    "pas": 0.1204,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.5607,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V04",
+   "risco_pct": 0.7,
+   "sinais_base": {
+    "idade": -1,
+    "hdl": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "hdl",
+    "pas"
+   ],
+   "top3_prob": [
+    "idade",
+    "hdl",
+    "pas"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "hdl",
+    "pas"
+   ],
+   "top3_inter": [
+    "idade",
+    "hdl",
+    "pas"
+   ],
+   "phi_base": {
+    "idade": -0.5478,
+    "nao_hdl": -0.019,
+    "hdl": -0.2765,
+    "pas": -0.2373,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": -0.5428,
+    "nao_hdl": -0.0566,
+    "hdl": -0.2523,
+    "pas": -0.1169,
+    "anti_hipertensivo": -0.0733,
+    "estatina": 0.0109,
+    "diabetes": -0.0919,
+    "tabagismo": -0.0766,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": -0.5039,
+    "nao_hdl": -0.0218,
+    "hdl": -0.2959,
+    "pas": -0.2591,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V05",
+   "risco_pct": 0.9,
+   "sinais_base": {
+    "idade": -1,
+    "hdl": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "hdl",
+    "pas",
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "diabetes",
+    "tabagismo"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "hdl"
+   ],
+   "phi_base": {
+    "idade": -0.7397,
+    "nao_hdl": -0.0013,
+    "hdl": -0.0683,
+    "pas": -0.1028,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": -0.7326,
+    "nao_hdl": -0.04,
+    "hdl": -0.0433,
+    "pas": 0.0203,
+    "anti_hipertensivo": -0.0712,
+    "estatina": 0.0098,
+    "diabetes": -0.0956,
+    "tabagismo": -0.0784,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": -0.7199,
+    "nao_hdl": -0.0016,
+    "hdl": -0.0749,
+    "pas": -0.1157,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V06",
+   "risco_pct": 4.9,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "pas": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "pas",
+    "idade",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 0.2006,
+    "nao_hdl": 0.1279,
+    "hdl": 0.06,
+    "pas": 0.155,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 0.1989,
+    "nao_hdl": 0.0939,
+    "hdl": 0.0765,
+    "pas": 0.2442,
+    "anti_hipertensivo": -0.0601,
+    "estatina": 0.0054,
+    "diabetes": -0.0689,
+    "tabagismo": -0.0572,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.213,
+    "nao_hdl": 0.1244,
+    "hdl": 0.0581,
+    "pas": 0.1481,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V07",
+   "risco_pct": 3.6,
+   "sinais_base": {
+    "idade": -1,
+    "nao_hdl": 1,
+    "hdl": -1,
+    "pas": 1,
+    "anti_hipertensivo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "hdl",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [
+    "hdl"
+   ],
+   "top3_base": [
+    "pas",
+    "idade",
+    "anti_hipertensivo"
+   ],
+   "top3_prob": [
+    "pas",
+    "idade",
+    "anti_hipertensivo"
+   ],
+   "top3_ref_alt": [
+    "pas",
+    "idade",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "pas",
+    "idade",
+    "anti_hipertensivo"
+   ],
+   "phi_base": {
+    "idade": -0.3062,
+    "nao_hdl": 0.1694,
+    "hdl": -0.0649,
+    "pas": 0.5481,
+    "anti_hipertensivo": 0.1968,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": -0.3026,
+    "nao_hdl": 0.1452,
+    "hdl": -0.0412,
+    "pas": 0.647,
+    "anti_hipertensivo": 0.1419,
+    "estatina": -0.0011,
+    "diabetes": -0.0895,
+    "tabagismo": -0.0754,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": -0.3599,
+    "nao_hdl": 0.1876,
+    "hdl": -0.0683,
+    "pas": 0.5869,
+    "anti_hipertensivo": 0.1968,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V08",
+   "risco_pct": 5.7,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "pas": 1,
+    "anti_hipertensivo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "anti_hipertensivo",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "anti_hipertensivo",
+    "nao_hdl",
+    "pas"
+   ],
+   "top3_ref_alt": [
+    "pas",
+    "nao_hdl",
+    "anti_hipertensivo"
+   ],
+   "top3_inter": [
+    "anti_hipertensivo",
+    "nao_hdl",
+    "pas"
+   ],
+   "phi_base": {
+    "idade": 0.0657,
+    "nao_hdl": 0.1813,
+    "hdl": 0.0808,
+    "pas": 0.1819,
+    "anti_hipertensivo": 0.194,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 0.0652,
+    "nao_hdl": 0.15,
+    "hdl": 0.0976,
+    "pas": 0.2685,
+    "anti_hipertensivo": 0.1392,
+    "estatina": 0.0018,
+    "diabetes": -0.0709,
+    "tabagismo": -0.0586,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.071,
+    "nao_hdl": 0.1796,
+    "hdl": 0.0799,
+    "pas": 0.1791,
+    "anti_hipertensivo": 0.194,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V09",
+   "risco_pct": 6.6,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "pas": 1,
+    "tabagismo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "diabetes"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "tabagismo",
+    "idade",
+    "pas"
+   ],
+   "top3_prob": [
+    "tabagismo",
+    "pas",
+    "idade"
+   ],
+   "top3_ref_alt": [
+    "tabagismo",
+    "pas",
+    "idade"
+   ],
+   "top3_inter": [
+    "tabagismo",
+    "idade",
+    "pas"
+   ],
+   "phi_base": {
+    "idade": 0.3003,
+    "nao_hdl": 0.1195,
+    "hdl": 0.0033,
+    "pas": 0.3,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.4633,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": 0.2967,
+    "nao_hdl": 0.1013,
+    "hdl": 0.0247,
+    "pas": 0.3929,
+    "anti_hipertensivo": -0.0644,
+    "estatina": -0.0,
+    "diabetes": -0.0774,
+    "tabagismo": 0.3938,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.3599,
+    "nao_hdl": 0.1031,
+    "hdl": 0.0032,
+    "pas": 0.2767,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.4436,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V10",
+   "risco_pct": 4.0,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "estatina": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "nao_hdl",
+    "pas",
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "hdl",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "hdl",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "hdl",
+    "pas"
+   ],
+   "top3_inter": [
+    "idade",
+    "hdl",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 0.2082,
+    "nao_hdl": 0.0829,
+    "hdl": 0.0982,
+    "pas": 0.0,
+    "anti_hipertensivo": 0.0,
+    "estatina": -0.0648,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 0.2066,
+    "nao_hdl": 0.0298,
+    "hdl": 0.1148,
+    "pas": 0.0916,
+    "anti_hipertensivo": -0.0625,
+    "estatina": -0.0404,
+    "diabetes": -0.0689,
+    "tabagismo": -0.0572,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.213,
+    "nao_hdl": 0.0812,
+    "hdl": 0.0951,
+    "pas": 0.0,
+    "anti_hipertensivo": 0.0,
+    "estatina": -0.0648,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V11",
+   "risco_pct": 4.8,
+   "sinais_base": {
+    "idade": 1,
+    "hdl": -1,
+    "pas": 1,
+    "tfge": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "diabetes"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "tfge",
+    "hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "tfge",
+    "hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "tfge",
+    "pas"
+   ],
+   "top3_inter": [
+    "idade",
+    "tfge",
+    "hdl"
+   ],
+   "phi_base": {
+    "idade": 0.5336,
+    "nao_hdl": 0.0311,
+    "hdl": -0.1397,
+    "pas": 0.0954,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": 0.3033
+   },
+   "phi_ref_alt": {
+    "idade": 0.5278,
+    "nao_hdl": 0.008,
+    "hdl": -0.1191,
+    "pas": 0.1871,
+    "anti_hipertensivo": -0.068,
+    "estatina": 0.007,
+    "diabetes": -0.0738,
+    "tabagismo": -0.0677,
+    "tfge": 0.3033
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.5759,
+    "nao_hdl": 0.0237,
+    "hdl": -0.1265,
+    "pas": 0.0829,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": 0.2677
+   }
+  },
+  {
+   "id": "V12",
+   "risco_pct": 6.3,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "pas": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 0.3945,
+    "nao_hdl": 0.1446,
+    "hdl": 0.0581,
+    "pas": 0.2073,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 0.3912,
+    "nao_hdl": 0.1132,
+    "hdl": 0.0741,
+    "pas": 0.2913,
+    "anti_hipertensivo": -0.0592,
+    "estatina": 0.0039,
+    "diabetes": -0.0658,
+    "tabagismo": -0.055,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.426,
+    "nao_hdl": 0.1363,
+    "hdl": 0.0543,
+    "pas": 0.1879,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V13",
+   "risco_pct": 21.1,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "pas": 1,
+    "anti_hipertensivo": 1,
+    "tabagismo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "hdl"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "tabagismo"
+   ],
+   "top3_prob": [
+    "idade",
+    "tabagismo",
+    "pas"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "tabagismo"
+   ],
+   "top3_inter": [
+    "idade",
+    "tabagismo",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 1.061,
+    "nao_hdl": 0.2368,
+    "hdl": 0.0976,
+    "pas": 0.3077,
+    "anti_hipertensivo": 0.181,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.3035,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 1.0506,
+    "nao_hdl": 0.2194,
+    "hdl": 0.1114,
+    "pas": 0.3654,
+    "anti_hipertensivo": 0.1301,
+    "estatina": -0.0053,
+    "diabetes": -0.0527,
+    "tabagismo": 0.258,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 1.349,
+    "nao_hdl": 0.1876,
+    "hdl": 0.0743,
+    "pas": 0.1844,
+    "anti_hipertensivo": 0.181,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.2113,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V14",
+   "risco_pct": 10.6,
+   "sinais_base": {
+    "idade": 1,
+    "pas": 1,
+    "anti_hipertensivo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "anti_hipertensivo"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "anti_hipertensivo"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "anti_hipertensivo"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "anti_hipertensivo"
+   ],
+   "phi_base": {
+    "idade": 1.0331,
+    "nao_hdl": 0.0586,
+    "hdl": -0.0184,
+    "pas": 0.44,
+    "anti_hipertensivo": 0.1919,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": 1.0209,
+    "nao_hdl": 0.0463,
+    "hdl": 0.0,
+    "pas": 0.5033,
+    "anti_hipertensivo": 0.1385,
+    "estatina": 0.0026,
+    "diabetes": -0.0629,
+    "tabagismo": -0.0624,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": 1.2238,
+    "nao_hdl": 0.0179,
+    "hdl": -0.0143,
+    "pas": 0.2859,
+    "anti_hipertensivo": 0.1919,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V15",
+   "risco_pct": 10.4,
+   "sinais_base": {
+    "idade": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "hdl",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "nao_hdl",
+    "hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "nao_hdl",
+    "anti_hipertensivo"
+   ],
+   "top3_inter": [
+    "idade",
+    "nao_hdl",
+    "hdl"
+   ],
+   "phi_base": {
+    "idade": 1.4468,
+    "nao_hdl": -0.0363,
+    "hdl": -0.0372,
+    "pas": -0.0231,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 1.4358,
+    "nao_hdl": -0.0762,
+    "hdl": -0.0236,
+    "pas": 0.0453,
+    "anti_hipertensivo": -0.063,
+    "estatina": 0.0175,
+    "diabetes": -0.0517,
+    "tabagismo": -0.0448,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 1.42,
+    "nao_hdl": -0.0283,
+    "hdl": -0.0277,
+    "pas": -0.0139,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V16",
+   "risco_pct": 24.9,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "pas": 1,
+    "anti_hipertensivo": 1,
+    "tabagismo": 1,
+    "tfge": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [],
+   "flip_interacao_ao_fator": [
+    "hdl"
+   ],
+   "top3_base": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 0.705,
+    "nao_hdl": 0.3324,
+    "hdl": 0.1276,
+    "pas": 0.4767,
+    "anti_hipertensivo": 0.1714,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.3229,
+    "tfge": 0.2629
+   },
+   "phi_ref_alt": {
+    "idade": 0.6967,
+    "nao_hdl": 0.3203,
+    "hdl": 0.1421,
+    "pas": 0.537,
+    "anti_hipertensivo": 0.1233,
+    "estatina": -0.0121,
+    "diabetes": -0.0568,
+    "tabagismo": 0.2745,
+    "tfge": 0.2629
+   },
+   "phi_inter_ao_fator": {
+    "idade": 1.065,
+    "nao_hdl": 0.2802,
+    "hdl": 0.1047,
+    "pas": 0.3376,
+    "anti_hipertensivo": 0.1714,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.2501,
+    "tfge": 0.1899
+   }
+  },
+  {
+   "id": "V17",
+   "risco_pct": 16.6,
+   "sinais_base": {
+    "idade": 1,
+    "pas": 1,
+    "anti_hipertensivo": 1,
+    "tabagismo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "tabagismo",
+    "pas"
+   ],
+   "top3_prob": [
+    "idade",
+    "tabagismo",
+    "pas"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "tabagismo"
+   ],
+   "top3_inter": [
+    "idade",
+    "tabagismo",
+    "anti_hipertensivo"
+   ],
+   "phi_base": {
+    "idade": 1.1698,
+    "nao_hdl": 0.1046,
+    "hdl": 0.0532,
+    "pas": 0.2884,
+    "anti_hipertensivo": 0.2018,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.4,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": 1.1548,
+    "nao_hdl": 0.1032,
+    "hdl": 0.0706,
+    "pas": 0.3484,
+    "anti_hipertensivo": 0.1454,
+    "estatina": -0.0055,
+    "diabetes": -0.0581,
+    "tabagismo": 0.34,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": 1.5118,
+    "nao_hdl": -0.0028,
+    "hdl": 0.0376,
+    "pas": 0.1524,
+    "anti_hipertensivo": 0.2018,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.317,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V18",
+   "risco_pct": 0.8,
+   "sinais_base": {
+    "idade": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "diabetes"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "tfge"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "tfge"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "diabetes",
+    "pas"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "tfge"
+   ],
+   "phi_base": {
+    "idade": -1.0995,
+    "nao_hdl": -0.0017,
+    "hdl": 0.0031,
+    "pas": -0.1968,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": -1.0913,
+    "nao_hdl": -0.0517,
+    "hdl": 0.0227,
+    "pas": -0.0777,
+    "anti_hipertensivo": -0.065,
+    "estatina": 0.0146,
+    "diabetes": -0.087,
+    "tabagismo": -0.0703,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": -1.065,
+    "nao_hdl": -0.0019,
+    "hdl": 0.0035,
+    "pas": -0.2315,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V19",
+   "risco_pct": 1.3,
+   "sinais_base": {
+    "idade": -1,
+    "nao_hdl": 1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "nao_hdl",
+    "pas"
+   ],
+   "top3_prob": [
+    "idade",
+    "nao_hdl",
+    "pas"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "nao_hdl",
+    "pas"
+   ],
+   "top3_inter": [
+    "idade",
+    "nao_hdl",
+    "pas"
+   ],
+   "phi_base": {
+    "idade": -0.6135,
+    "nao_hdl": 0.3618,
+    "hdl": -0.0247,
+    "pas": -0.2435,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": -0.6071,
+    "nao_hdl": 0.3452,
+    "hdl": 0.0,
+    "pas": -0.12,
+    "anti_hipertensivo": -0.0733,
+    "estatina": -0.0116,
+    "diabetes": -0.0944,
+    "tabagismo": -0.0778,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": -0.6479,
+    "nao_hdl": 0.4263,
+    "hdl": -0.0269,
+    "pas": -0.2715,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V20",
+   "risco_pct": 0.8,
+   "sinais_base": {
+    "idade": -1,
+    "nao_hdl": -1,
+    "hdl": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "anti_hipertensivo",
+    "diabetes",
+    "tabagismo"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "pas",
+    "hdl",
+    "idade"
+   ],
+   "top3_prob": [
+    "pas",
+    "hdl",
+    "idade"
+   ],
+   "top3_ref_alt": [
+    "hdl",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "pas",
+    "hdl",
+    "idade"
+   ],
+   "phi_base": {
+    "idade": -0.1672,
+    "nao_hdl": -0.1287,
+    "hdl": -0.3292,
+    "pas": -0.3488,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": -0.1658,
+    "nao_hdl": -0.1704,
+    "hdl": -0.3062,
+    "pas": -0.2337,
+    "anti_hipertensivo": -0.0757,
+    "estatina": 0.0185,
+    "diabetes": -0.0859,
+    "tabagismo": -0.0737,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": -0.144,
+    "nao_hdl": -0.1346,
+    "hdl": -0.3362,
+    "pas": -0.3591,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V21",
+   "risco_pct": 5.7,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": -1,
+    "hdl": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "hdl",
+    "pas"
+   ],
+   "flip_interacao_ao_fator": [
+    "hdl"
+   ],
+   "top3_base": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "nao_hdl",
+    "anti_hipertensivo"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 0.9664,
+    "nao_hdl": -0.0694,
+    "hdl": -0.0662,
+    "pas": -0.1055,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0271
+   },
+   "phi_ref_alt": {
+    "idade": 0.9593,
+    "nao_hdl": -0.1143,
+    "hdl": -0.0514,
+    "pas": -0.0259,
+    "anti_hipertensivo": -0.0645,
+    "estatina": 0.0199,
+    "diabetes": -0.0588,
+    "tabagismo": -0.0499,
+    "tfge": -0.0271
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.923,
+    "nao_hdl": -0.0602,
+    "hdl": -0.0561,
+    "pas": -0.0814,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0271
+   }
+  },
+  {
+   "id": "V22",
+   "risco_pct": 5.2,
+   "sinais_base": {
+    "idade": 1,
+    "hdl": -1,
+    "anti_hipertensivo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "anti_hipertensivo",
+    "hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "anti_hipertensivo",
+    "hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "anti_hipertensivo",
+    "hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "anti_hipertensivo",
+    "hdl"
+   ],
+   "phi_base": {
+    "idade": 0.9746,
+    "nao_hdl": -0.017,
+    "hdl": -0.1651,
+    "pas": -0.0272,
+    "anti_hipertensivo": 0.2285,
+    "estatina": -0.0651,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   },
+   "phi_ref_alt": {
+    "idade": 0.9653,
+    "nao_hdl": -0.051,
+    "hdl": -0.1457,
+    "pas": 0.0532,
+    "anti_hipertensivo": 0.1641,
+    "estatina": -0.0436,
+    "diabetes": -0.0678,
+    "tabagismo": -0.0648,
+    "tfge": -0.0133
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.9358,
+    "nao_hdl": -0.0119,
+    "hdl": -0.1382,
+    "pas": -0.0205,
+    "anti_hipertensivo": 0.2285,
+    "estatina": -0.0651,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0133
+   }
+  },
+  {
+   "id": "V23",
+   "risco_pct": 8.6,
+   "sinais_base": {
+    "idade": 1,
+    "nao_hdl": 1,
+    "hdl": 1,
+    "pas": 1,
+    "tabagismo": 1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [
+    "diabetes"
+   ],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "tabagismo",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "tabagismo",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "pas",
+    "tabagismo",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "tabagismo",
+    "pas",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": 0.1167,
+    "nao_hdl": 0.2302,
+    "hdl": 0.0992,
+    "pas": 0.3147,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.386,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": 0.1156,
+    "nao_hdl": 0.2029,
+    "hdl": 0.116,
+    "pas": 0.4028,
+    "anti_hipertensivo": -0.0577,
+    "estatina": -0.0017,
+    "diabetes": -0.0699,
+    "tabagismo": 0.3281,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": 0.142,
+    "nao_hdl": 0.226,
+    "hdl": 0.0972,
+    "pas": 0.3055,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.3763,
+    "tfge": -0.0068
+   }
+  },
+  {
+   "id": "V24",
+   "risco_pct": 0.4,
+   "sinais_base": {
+    "idade": -1,
+    "pas": -1
+   },
+   "flip_prob": [],
+   "flip_ref_alt": [],
+   "flip_interacao_ao_fator": [],
+   "top3_base": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_prob": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_ref_alt": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "top3_inter": [
+    "idade",
+    "pas",
+    "nao_hdl"
+   ],
+   "phi_base": {
+    "idade": -1.6559,
+    "nao_hdl": -0.0429,
+    "hdl": 0.0274,
+    "pas": -0.3834,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   },
+   "phi_ref_alt": {
+    "idade": -1.6438,
+    "nao_hdl": -0.0979,
+    "hdl": 0.0483,
+    "pas": -0.2527,
+    "anti_hipertensivo": -0.0669,
+    "estatina": 0.0169,
+    "diabetes": -0.0941,
+    "tabagismo": -0.0754,
+    "tfge": -0.0068
+   },
+   "phi_inter_ao_fator": {
+    "idade": -1.562,
+    "nao_hdl": -0.05,
+    "hdl": 0.0324,
+    "pas": -0.4751,
+    "anti_hipertensivo": 0.0,
+    "estatina": 0.0,
+    "diabetes": 0.0,
+    "tabagismo": 0.0,
+    "tfge": -0.0068
+   }
+  }
+ ],
+ "eps_0.00_pares_variavel_desprezivel": 0,
+ "eps_0.02_pares_variavel_desprezivel": 32,
+ "eps_0.05_pares_variavel_desprezivel": 45,
+ "eps_0.10_pares_variavel_desprezivel": 62
+}

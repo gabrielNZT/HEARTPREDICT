@@ -1,0 +1,103 @@
+== 1. Caso publicado (Khan 2024) e reimplementação independente ==
+F50 CT240 HDL55 PAS160 trat, não fumante: 3.64% (publicado 3,6%)
+idem fumante: 5.99% (publicado 6,0%)
+
+== 2. Vinhetas: projeto x reimplementação ==
+V01 baixo típico, jovem                           risco= 0.25% cat=baixo         regras=-
+V02 armadilha IMC: obesidade com risco baixo      risco= 1.40% cat=baixo         regras=-
+V03 jovem fumante                                 risco= 2.78% cat=baixo         regras=-
+V04 HDL alto protetor                             risco= 0.73% cat=baixo         regras=-
+V05 agravante reclassifica baixo→intermediário    risco= 0.86% cat=intermediário regras=agravante(s): história familiar de doença cardiovascular prematura → de baixo para intermediário (Tabela 4.1)
+V06 risco logo abaixo do corte de 5%              risco= 4.91% cat=baixo         regras=-
+V07 caso publicado no PREVENT; anti-hipertensivo  risco= 3.59% cat=baixo         regras=-
+V08 intermediário com anti-hipertensivo           risco= 5.71% cat=intermediário regras=-
+V09 fumante intermediário                         risco= 6.62% cat=intermediário regras=-
+V10 usuário de estatina                           risco= 3.98% cat=baixo         regras=-
+V11 TFGe reduzida                                 risco= 4.76% cat=baixo         regras=-
+V12 agravante reclassifica intermediário→alto     risco= 6.28% cat=alto          regras=agravante(s): doença inflamatória crônica → de intermediário para alto (Tabela 4.1)
+V13 alto por múltiplos fatores                    risco=21.08% cat=alto          regras=-
+V14 idosa hipertensa                              risco=10.64% cat=intermediário regras=-
+V15 idoso com fatores controlados: idade domina   risco=10.36% cat=intermediário regras=-
+V16 alto com muitos fatores e TFGe reduzida       risco=24.94% cat=alto          regras=-
+V17 armadilha IMC 38 com risco intermediário      risco=16.58% cat=intermediário regras=-
+V18 LDL-c 165 → intermediário por regra           risco= 0.81% cat=intermediário regras=LDL-c 165 entre 160 e 189 → intermediário (seção 4.1)
+V19 LDL-c 200 → alto por regra                    risco= 1.27% cat=alto          regras=LDL-c 200 ≥ 190 → alto (seção 4.1)
+V20 PAS baixa e HDL alto reduzem o risco          risco= 0.81% cat=baixo         regras=-
+V21 intermediário principalmente pela idade       risco= 5.72% cat=intermediário regras=-
+V22 estatina e anti-hipertensivo                  risco= 5.19% cat=intermediário regras=-
+V23 fumante com síndrome metabólica               risco= 8.62% cat=alto          regras=agravante(s): síndrome metabólica → de intermediário para alto (Tabela 4.1)
+V24 jovem com história familiar e IMC 31          risco= 0.38% cat=intermediário regras=agravante(s): história familiar de doença cardiovascular prematura → de baixo para intermediário (Tabela 4.1)
+maior diferença absoluta projeto x independente: 3.55e-15 pontos percentuais
+
+== 3. Sinal da atribuição da ESTATINA (varredura) ==
+feminino 40 CT160(nHDL115):-0.081 CT200(nHDL155):-0.038 CT240(nHDL195):+0.006 CT280(nHDL235):+0.050 CT320(nHDL275):+0.093
+feminino 55 CT160(nHDL115):-0.081 CT200(nHDL155):-0.038 CT240(nHDL195):+0.006 CT280(nHDL235):+0.050 CT320(nHDL275):+0.093
+feminino 70 CT160(nHDL115):-0.081 CT200(nHDL155):-0.038 CT240(nHDL195):+0.006 CT280(nHDL235):+0.050 CT320(nHDL275):+0.093
+masculino 40 CT160(nHDL115):-0.117 CT200(nHDL155):-0.057 CT240(nHDL195):+0.002 CT280(nHDL235):+0.061 CT320(nHDL275):+0.120
+masculino 55 CT160(nHDL115):-0.117 CT200(nHDL155):-0.057 CT240(nHDL195):+0.002 CT280(nHDL235):+0.061 CT320(nHDL275):+0.120
+masculino 70 CT160(nHDL115):-0.117 CT200(nHDL155):-0.057 CT240(nHDL195):+0.002 CT280(nHDL235):+0.061 CT320(nHDL275):+0.120
+
+== 4. Sinal da atribuição do ANTI-HIPERTENSIVO ==
+feminino PAS 110 phi_anti=+0.246 phi_pas=-0.339
+feminino PAS 120 phi_anti=+0.236 phi_pas=-0.170
+feminino PAS 130 phi_anti=+0.227 phi_pas=+0.000
+feminino PAS 150 phi_anti=+0.207 phi_pas=+0.339
+feminino PAS 180 phi_anti=+0.177 phi_pas=+0.849
+masculino PAS 110 phi_anti=+0.220 phi_pas=-0.308
+masculino PAS 120 phi_anti=+0.212 phi_pas=-0.154
+masculino PAS 130 phi_anti=+0.204 phi_pas=+0.000
+masculino PAS 150 phi_anti=+0.188 phi_pas=+0.308
+masculino PAS 180 phi_anti=+0.163 phi_pas=+0.770
+
+== 5. Efeito do tratamento dentro do modelo (mesma PAS/não-HDL, com x sem remédio) ==
+feminino sem remédio 3.26%; com anti-HAS 3.98%; com estatina 3.49%
+masculino sem remédio 4.61%; com anti-HAS 5.50%; com estatina 5.02%
+
+== 6. CKD-EPI 2021 (Inker 2021) ==
+Cr 0.7 50 feminino -> projeto 105 | indep 105.3  OK
+Cr 0.9 50 masculino -> projeto 104 | indep 104.0  OK
+Cr 1.0 60 feminino -> projeto 64 | indep 64.5  OK
+Cr 1.2 60 masculino -> projeto 69 | indep 69.2  OK
+Cr 2.0 70 masculino -> projeto 35 | indep 35.2  OK
+Cr 0.5 30 masculino -> projeto 141 | indep 140.7  RECUSADO pelo PREVENT (fora de 15-140)
+Cr 0.4 30 feminino -> projeto 136 | indep 136.5  OK
+Cr 0.3 30 feminino -> projeto 146 | indep 146.3  RECUSADO pelo PREVENT (fora de 15-140)
+Cr 0.6 35 masculino -> projeto 129 | indep 129.1  OK
+
+== 7. Arredondamento: frequência natural x categoria ==
+risco 4.5% -> em_100_pessoas=4, categoria=baixo
+risco 4.6% -> em_100_pessoas=5, categoria=baixo
+risco 4.9% -> em_100_pessoas=5, categoria=baixo
+risco 19.5% -> em_100_pessoas=20, categoria=intermediário
+risco 19.9% -> em_100_pessoas=20, categoria=intermediário
+
+== 8. Regras SBC: casos de fronteira ==
+escore<5 + LDL 170 + agravante           -> intermediário  ['escore PREVENT 3,0% → baixo (Tabela 4.1)', 'agravante(s): história familiar de doença cardiovascular prematura → de baixo para intermediário (Tabela 4.1)']
+escore 10 + LDL 170                      -> intermediário  ['escore PREVENT 10,0% → intermediário (Tabela 4.1)']
+escore<5 + Lp(a)>=50 (sem valor)         -> intermediário  ['escore PREVENT 3,0% → baixo (Tabela 4.1)', 'agravante(s): lipoproteína(a) elevada → de baixo para intermediário (Tabela 4.1)']
+escore<5 + 3 agravantes                  -> intermediário  ['escore PREVENT 2,0% → baixo (Tabela 4.1)', 'agravante(s): história familiar de doença cardiovascular prematura; síndrome metabólica; PCR ultrassensível elevada → de baixo para intermediário (Tabela 4.1)']
+escore<5, LDL não informado              -> baixo  ['escore PREVENT 2,0% → baixo (Tabela 4.1)']
+escore 12 + LDL 189,5                    -> intermediário  ['escore PREVENT 12,0% → intermediário (Tabela 4.1)']
+
+== 9. Saída do endpoint (mesma lógica de backend-gateway/app/avaliacao.py::_resultado) para usuários de estatina ==
+M 62, estatina, CT 280 HDL 42 (não-HDL 238), PAS 128 -> risco 8.7%, cat intermediário
+    colesterol não-HDL           +0.565  aumentou
+    idade                        +0.467  aumentou
+    HDL (colesterol bom)         +0.076  aumentou
+    uso de estatina              +0.066  aumentou
+    pressão arterial sistólica   -0.029  pouco influenciou
+    função renal (TFGe)          +0.007  pouco influenciou
+F 58, estatina+anti-HAS, CT 290 HDL 50, PAS 124 -> risco 4.7%, cat baixo
+    colesterol não-HDL           +0.410  aumentou
+    uso de anti-hipertensivo     +0.233  aumentou
+    idade                        +0.198  aumentou
+    pressão arterial sistólica   -0.097  diminuiu
+    uso de estatina              +0.055  aumentou
+    HDL (colesterol bom)         +0.003  pouco influenciou
+F 45, anti-HAS, PAS 118 (bem controlada) -> risco 0.9%, cat baixo
+    idade                        -0.758  diminuiu
+    uso de anti-hipertensivo     +0.238  aumentou
+    pressão arterial sistólica   -0.235  diminuiu
+    HDL (colesterol bom)         -0.068  diminuiu
+    função renal (TFGe)          -0.013  pouco influenciou
+    colesterol não-HDL           -0.001  pouco influenciou

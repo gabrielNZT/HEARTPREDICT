@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Locale;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -146,7 +147,7 @@ public class AgenteExplicador extends Agent {
         prompt.append("• Paciente: ").append(userId).append("\n");
         prompt.append("• Score de Risco: ").append(String.format("%.2f", chronicRiskScore)).append(" (").append(riskLevel).append(")\n");
         prompt.append("• Predição: ").append(riskPrediction == 1 ? "POSITIVO para doença cardiovascular" : "NEGATIVO para doença cardiovascular").append("\n");
-        prompt.append("• Modelo: ").append(modelName).append(" (Precisão: ").append(String.format("%.1f%%", rocAuc * 100)).append(")\n\n");
+        prompt.append("• Modelo: ").append(modelName).append(" (AUC-ROC: ").append(String.format(Locale.ROOT, "%.2f", rocAuc)).append(")\n\n");
         
         prompt.append("**ACHADOS CLÍNICOS:**\n");
         prompt.append("• IMC: ").append(bmi).append(" (").append(bmiCategory).append(")\n");
@@ -159,7 +160,7 @@ public class AgenteExplicador extends Agent {
         prompt.append("Retorne APENAS um JSON válido seguindo este formato exato:\n\n");
         prompt.append("{\n");
         prompt.append("  \"patientName\": \"").append(userId).append("\",\n");
-        prompt.append("  \"riskScore\": ").append(String.format("%.2f", chronicRiskScore)).append(",\n");
+        prompt.append("  \"riskScore\": ").append(String.format(Locale.ROOT, "%.2f", chronicRiskScore)).append(",\n");
         prompt.append("  \"riskLevel\": \"").append(riskLevel.toLowerCase()).append("\",\n");
         prompt.append("  \"predictionStatus\": \"").append(riskPrediction == 1 ? "positiva" : "negativa").append("\",\n");
         prompt.append("  \"predictionSummary\": \"[Explicação de 1-2 frases sobre o que significa essa predição]\",\n");
@@ -194,8 +195,9 @@ public class AgenteExplicador extends Agent {
         prompt.append("    }\n");
         prompt.append("  ],\n");
         prompt.append("  \"modelInfo\": {\n");
-        prompt.append("    \"accuracy\": ").append(String.format("%.1f", rocAuc * 100)).append(",\n");
-        prompt.append("    \"disclaimer\": \"Este modelo tem uma precisão de ").append(String.format("%.1f%%", rocAuc * 100)).append(", o que significa que existe uma margem de erro.\"\n");
+        // AUC-ROC mede discriminação, não taxa de acerto; não deve ser apresentada como "precisão".
+        prompt.append("    \"rocAuc\": ").append(String.format(Locale.ROOT, "%.2f", rocAuc)).append(",\n");
+        prompt.append("    \"disclaimer\": \"A AUC-ROC de ").append(String.format(Locale.ROOT, "%.2f", rocAuc)).append(" indica a capacidade do modelo de separar pessoas com e sem a condição; não é uma taxa de acerto. Este resultado não substitui uma avaliação médica.\"\n");
         prompt.append("  }\n");
         prompt.append("}\n\n");
         

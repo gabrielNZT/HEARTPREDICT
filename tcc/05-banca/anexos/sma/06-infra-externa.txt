@@ -1,0 +1,18 @@
+# Verificações de infraestrutura externa (29/09/2026)
+## fipa.org
+HTTP/1.1 301 Moved Permanently
+Date: Tue, 29 Sep 2026 09:03:34 GMT
+Content-Type: text/html; charset=UTF-8
+<title> de http://www.fipa.org/ e de http://www.fipa.org/specs/fipa00036/SC00036H.html:
+<title>Casino på nett: Sammenlign de beste norske casinoene
+-> domínio não serve mais as especificações (página de cassino). Cópias usadas: Internet Archive:
+https://web.archive.org/web/20220121083431/http://www.fipa.org/specs/fipa00036/SC00036H.html
+https://web.archive.org/web/20210226113458/http://www.fipa.org/specs/fipa00030/SC00030H.html
+https://web.archive.org/web/20220116191415/http://fipa.org/specs/fipa00026/SC00026H.html
+https://web.archive.org/web/20201214192852/http://www.fipa.org/specs/fipa00037/SC00037J.html
+## jade.tilab.com (repositório Maven do pom.xml)
+verify error:num=20:unable to get local issuer certificate
+verify error:num=21:unable to verify the first certificate
+Verify return code: 21 (unable to verify the first certificate)
+-> o servidor não envia a cadeia intermediária; Maven/Java tende a falhar com PKIX. JADE não está no Maven Central:
+repo1.maven.org/maven2/com/tilab/jade/jade/ -> HTTP 404

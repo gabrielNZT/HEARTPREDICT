@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "heartpredict-interface",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,11 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^5.26.5",
-    "axios": "^1.10.0",
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.7.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

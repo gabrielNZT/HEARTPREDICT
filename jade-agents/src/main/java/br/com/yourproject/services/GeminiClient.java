@@ -19,13 +19,22 @@ import java.time.Duration;
  */
 public class GeminiClient {
     
-    private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
+    // O modelo não é fixado no código: versões do Gemini são desligadas periodicamente
+    // (o gemini-1.5-flash usado antes já retorna 404). Defina GEMINI_MODEL com um modelo vigente,
+    // conforme https://ai.google.dev/gemini-api/docs/deprecations, e registre a versão usada.
+    private static final String GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models/";
     private final String apiKey;
+    private final String model;
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
     
     public GeminiClient(String apiKey) {
+        this(apiKey, System.getenv("GEMINI_MODEL"));
+    }
+
+    public GeminiClient(String apiKey, String model) {
         this.apiKey = apiKey;
+        this.model = model;
         this.httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(30))
                 .build();
@@ -36,6 +45,10 @@ public class GeminiClient {
         // Valida a chave da API
         if (apiKey == null || apiKey.trim().isEmpty() || apiKey.equals("SUA_CHAVE_DE_API_VAI_AQUI")) {
             throw new IllegalArgumentException("Chave da API do Gemini não configurada. Configure a variável de ambiente GEMINI_API_KEY.");
+        }
+        if (model == null || model.trim().isEmpty()) {
+            throw new IllegalArgumentException("Modelo do Gemini não configurado. Defina a variável de ambiente GEMINI_MODEL "
+                    + "com um modelo vigente (https://ai.google.dev/gemini-api/docs/deprecations).");
         }
         
         // Constrói o payload da requisição
@@ -81,7 +94,7 @@ public class GeminiClient {
         
         // Cria a requisição HTTP
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(GEMINI_API_URL + "?key=" + apiKey))
+                .uri(URI.create(GEMINI_API_BASE + model.trim() + ":generateContent?key=" + apiKey))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
                 .timeout(Duration.ofSeconds(60))

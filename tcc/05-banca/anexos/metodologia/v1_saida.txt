@@ -1,0 +1,47 @@
+========================================================================
+1) Eficiencia do Shapley: soma(phi) == L(x) - L(ref)
+   maior |soma(phi) - (L - L_ref)| nas 24 vinhetas = 4.44e-15  -> OK
+========================================================================
+2) Plausibilidade: LDL-c nao pode exceder nao-HDL-c (nao-HDL = LDL + VLDL)
+   V18  CT=185 HDL=50 -> nao-HDL=135 ; LDL informado=165  -> IMPOSSIVEL
+   V19  CT=285 HDL=52 -> nao-HDL=233 ; LDL informado=200  -> ok
+========================================================================
+3) Categorias e origem (escore puro x regra de agravante/LDL)
+   categorias: {'baixo': 9, 'intermediário': 10, 'alto': 5}
+   vinhetas cuja categoria foi alterada por regra (agravante/LDL): 6/24
+   vinhetas com risco PREVENT >= 20%: 2/24 ; < 5%: 13/24
+========================================================================
+4) Vinhetas 'armadilha' segundo os criterios declarados em vinhetas.py (docstring)
+   V01 baixo típico, jovem                                idade<55
+   V02 armadilha IMC: obesidade com risco baixo           IMC>=30,idade<55
+   V03 jovem fumante                                      idade<55
+   V04 HDL alto protetor                                  idade<55
+   V05 agravante reclassifica baixo→intermediário         idade<55,reclassif.
+   V06 risco logo abaixo do corte de 5%                   IMC>=30,perto de 5%
+   V07 caso publicado no PREVENT; anti-hipertensivo como  IMC>=30,anti-HAS,idade<55
+   V08 intermediário com anti-hipertensivo                anti-HAS
+   V09 fumante intermediário                              -
+   V10 usuário de estatina                                -
+   V11 TFGe reduzida                                      perto de 5%
+   V12 agravante reclassifica intermediário→alto          reclassif.
+   V13 alto por múltiplos fatores                         anti-HAS
+   V14 idosa hipertensa                                   anti-HAS
+   V15 idoso com fatores controlados: idade domina        -
+   V16 alto com muitos fatores e TFGe reduzida            anti-HAS
+   V17 armadilha IMC 38 com risco intermediário           IMC>=30,anti-HAS
+   V18 LDL-c 165 → intermediário por regra                idade<55,reclassif.
+   V19 LDL-c 200 → alto por regra                         idade<55,reclassif.
+   V20 PAS baixa e HDL alto reduzem o risco               idade<55
+   V21 intermediário principalmente pela idade            -
+   V22 estatina e anti-hipertensivo                       anti-HAS,perto de 5%
+   V23 fumante com síndrome metabólica                    IMC>=30,reclassif.
+   V24 jovem com história familiar e IMC 31               IMC>=30,idade<55,reclassif.
+   -> 20/24 vinhetas tem ao menos um gatilho de erro declarado
+========================================================================
+5) Formato decimal no prompt (virgula x ponto)
+   numeros com virgula: ['1,73', '0,3', '0,3']  | com ponto: ['4.1', '-1.567', '-0.347', '-0.154', '-0.069']
+========================================================================
+6) resumir.py: unidade declarada (vinheta) x unidade usada na regra (resposta)
+   cenario: 7 de 24 vinhetas (29%) com erro em 1 de 3 repeticoes
+   sim: 7/72 respostas com erro (10%; IC95% 5–19%); 7/24 vinhetas com ≥1 erro
+     → regra do piloto (limiar 10%): AJUSTAR a tarefa (erros raros)

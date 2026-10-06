@@ -313,3 +313,6 @@ Thumbs.db
 *~
 
 venv/
+# ============ TCC ============
+# Textos completos de artigos (direitos autorais variam)
+tcc/01-literatura/textos/

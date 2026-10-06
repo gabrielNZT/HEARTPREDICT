@@ -1,0 +1,47 @@
+# Conferência dos números e alegações do MAST citados em justificativa-jade.md (texto: tcc/01-literatura/textos/cemri2025mast.txt, arXiv v3)
+--- linhas 117,119
+Figure 1: MAST: A Taxonomy of MAS Failure Modes. The inter-agent conversation stages indicate when a failure typically occurs within the end-to-end MAS execution pipeline. A failure mode spanning
+multiple stages signifies that the underlying issue can manifest or have implications across these different phases of operation. The percentages shown represent the prevalence of each failure mode
+and category as observed in our analysis of 1642 MAS execution traces. Detailed definitions for each failure mode and illustrative examples are available in Appendix A.
+--- linhas 326,329
+
+Failures in FC1 occur during execution but often reflect flaws in pre-execution design choices regarding system architecture, prompt instructions, or state management. These include failing to follow
+task requirements (FM-1.1, 11.8%) or agent roles (FM-1.2, 1.5%), step repetitions (FM-1.3, 15.7%), context loss (FM-1.4, 2.80%), or not recognizing task completion (FM-1.5, 12.4%). While FM-1.1 and
+FM-1.2, disobey specifications, may seem like general instruction-following limitation, we identify deeper causes: (1) flaws in MAS design regarding agent roles and workflow, (2) poor user prompt
+--- linhas 339,339
+. Insight 2. Solutions focused on context or communication protocols are often insufficient for FC2 failures, which demand deeper ‘social reasoning’ abilities from agents.
+--- linhas 341,342
+FC2 covers failures in agent coordination. These include unexpected conversation resets (FM-2.1, 2.20%), proceeding with wrong assumptions instead of seeking clarification (FM-2.2, 6.80%), task
+derailment (FM-2.3, 7.40%), withholding crucial information (FM-2.4, 0.85%), ignoring other agents’ input (FM-2.5, 1.90%), or mismatches between reasoning and action (FM-2.6, 13.2%). Figure 3
+--- linhas 346,352
+Recent system innovations, such as Model Context Protocol [46] and Agent to Agent [47], improve agent communication by standardizing message formats from different tool or agent providers. However,
+the errors we observe in FC2 occur even when agents within the same framework communicate using natural language. This signals a deeper agent interaction dynamic challenge: the collapse of ’theory of
+mind’ [48], where agents fail to accurately model other agents’ informational needs. Addressing this likely requires structural improvements to the content of agent messages or enhancing models’
+contextual reasoning and their capacity to infer other agents’ informational needs, such as through targeted training, as base LLMs are generally not pre-trained for such nuanced inter-agent
+dynamics. Thus, robust solutions will likely involve a combination of improved MAS architecture and model-level advancements in communicative intelligence.
+
+FC3. Task Verification. Failures involve inadequate verification processes that fail to detect or correct errors, or premature termination of tasks.
+--- linhas 353,356
+. Insight 3. Multi-Level Verification is Needed. Current verifier implementations are often insufficient; sole reliance on final-stage, low-level checks is inadequate.
+
+FC3 failures are related to the quality control of the final output, including premature termination (FM-3.1, 6.20%), no or incomplete verification (FM-3.2, 8.20%), or incorrect verification (FM-3.3,
+9.10%). These highlight challenges in ensuring output correctness and reliability. Systems with explicit verifiers like MetaGPT and ChatDev generally show fewer total failures (Figure 4), indicating
+--- linhas 818,821
+inconsistencies arise, as shown in Appendix L.5 [60]. After completing a complex multi-step task, add a self-verification step to the prompt to retrace the reasoning by restating solutions, checking
+conditions, and testing for errors [61]. However, it may miss flaws, rely on vague conditions, or be impractical [36]. Moreover, clear role specifications can be reinforced by defining conversation
+patterns and setting termination conditions [55, 62]. A modular approach with simple, well-defined agents, rather than complex, multitasked ones, enhances performance and simplifies debugging [63].
+The group dynamics also enable other interesting possibilities of multi-agent systems: different agents can propose various solutions [64], discuss their assumptions, and findings
+--- linhas 834,836
+A complementary strategy to verification is establishing a standardized communication protocol [72]. LLM-based agents mainly communicate via unstructured text, leading to ambiguities. Clearly
+defining intentions and parameters enhances alignment and enables formal coherence checks during and after interactions. [73] introduce Multi-Agent Graph Attention, leveraging a graph attention
+mechanism to model agent interactions and enhance coordination. Similarly, [74] propose Attentional Communication, enabling agents to selectively focus on relevant information. Likewise, [75] develop
+--- linhas 851,859
+
+Table 4: Solution Strategies vs. Failure Category in Multi-Agent Systems
+
+Failure Category        Tactical Approaches                                                                                      Structural Strategies
+System Design Issues    Clear role/task definitions, Engage in further discussions, Self-verification, Conversation pattern      Comprehensive verification, Confidence quantification
+                        design
+Inter-Agent             Cross-verification, Conversation pattern design, Mutual disambiguation, Modular agents design            Standardized communication protocols, Probabilistic confidence
+Misalignment                                                                                                                     measures
+Task Verification       Self-verification, Cross-verification, Topology redesign for verification                                Comprehensive verification & unit test generation

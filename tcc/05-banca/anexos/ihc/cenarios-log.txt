@@ -1,0 +1,58 @@
+## Tamanhos de fonte computados (px)
+{"html": "18px", "body": "18px", "h1": "39.546px", "h2 início": "25.308px", ".nota": "18px", ".cabecalho__nome": "20.25px", ".cabecalho__descritor": "18px", ".cabecalho__selo": "15.75px", ".inicio__lead": "25.308px", "rodapé": "18px"}
+## Erros e validação
+idade '': ['Erro:\nDigite um número.'] | foco: resumo-erros
+idade 'abc': ['Erro:\nDigite só números, por exemplo 180 ou 1,2.'] | foco: resumo-erros
+idade '58,5': ['Erro:\nDigite um número inteiro.'] | foco: resumo-erros
+idade '15': ['Erro:\nConfira o valor digitado.'] | foco: resumo-erros
+idade '150': ['Erro:\nConfira o valor digitado.'] | foco: resumo-erros
+idade 25 -> /#/fora/idade | Esta calculadora é para pessoas de 30 a 79 anos
+Voltar do navegador após fora do escopo -> /#/p/idade | valor no campo: 25
+colesterol 340: ['Erro:\nDigite um valor entre 130 e 320 mg/dL. Confira o valor no exame; a equação foi desenvolvida para essa faixa.']
+pressão '12': ['Erro:\nDigite um valor entre 90 e 200 mmHg. Confira o valor no exame; a equação foi desenvolvida para essa faixa.']
+pressão '12/8': ['Erro:\nDigite só números, por exemplo 180 ou 1,2.']
+pressão '85': ['Erro:\nDigite um valor entre 90 e 200 mmHg. Confira o valor no exame; a equação foi desenvolvida para essa faixa.']
+## Botão Voltar do navegador
+em: /#/p/anti_hipertensivo
+go_back -> /#/p/pas | campo: 140 | foco: H1
+go_back -> /#/p/ldl | campo LDL: ''
+go_forward x2 -> /#/p/anti_hipertensivo | Você toma remédio para pressão alta?
+recarregar em pergunta -> /#/p/anti_hipertensivo | Você toma remédio para pressão alta?
+#/revisao após recarregar -> /#/revisao | Calcule o seu risco de infarto e AVC nos próximos 10 anos
+#/fora/diabetes -> Esta versão ainda não avalia pessoas com diabetes
+Alterar minha resposta -> /#/p/diabetes | Você tem diabetes? | progresso: Pergunta 4 de 13
+#/p/inexistente -> Calcule o seu risco de infarto e AVC nos próximos 10 anos
+## Revisão / Alterar (inconsistência sexo x fator da mulher)
+Alterar sexo -> /#/p/sexo | progresso: Pergunta 2 de 13 | botão: Continuar
+após mudar para Masculino -> /#/revisao
+linha agravantes na revisão: Situações que ajustam a categoria | Situações da saúde da mulher | Alterar | situações que ajustam a categoria
+resultado: 7,1% | Sua categoria de risco: alto | Pelo cálculo, o risco seria intermediário. A diretriz eleva a categoria quando há fator de risco específico da mulher. Por isso, a sua categoria é alto.
+explicação: Explicação em linguagem simples |  | Texto gerado por inteligência artificial |  | Não foi possível gerar a explicação agora. |  | O resultado acima não depende deste texto e continua válido. |  | Tentar de novo
+pictograma aria-label: Grade de 100 pessoas, das quais 7 estão destacadas.
+summary display/marker: flex
+## Marca no cabeçalho no meio do fluxo
+clicou na marca -> /#/ | confirmação pedida? não (sem diálogo)
+#/revisao depois -> Calcule o seu risco de infarto e AVC nos próximos 10 anos
+## Reflow e zoom
+320px revisão overflow: {'sw': 320, 'cw': 320}
+320px resultado overflow: {'sw': 320, 'cw': 320}
+   elementos além da largura: []
+320px renal overflow: {'sw': 346, 'cw': 320}
+640px + zoom 200% (DPR2) revisão overflow: {'sw': 640, 'cw': 640}
+640px + zoom 200% (DPR2) resultado overflow: {'sw': 640, 'cw': 640}
+   elementos além da largura: []
+640px + zoom 200% (DPR2) renal overflow: {'sw': 640, 'cw': 640}
+1280px texto 200% (html 225%) revisão overflow: {'sw': 1280, 'cw': 1280}
+1280px texto 200% (html 225%) resultado overflow: {'sw': 1280, 'cw': 1280}
+   elementos além da largura: []
+1280px texto 200% (html 225%) renal overflow: {'sw': 1280, 'cw': 1280}
+390px texto 200% revisão overflow: {'sw': 443, 'cw': 390}
+390px texto 200% resultado overflow: {'sw': 588, 'cw': 390}
+   elementos além da largura: ['LI.escala__faixa escala__faixa--1 ', 'SPAN.escala__cor', 'SPAN.escala__rotulo', 'SPAN.escala__intervalo', 'LI.escala__faixa escala__faixa--2 escala__faixa--atual', 'SPAN.escala__cor']
+390px texto 200% renal overflow: {'sw': 689, 'cw': 390}
+## prefers-reduced-motion
+{"entrar": "entrar 1e-05s 1 / trans 1e-05s", "pessoa": "entrar 1e-05s 1 / trans 1e-05s", "barra": "crescer 1e-05s 1 / trans 1e-05s", "fantasma": null, "progresso": null}
+sem redução, 60 ms após: {"opacidadeTela": "0.406559", "fantasma": null}
+## forced-colors: active
+foco no botão em forced-colors: outline = none | box-shadow = none
+## Impressão (PDF sem gráficos de fundo = padrão do Chrome)

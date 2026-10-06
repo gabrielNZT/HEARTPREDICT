@@ -1,0 +1,14 @@
+meio exato 0.5 -> 0 figuras => {'entrada': {'idade': 40, 'sexo': 'feminino', 'pas': 100, 'tabagismo': False}, 'risco_pct': 0.5, 'em_100': 0, 'categoria': 'baixo'}
+meio exato 1.5 -> 2 figuras => {'entrada': {'idade': 40, 'sexo': 'feminino', 'pas': 130, 'tabagismo': True}, 'risco_pct': 1.5, 'em_100': 2, 'categoria': 'baixo'}
+meio exato 2.5 -> 2 figuras => {'entrada': {'idade': 40, 'sexo': 'feminino', 'pas': 152, 'tabagismo': True}, 'risco_pct': 2.5, 'em_100': 2, 'categoria': 'baixo'}
+pictograma 5/100 com categoria baixo (<5%) => {'entrada': {'idade': 40, 'sexo': 'feminino', 'pas': 176, 'tabagismo': True}, 'risco_pct': 4.6, 'em_100': 5, 'categoria': 'baixo'}
+meio exato 3.5 -> 4 figuras => {'entrada': {'idade': 40, 'sexo': 'feminino', 'pas': 188, 'tabagismo': False}, 'risco_pct': 3.5, 'em_100': 4, 'categoria': 'baixo'}
+meio exato 6.5 -> 6 figuras => {'entrada': {'idade': 40, 'sexo': 'feminino', 'pas': 190, 'tabagismo': True}, 'risco_pct': 6.5, 'em_100': 6, 'categoria': 'intermediário'}
+meio exato 4.5 -> 4 figuras => {'entrada': {'idade': 40, 'sexo': 'masculino', 'pas': 168, 'tabagismo': True}, 'risco_pct': 4.5, 'em_100': 4, 'categoria': 'baixo'}
+5,0% exibido mas categoria baixo (<5%) => {'entrada': {'idade': 40, 'sexo': 'masculino', 'pas': 196, 'tabagismo': False}, 'risco_pct': 5.0, 'em_100': 5, 'categoria': 'baixo'}
+meio exato 5.5 -> 6 figuras => {'entrada': {'idade': 41, 'sexo': 'feminino', 'pas': 182, 'tabagismo': True}, 'risco_pct': 5.5, 'em_100': 6, 'categoria': 'intermediário'}
+pictograma 20/100 com categoria intermediário (<20%) => {'entrada': {'idade': 74, 'sexo': 'masculino', 'pas': 196, 'tabagismo': True}, 'risco_pct': 19.6, 'em_100': 20, 'categoria': 'intermediário'}
+20,0% exibido mas categoria intermediário (<20%) => {'entrada': {'idade': 76, 'sexo': 'masculino', 'pas': 190, 'tabagismo': True}, 'risco_pct': 20.0, 'em_100': 20, 'categoria': 'intermediário'}
+colesterol 340: {'detail': {'codigo': 'fora_da_faixa', 'mensagens': ['Colesterol total de 340 mg/dL está fora da faixa em que a equação foi desenvolvida (130 a 320 mg/dL).']}}
+pas 85: {'detail': {'codigo': 'fora_da_faixa', 'mensagens': ['Pressão sistólica de 85 mmHg está fora da faixa em que a equação foi desenvolvida (90 a 200 mmHg).']}}
+mulher com fator mulher? masculino+fator_especifico_mulher: {'categoria': 'intermediário', 'regras_aplicadas': ['escore PREVENT 3,1% → baixo (Tabela 4.1)', 'agravante(s): fator de risco específico da mulher → de baixo para intermediário (Tabela 4.1)'], 'agravantes': ['fator de risco específico da mulher']}

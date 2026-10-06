@@ -1,0 +1,57 @@
+/*
+ * Tokens de design. Justificativas e contrastes medidos:
+ * tcc/03-metodologia/interface-design.md, seção 3.
+ */
+:root {
+  /* Cores — contraste sobre --papel entre parênteses */
+  --papel: #f7f4ee;
+  --superficie: #fffdf9;
+  --tinta: #17222e;            /* 14,7:1 */
+  --tinta-suave: #44505c;      /* 7,5:1 */
+  --acento: #0e5a5e;           /* 7,2:1; texto branco sobre ele 7,95:1 */
+  --acento-escuro: #0a474a;    /* 9,5:1 (hover) */
+  --acento-claro: #e3efee;     /* fundo de seleção */
+  --erro: #a4231b;             /* 6,8:1 */
+  --erro-claro: #f8e9e7;
+  --linha: #8c8579;            /* 3,3:1 — borda de componentes (WCAG 1.4.11) */
+  --linha-suave: #e2ddd3;      /* divisórias decorativas */
+
+  /* Escala sequencial da categoria (claro → escuro; ColorBrewer) */
+  --risco-baixo: #ead9b5;
+  --risco-intermediario: #d9a15f;
+  --risco-alto: #8e2f1f;
+
+  /* Pictograma: evento = figura cheia (7,4:1 sobre --papel); sem evento = só contorno em --linha
+     (3,3:1, WCAG 1.4.11). Diferença de forma + luminância, não só de matiz (parecer de IHC). */
+  --evento: #8e2f1f;
+  --sem-evento: var(--linha);
+  --diminuiu: #5b7083;
+
+  /* Tipografia — corpo 18 px, escala 1,25 */
+  --fonte: "Atkinson Hyperlegible Next Variable", "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --texto-p: 1rem;        /* 16 px — notas */
+  --texto-m: 1.125rem;    /* 18 px — corpo */
+  --texto-g: 1.406rem;    /* 22,5 px */
+  --texto-gg: 1.758rem;   /* 28 px */
+  --texto-ggg: 2.197rem;  /* 35 px */
+  --altura-linha: 1.5;
+  --medida: 38rem;        /* ~65 caracteres por linha */
+
+  /* Espaçamento em múltiplos de 8 px */
+  --e1: 0.5rem;
+  --e2: 1rem;
+  --e3: 1.5rem;
+  --e4: 2rem;
+  --e6: 3rem;
+  --e8: 4rem;
+
+  --raio: 10px;
+  --alvo-min: 48px;       /* acima dos 24 px do WCAG 2.5.8 */
+  --foco: 0 0 0 3px var(--papel), 0 0 0 6px var(--acento);
+
+  /* Movimento — 100 a 300 ms (NN/g) */
+  --t-retorno: 120ms;
+  --t-tela: 200ms;
+  --t-dado: 300ms;
+  --curva: cubic-bezier(0.2, 0, 0, 1);
+}

@@ -1,0 +1,90 @@
+==========================================================================================
+(a) n de VINHETAS (pares) para McNemar, poder 80%
+    alpha=0,05 (1 contraste) | alpha=0,025 (Bonferroni: 1 contraste x 2 LLMs) | alpha=0,0083 (3 pares x 2 LLMs)
+pA    r     q     p10    p01    |    a=.05   a=.025  a=.0083 | poder simulado (mid-p, alpha=0,025) no n Bonferroni
+0.10  0.3   0.01  0.030  0.009  |      692      838     1068 | 
+0.10  0.3   0.03  0.030  0.027  |    49708    60196    76691 | 
+0.10  0.3   0.05  0.030  0.045  |      inf      inf      inf | 
+0.10  0.5   0.01  0.050  0.009  |      274      332      423 | 0.85
+0.10  0.5   0.03  0.050  0.027  |     1141     1381     1760 | 0.81
+0.10  0.5   0.05  0.050  0.045  |    29824    36117    46014 | 
+0.10  0.8   0.01  0.080  0.009  |      137      166      211 | 0.87
+0.10  0.8   0.03  0.080  0.027  |      297      360      459 | 0.82
+0.10  0.8   0.05  0.080  0.045  |      799      968     1233 | 
+0.20  0.3   0.01  0.060  0.008  |      196      237      302 | 
+0.20  0.3   0.03  0.060  0.024  |      507      614      782 | 
+0.20  0.3   0.05  0.060  0.040  |     1960     2374     3025 | 
+0.20  0.5   0.01  0.100  0.008  |       98      119      152 | 0.88
+0.20  0.5   0.03  0.100  0.024  |      167      202      258 | 0.83
+0.20  0.5   0.05  0.100  0.040  |      303      368      468 | 
+0.20  0.8   0.01  0.160  0.008  |       55       67       86 | 0.89
+0.20  0.8   0.03  0.160  0.024  |       76       92      118 | 0.86
+0.20  0.8   0.05  0.160  0.040  |      107      130      166 | 
+0.30  0.3   0.01  0.090  0.007  |      109      132      168 | 
+0.30  0.3   0.03  0.090  0.021  |      181      219      280 | 
+0.30  0.3   0.05  0.090  0.035  |      322      391      498 | 
+0.30  0.5   0.01  0.150  0.007  |       58       71       90 | 0.89
+0.30  0.5   0.03  0.150  0.021  |       79       96      122 | 0.86
+0.30  0.5   0.05  0.150  0.035  |      108      131      167 | 
+0.30  0.8   0.01  0.240  0.007  |       34       41       53 | 0.89
+0.30  0.8   0.03  0.240  0.021  |       41       50       63 | 0.88
+0.30  0.8   0.05  0.240  0.035  |       49       60       77 | 
+0.50  0.3   0.01  0.150  0.005  |       56       68       87 | 
+0.50  0.3   0.03  0.150  0.015  |       69       84      107 | 
+0.50  0.3   0.05  0.150  0.025  |       86      104      133 | 
+0.50  0.5   0.01  0.250  0.005  |       31       38       49 | 0.90
+0.50  0.5   0.03  0.250  0.015  |       36       43       56 | 0.88
+0.50  0.5   0.05  0.250  0.025  |       41       49       63 | 
+0.50  0.8   0.01  0.400  0.005  |       18       22       29 | 0.90
+0.50  0.8   0.03  0.400  0.015  |       20       24       31 | 0.90
+0.50  0.8   0.05  0.400  0.025  |       22       26       34 | 
+
+==========================================================================================
+(b) Curva operacional da regra do piloto: P('SEGUE') = P(taxa por resposta >= 10%)
+    24 vinhetas x 3 repeticoes = 72 respostas; ICC = correlacao intra-vinheta (beta-binomial)
+p real        ICC=0    ICC=0,3    ICC=0,6
+0.030          0.00       0.01       0.02
+0.050          0.03       0.06       0.09
+0.075          0.17       0.21       0.24
+0.100          0.44       0.43       0.43
+0.125          0.69       0.64       0.61
+0.150          0.87       0.80       0.75
+0.200          0.98       0.95       0.93
+0.250          1.00       0.99       0.98
+    n efetivo com ICC=0,3: 72/(1+(3-1)*0,3) = 45 respostas
+    IC95% (Wilson) para 7/72: 4.8% a 18.7%
+
+==========================================================================================
+(c) Vies por enriquecimento de armadilhas (20/24 vinhetas com gatilho declarado; ver v1)
+    taxa_piloto = 20/24*p_arm + 4/24*p_tip ; taxa_populacional = w*p_arm + (1-w)*p_tip
+    p_arm=0.15 p_tip=0.03 w=0.2 -> piloto 13.0% x populacao 5.4%  (regra: SEGUE x AJUSTA)
+    p_arm=0.15 p_tip=0.03 w=0.4 -> piloto 13.0% x populacao 7.8%  (regra: SEGUE x AJUSTA)
+    p_arm=0.20 p_tip=0.05 w=0.2 -> piloto 17.5% x populacao 8.0%  (regra: SEGUE x AJUSTA)
+    p_arm=0.20 p_tip=0.05 w=0.4 -> piloto 17.5% x populacao 11.0%  (regra: SEGUE x SEGUE)
+    p_arm=0.10 p_tip=0.02 w=0.2 -> piloto 8.7% x populacao 3.6%  (regra: AJUSTA x AJUSTA)
+    p_arm=0.10 p_tip=0.02 w=0.4 -> piloto 8.7% x populacao 5.2%  (regra: AJUSTA x AJUSTA)
+
+==========================================================================================
+(d) H3 -- evento raro (explicacao atribui risco a raca/etnia). p01 ~ 0 (verificador nao cria mencao)
+    base 1%, verificador remove 80% -> n = 1440 pares (alpha=0,05)
+    base 1%, verificador remove 100% -> n = 1064 pares (alpha=0,05)
+    base 2%, verificador remove 80% -> n = 591 pares (alpha=0,05)
+    base 2%, verificador remove 100% -> n = 455 pares (alpha=0,05)
+    base 5%, verificador remove 80% -> n = 210 pares (alpha=0,05)
+    base 5%, verificador remove 100% -> n = 165 pares (alpha=0,05)
+    base 10%, verificador remove 80% -> n = 100 pares (alpha=0,05)
+    base 10%, verificador remove 100% -> n = 79 pares (alpha=0,05)
+
+==========================================================================================
+(e) Carga do nucleo (D020): textos gerados e a anotar
+    100 vinhetas: 1800 textos finais (3 configs x 2 LLMs x 3 reps); ~2700 chamadas de API; com ~8 afirmacoes/texto = 14400 afirmacoes
+    200 vinhetas: 3600 textos finais (3 configs x 2 LLMs x 3 reps); ~5400 chamadas de API; com ~8 afirmacoes/texto = 28800 afirmacoes
+    300 vinhetas: 5400 textos finais (3 configs x 2 LLMs x 3 reps); ~8100 chamadas de API; com ~8 afirmacoes/texto = 43200 afirmacoes
+
+==========================================================================================
+(f) Precisao do kappa (2 anotadores, desfecho binario, prevalencia 20%, kappa real 0,70)
+    n=50 textos anotados em dobro -> 95% dos kappas amostrais entre 0.42 e 0.90
+    n=100 textos anotados em dobro -> 95% dos kappas amostrais entre 0.52 e 0.85
+    n=200 textos anotados em dobro -> 95% dos kappas amostrais entre 0.58 e 0.81
+
+Figuras: fig1_n_mcnemar.png, fig2_regra_piloto.png

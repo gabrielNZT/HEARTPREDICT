@@ -1,0 +1,13 @@
+PASSOU  “Nenhuma destas” chega à revisão (1280 px) — http://127.0.0.1:4173/#/revisao
+PASSOU  … e ao resultado — http://127.0.0.1:4173/#/resultado
+PASSOU  “Nenhuma destas” chega à revisão (390 px) — http://127.0.0.1:4173/#/revisao
+PASSOU  Trocar o sexo pede de novo as situações que dependem dele — http://127.0.0.1:4173/#/p/agravantes
+PASSOU  … e a opção feminina não aparece para homem
+PASSOU  Escala marca a faixa do número e a categoria da diretriz
+PASSOU  Explicação por IA não é pedida sem consentimento
+PASSOU  Marca volta ao início sem apagar respostas
+PASSOU  Colesterol 340 orienta o que fazer
+PASSOU  Pergunta renal cabe em 320 px — scrollWidth=320
+PASSOU  Categoria do escore coerente com o número exibido nas fronteiras — 0 contradições em 4000 entradas
+
+11 de 11 verificações passaram

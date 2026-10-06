@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 112.5%; /* 18 px de corpo, respeitando o ajuste de fonte do navegador */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  font-size: 1rem;
+  line-height: var(--altura-linha);
+  font-variant-numeric: lining-nums;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 var(--e2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--texto-ggg);
+}
+
+h2 {
+  font-size: var(--texto-gg);
+}
+
+h3 {
+  font-size: var(--texto-g);
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 var(--e2);
+  max-width: var(--medida);
+}
+
+li + li {
+  margin-top: var(--e1);
+}
+
+a {
+  color: var(--acento);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--acento-escuro);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--foco);
+  border-radius: 4px;
+}
+
+/* Modo de cores forçadas (Alto Contraste do Windows) remove box-shadow: o foco precisa de outline
+   (WCAG 2.4.7; parecer de IHC). */
+@media (forced-colors: active) {
+  :focus-visible,
+  .opcao:focus-within {
+    outline: 3px solid CanvasText;
+    outline-offset: 3px;
+  }
+  .escala__cor,
+  .fator__barra {
+    forced-color-adjust: none;
+    border: 1px solid CanvasText;
+  }
+}
+
+/* Títulos recebem foco por script ao trocar de tela (para leitores de tela anunciarem);
+   não mostram anel, pois não são interativos (padrão GOV.UK) */
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.visualmente-oculto {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.nota {
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+}
+
+.numero {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Entrada de tela: curta e na direção da leitura (NN/g: 100–300 ms) */
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.entrar {
+  animation: entrar var(--t-tela) var(--curva) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Link "pular para o conteúdo": visível só ao receber foco pelo teclado */
+.pular {
+  position: absolute;
+  left: var(--e2);
+  top: -4rem;
+  background: var(--tinta);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--raio);
+  z-index: 10;
+}
+
+.pular:focus {
+  top: var(--e2);
+  color: #fff;
+}
+
+main:focus {
+  outline: none;
+}

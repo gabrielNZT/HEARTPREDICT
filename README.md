@@ -1,211 +1,77 @@
-# 🫀 Sistema de Alerta Cardíaco
+# HEARTPREDICT
 
-Um sistema multiagentes inteligente para detecção e alerta de riscos cardíacos, combinando análise de dados crônicos e monitoramento em tempo real através de uma arquitetura híbrida de microsserviços e agentes autônomos.
+Protótipo de pesquisa (TCC de Engenharia de Computação) sobre **explicações de risco cardiovascular geradas por LLM**: o risco é calculado por ferramenta determinística, um LLM explica o resultado em português, e um agente verificador confere se a explicação é fiel ao cálculo.
 
-## 🚀 Sobre o Projeto
+> **Não é um dispositivo médico.** Uso exclusivamente acadêmico.
 
-O **Sistema de Alerta Cardíaco** é uma plataforma inovadora que utiliza Inteligência Artificial e Sistemas Multiagentes para:
+## Estado atual (transição)
 
-- **🔍 Análise de Risco Crônico**: Avaliação de fatores de risco cardiovascular a longo prazo
-- **⚡ Detecção de Anomalias em Tempo Real**: Monitoramento contínuo de sinais vitais (ECG, frequência cardíaca)
-- **🤖 Agentes Autônomos**: Coordenação inteligente entre diferentes componentes do sistema
-- **📊 Explicabilidade (XAI)**: Transparência nas decisões de IA para profissionais de saúde
-- **🚨 Alertas Inteligentes**: Notificações contextualizadas e priorizadas
+O projeto está migrando da versão inicial para a arquitetura definida no TCC. Hoje:
 
-### 🎯 Características Principais
+| Componente | Situação |
+|---|---|
+| `frontend/` (React + Vite) | **Nova interface** (29/09/2026): perguntas do escopo PREVENT, resultado com pictograma, categoria SBC, fatores e explicação de IA. Especificação: `tcc/03-metodologia/interface-design.md` |
+| `backend-gateway/` (FastAPI, porta 8000) | `POST /api/avaliacao` (cálculo PREVENT + SBC) e `POST /api/avaliacao/explicacao` (texto de IA, **ainda sem passar pelos agentes JADE**). O endpoint antigo `/predict` continua ligado ao fluxo JADE |
+| `jade-agents/` (JADE) | Funcional com 4 agentes: Gerenciador, Classificador, Julgador e Explicador |
+| `ai-services/chronic-risk-service/` (FastAPI, porta 8002) | **Versão inicial:** XGBoost treinado no dataset Cardiovascular Disease (Kaggle). **Será substituído** pelo escore PREVENT + regras da Diretriz SBC 2025 |
+| `AgenteJulgador` | Hoje só encaminha resultados ao Explicador; **será o Verificador** de fidelidade |
 
-- **Arquitetura Híbrida**: Microsserviços Python + Plataforma JADE (Java)
-- **Comunicação Assíncrona**: MQTT para mensagens em tempo real
-- **Banco de Dados Temporal**: PostgreSQL + TimescaleDB para séries temporais
-- **IA Explicável**: Implementação de técnicas XAI (SHAP, LIME)
-- **Containerização**: Docker para facilitar deployment e escalabilidade
+Decisões, justificativas e referências: [`tcc/`](tcc/INDEX.md) (comece por [`tcc/00-projeto/proposta.md`](tcc/00-projeto/proposta.md)).
 
-## 🛠️ Tecnologias Utilizadas
+## Fluxo atual
 
-### Backend & APIs
-- **FastAPI** - Framework web moderno e rápido para Python
-- **JADE** - Plataforma de agentes autônomos em Java
-- **PostgreSQL + TimescaleDB** - Banco de dados relacional com extensão para séries temporais
-- **Eclipse Mosquitto** - Broker MQTT para comunicação assíncrona
+```
+frontend → backend-gateway (8000) → AgenteGerenciadorPacientes (HTTP 8888)
+        → AgenteClassificador → chronic-risk-service (8002)
+        → AgenteJulgador → AgenteExplicador → LLM (Gemini)
+        → explicação devolvida ao backend-gateway → frontend
+```
 
-### Inteligência Artificial
-- **TensorFlow/Keras** - Deep Learning para análise de ECG
-- **Scikit-learn** - Machine Learning clássico para análise de risco
-- **XGBoost** - Gradient Boosting para predições robustas
-- **SHAP & LIME** - Explicabilidade de modelos de IA
+## Como executar
 
-### DevOps & Infraestrutura
-- **Docker & Docker Compose** - Containerização e orquestração
-- **GitHub Actions** - CI/CD (planejado)
-- **Prometheus** - Monitoramento (planejado)
-
-### Frontend (Planejado)
-- **React.js** - Interface web moderna e responsiva
-- **Chart.js/D3.js** - Visualizações interativas
-- **Material-UI** - Componentes de interface
-
-## 📦 Como Rodar (Setup)
-
-### Pré-requisitos
-
-- **Docker** >= 20.10
-- **Docker Compose** >= 2.0
-- **Git**
-- **Java** >= 17 (para desenvolvimento JADE)
-- **Python** >= 3.11 (para desenvolvimento dos microsserviços)
-- **Node.js** >= 18 (para o frontend)
-
-### 🚀 Início Rápido
-
-1. **Clone o repositório**
-   ```bash
-   git clone <repository-url>
-   cd HEARTPREDICT
-   ```
-
-2. **Crie a estrutura de pastas** (se necessário)
-   ```bash
-   bash create_structure.sh
-   ```
-
-3. **Configure as variáveis de ambiente**
-   ```bash
-   cp .env.example .env
-   # Edite o arquivo .env com suas configurações
-   ```
-
-4. **Inicie os serviços de infraestrutura**
-   ```bash
-   docker-compose up -d postgres-db mqtt-broker
-   ```
-
-5. **Aguarde os serviços estarem prontos e inicie o sistema completo**
-   ```bash
-   docker-compose up -d
-   ```
-
-6. **Verifique se todos os serviços estão rodando**
-   ```bash
-   docker-compose ps
-   ```
-
-### 🔗 Endpoints Principais
-
-| Serviço | URL Local | Descrição |
-|---------|-----------|-----------|
-| **Gateway Principal** | http://localhost:8000 | API principal do sistema |
-| **Risco Crônico** | http://localhost:8001 | Serviço de análise de risco |
-| **Anomalia Tempo Real** | http://localhost:8002 | Serviço de detecção de anomalias |
-| **XAI Service** | http://localhost:8003 | Serviço de explicabilidade |
-| **Frontend** | http://localhost:3000 | Interface web |
-| **MQTT Broker** | localhost:1883 | Broker de mensagens |
-| **PostgreSQL** | localhost:5432 | Banco de dados |
-
-### 📋 Comandos Úteis
+Pré-requisitos: Python ≥ 3.11, Java 17 + Maven, Node.js ≥ 18, chave da API do Gemini.
 
 ```bash
-# Ver logs de um serviço específico
-docker-compose logs -f chronic-risk-service
+# 1. Serviço de risco
+cd ai-services/chronic-risk-service && pip install -r requirements.txt && ./run.sh
 
-# Reiniciar um serviço
-docker-compose restart backend-gateway
+# 2. Gateway
+cd backend-gateway && pip install -r requirements.txt && python app/main.py
 
-# Acessar shell de um container
-docker-compose exec postgres-db psql -U cardiac_user -d cardiac_alert_db
+# Explicação por IA na nova interface: no arquivo .env da raiz
+#   LLM_PROVEDOR=groq            (ou gemini)
+#   LLM_MODELO=<id do modelo>
+#   GROQ_API_KEY=...             (ou GEMINI_API_KEY=...)
 
-# Parar todos os serviços
-docker-compose down
+# 3. Agentes JADE (fluxo antigo /predict)
+export GEMINI_API_KEY='sua_chave'
+export GEMINI_MODEL='<id de um modelo vigente>'   # ver https://ai.google.dev/gemini-api/docs/deprecations
+cd jade-agents && ./run-agents.sh
 
-# Parar e remover volumes (⚠️ CUIDADO: remove dados!)
-docker-compose down -v
+# 4. Frontend
+cd frontend && npm install && npm run dev
 ```
 
-## 📂 Estrutura de Pastas
+`GEMINI_MODEL` é obrigatória: o modelo não é fixado no código porque versões do Gemini são desligadas periodicamente. Registre a versão usada em cada experimento.
+
+Para testar sem o frontend: `python trigger/disparar_registro.py`.
+
+## Estrutura
 
 ```
-HEARTPREDICT/
-│
-├── 📋 .gitignore                    # Arquivos ignorados pelo Git
-├── 🐳 docker-compose.yml           # Orquestração de serviços
-├── 📖 README.md                    # Esta documentação
-├── 📝 instructions.md              # Planejamento detalhado do projeto
-└── 🔨 create_structure.sh          # Script de criação da estrutura
-│
-├── 🤖 ai-services/                 # Microsserviços de IA
-│   │
-│   ├── 📊 chronic-risk-service/    # Análise de risco crônico
-│   │   ├── app/                    # Código da aplicação FastAPI
-│   │   ├── data/                   # Datasets para treinamento
-│   │   ├── models/                 # Modelos treinados (.pkl, .h5)
-│   │   ├── notebooks/              # Jupyter notebooks
-│   │   ├── 🐳 Dockerfile
-│   │   └── 📦 requirements.txt
-│   │
-│   ├── ⚡ realtime-anomaly-service/ # Detecção de anomalias em tempo real
-│   │   ├── app/                    # Código da aplicação FastAPI
-│   │   ├── models/                 # Modelos de séries temporais
-│   │   ├── notebooks/              # Análise e treinamento
-│   │   ├── 🐳 Dockerfile
-│   │   └── 📦 requirements.txt
-│   │
-│   └── 🔍 xai-service/            # Explicabilidade de IA
-│       ├── app/                    # Endpoints de explicação
-│       ├── 🐳 Dockerfile
-│       └── 📦 requirements.txt
-│
-├── 🌐 backend-gateway/             # Gateway principal
-│   ├── app/                        # API principal (FastAPI)
-│   │   └── clients/                # Clientes para JADE e outros serviços
-│   ├── 🐳 Dockerfile
-│   └── 📦 requirements.txt
-│
-├── 🎨 frontend/                    # Interface web (React)
-│   ├── public/                     # Arquivos estáticos
-│   ├── src/                        # Código-fonte React
-│   │   ├── assets/                 # Imagens, CSS, fontes
-│   │   ├── components/             # Componentes reutilizáveis
-│   │   ├── pages/                  # Páginas da aplicação
-│   │   └── services/               # Clientes HTTP
-│   ├── 🐳 Dockerfile
-│   └── 📦 package.json
-│
-├── ☕ jade-agents/                 # Plataforma JADE (Java)
-│   ├── src/main/java/br/com/yourproject/agents/  # Agentes autônomos
-│   │   ├── AgenteGateway.java      # Agente de coordenação
-│   │   ├── AgenteGerenciadorPacientes.java
-│   │   ├── AgenteMonitor.java      # Monitoramento em tempo real
-│   │   ├── AgenteNotificador.java  # Sistema de alertas
-│   │   ├── AgentePaciente.java     # Representação de pacientes
-│   │   └── AgenteExplicador.java   # Coordenação de XAI
-│   ├── src/main/resources/         # Configurações
-│   ├── 🐳 Dockerfile
-│   └── 📋 pom.xml                  # Dependências Maven
-│
-└── 📡 mosquitto/                   # Configuração MQTT
-    └── config/
-        └── mosquitto.conf          # Configuração do broker
+ai-services/chronic-risk-service/   serviço de risco (versão inicial, a substituir)
+backend-gateway/                    API de integração
+jade-agents/                        agentes JADE e cliente do LLM
+frontend/                           interface web
+trigger/                            script de teste
+tcc/                                base de conhecimento do TCC (literatura, decisões, métodos)
+docs/historico/                     planejamento da arquitetura original (substituída)
 ```
 
-## 👥 Contribuição
+## Fora do escopo
 
-Este projeto está em desenvolvimento ativo. Para contribuir:
+A versão original previa ECG em tempo real, MQTT, banco temporal (TimescaleDB) e um serviço XAI separado. Esses componentes **não foram implementados** e foram retirados do escopo do TCC (ver `tcc/00-projeto/decisoes.md`, D008 e D019).
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
+## Licença
 
-## 📄 Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
-## 📞 Contato
-
-- **Equipe de Desenvolvimento**: [gabrielnunescesarino@gmail.com]
-- **Documentação Técnica**: Ver `instructions.md`
-- **Issues**: [GitHub Issues](link-para-issues)
-
----
-
-⚡ **Feito com ❤️ para salvar vidas através da tecnologia**
+A definir.

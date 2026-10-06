@@ -1,0 +1,56 @@
+--- /api/avaliacao
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+200
+--- /api/avaliacao/explicacao
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao/explicacao "HTTP/1.1 200 OK"
+200 {'texto': 'texto de teste', 'provedor': 'groq', 'modelo': 'modelo-x', 'gerado_em': '2026-09-29T01:53:58', 'verificado': False}
+=== PROMPT ENVIADO AO PROVEDOR ===
+Você é um assistente que explica, em português do Brasil, o resultado de uma calculadora de risco cardiovascular para o próprio paciente.
+
+Regras:
+- Use apenas as informações fornecidas abaixo. Não calcule nenhum valor novo.
+- Explique o risco, a categoria, os fatores que mais pesaram (e em que direção) e a meta de LDL-c.
+- A tabela de contribuições compara o paciente com uma pessoa de referência (55 anos, colesterol não-HDL 135 mg/dL, HDL 50 mg/dL, pressão sistólica 130 mmHg, sem remédios, sem diabetes, não fumante, TFGe 90). Contribuição positiva = aumentou o risco em relação a essa referência; negativa = diminuiu.
+- Linguagem simples, entre 120 e 200 palavras, em texto corrido (sem listas, sem títulos).
+- Não faça diagnóstico e recomende conversar com o médico.
+
+DADOS DO PACIENTE
+Idade: 62 anos | Sexo: feminino
+Colesterol total: 220 mg/dL | HDL: 45 mg/dL | Não-HDL: 175 mg/dL
+Pressão sistólica: 142 mmHg | Usa anti-hipertensivo: sim | Usa estatina: não
+Diabetes: não | Fumante: sim | TFGe: 57 mL/min/1,73m²
+LDL-c: 150 mg/dL
+Fatores agravantes informados: doença inflamatória crônica; fator de risco específico da mulher
+
+RESULTADO DA CALCULADORA (PREVENT, doença cardiovascular aterosclerótica em 10 anos)
+Risco: 9,8%
+Categoria (Diretriz SBC 2025): alto
+Regras aplicadas: escore PREVENT 9,8% → intermediário (Tabela 4.1) | agravante(s): doença inflamatória crônica; fator de risco específico da mulher → de intermediário para alto (Tabela 4.1)
+Meta de LDL-c: < 70 mg/dL (redução mínima ≥ 50%)
+
+CONTRIBUIÇÕES DOS FATORES (escala log-odds; maiores em módulo primeiro)
+- tabagismo: +0.455
+- idade: +0.417
+- uso de anti-hipertensivo: +0.215
+- pressão arterial sistólica: +0.182
+- função renal (TFGe): +0.165
+- colesterol não-HDL: +0.100
+- HDL (colesterol bom): +0.064
+--- CORS preflight de origem arbitraria
+INFO:httpx:HTTP Request: OPTIONS http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+200 *
+--- /predict legado (JADE ausente)
+INFO:main:Recebendo dados do paciente: maria.silva@email.com
+INFO:main:Enviando dados para JADE Agent: {'user_id': 'maria.silva@email.com', 'age': 60, 'gender': 1, 'height': 160, 'weight': 70.0, 'ap_hi': 140, 'ap_lo': 90, 'cholesterol': 2, 'gluc': 1, 'smoke': 0, 'alco': 0, 'active': 1}
+ERROR:main:Erro de conexão com JADE Agent: All connection attempts failed
+INFO:httpx:HTTP Request: POST http://testserver/predict "HTTP/1.1 503 Service Unavailable"
+503 {"detail":"Serviço de análise temporariamente indisponível"}
+--- /pending
+INFO:httpx:HTTP Request: GET http://testserver/pending "HTTP/1.1 200 OK"
+{'pending_explanations': []}
+--- /explanation injection sem autenticacao
+INFO:main:Recebendo explicação para usuário qualquer: x
+WARNING:main:Explicação recebida para usuário qualquer que não está aguardando
+INFO:httpx:HTTP Request: POST http://testserver/explanation/qualquer "HTTP/1.1 200 OK"
+{'status': 'explanation_received', 'user_id': 'qualquer'}
+--- rotas: ['/api/avaliacao', '/api/avaliacao/explicacao', '/docs', '/docs/oauth2-redirect', '/explanation/{user_id}', '/health', '/openapi.json', '/pending', '/predict', '/redoc']

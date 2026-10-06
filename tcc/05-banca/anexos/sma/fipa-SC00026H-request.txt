@@ -1,0 +1,184 @@
+ 
+ FIPA Request Interaction Protocol Specification 
+ FOUNDATION
+FOR INTELLIGENT PHYSICAL AGENTS 
+ FIPA Request Interaction Protocol
+Specification 
+ Document title 
+ FIPA Request Interaction Protocol Specification 
+ Document number 
+ SC00026H 
+ Document source 
+ FIPA TC Communication 
+ Document status 
+ Standard 
+ Date of this status 
+ 2002/12/03 
+ Supersedes 
+ None 
+ Contact 
+ fab@fipa.org 
+ Change history 
+ See Informative Annex A ChangeLog 
+1996-2002 Foundation for Intelligent Physical Agents 
+http://www.fipa.org/ 
+Geneva, Switzerland 
+ Notice 
+ Use of the technologies described
+ in this specification may infringe patents, copyrights or other intellectual
+ property rights of FIPA Members and non-members. Nothing in this
+ specification should be construed as granting permission to use any of the
+ technologies described. Anyone planning to make use of technology covered by
+ the intellectual property rights of others should first obtain permission
+ from the holder(s) of the rights. FIPA strongly encourages anyone
+ implementing any part of this specification to determine first whether
+ part(s) sought to be implemented are covered by the intellectual property of
+ others, and, if so, to obtain appropriate licenses or other permission from
+ the holder(s) of such intellectual property prior to implementation. This
+ specification is subject to change without notice. Neither FIPA nor any of
+ its Members accept any responsibility whatsoever for damages or liability,
+ direct or consequential, which may result from the use of this specification. 
+ Foreword 
+ The Foundation for Intelligent Physical Agents
+(FIPA) is an international organization that is dedicated to promoting the
+industry of intelligent agents by openly developing specifications supporting
+interoperability among agents and agent-based applications. This occurs through
+open collaboration among its member organizations, which are companies and
+universities that are active in the field of agents. FIPA makes the results of
+its activities available to all interested parties and intends to contribute
+its results to the appropriate formal standards bodies where appropriate. 
+ The members of FIPA are individually and
+collectively committed to open competition in the development of agent-based
+applications, services and equipment. Membership in FIPA is open to any
+corporation and individual firm, partnership, governmental body or
+international organization without restriction. In particular, members are not
+bound to implement or use specific agent-based standards, recommendations and
+FIPA specifications by virtue of their participation in FIPA. 
+ The FIPA specifications are developed through direct
+involvement of the FIPA membership. The status of a specification can be either
+Preliminary, Experimental, Standard, Deprecated or Obsolete. More detail
+about the process of specification may be found in the FIPA Document
+Policy [f-out-00000] and the FIPA Specifications Policy [f-out-00003] . A
+complete overview of the FIPA specifications and their current status may be
+found on the FIPA Web site. 
+ FIPA is a non-profit association registered in
+Geneva, Switzerland. As of June 2002, the 56 members of FIPA represented many 
+ countries worldwide. Further information about FIPA as an organization,
+membership information, FIPA specifications and upcoming meetings may be found on
+the FIPA Web site at http://www.fipa.org/. 
+ Contents 
+ 1 FIPA
+Request Interaction Protocol 1 
+ 1.1 Explanation
+of the Protocol Flow . 1 
+ 1.2 Exceptions
+to Protocol Flow . 2 
+ 2 References . 4 
+ 3 Informative
+Annex A ChangeLog . 5 
+ 3.1 2002/11/01
+- version G by TC X2S . 5 
+ 3.2 2002/12/03
+- version H by FIPA Architecture Board . 5 
+ 1         
+ FIPA Request
+Interaction Protocol 
+ The FIPA
+Request Interaction Protocol (IP) allows one agent to request another to
+perform some action. 
+ The
+representation of this protocol is given in Figure 1 which is based on extensions
+to UML 1.x. [Odell2001]. This protocol is identified by the token fipa-request as the value of the protocol parameter of the ACL message. 
+ Figure 1: FIPA Request Interaction Protocol 
+ 1.1        
+ Explanation of the
+Protocol Flow 
+ The FIPA
+Request Interaction Protocol (IP) allows one agent to request another to
+perform some action. The Participant processes the request and makes a decision
+whether to accept or refuse the request. If a refuse decision is made, then refused
+becomes true and the Participant communicates a refuse . Otherwise, agreed becomes true. 
+ If conditions
+indicate that an explicit agreement is required (that is, notification
+necessary is true), then the Participant communicates an agree . The agree may be
+optional depending on circumstances, for example, if the requested action is
+very quick and can happen before a time specified in the reply-by parameter. Once the request has been agreed
+upon, then the Participant must communicate either: 
+ A failure if it fails in its attempt to fill the request, 
+ An inform-done if it successfully completes the request and
+only wishes to indicate that it is done, or, 
+ An inform-result if it wishes to indicate both that it is done
+and notify the initiator of the results. 
+ Any interaction using this interaction
+protocol is identified by a globally unique, non-null conversation-id parameter, assigned by the Initiator. The agents
+involved in the interaction must tag all of its ACL messages with this
+conversation identifier. This enables each agent to manage its communication
+strategies and activities, for example, it allows an agent to identify
+individual conversations and to reason across historical records of
+conversations. 
+ 1.2        
+ Exceptions to
+Protocol Flow 
+ At any 
+point in the IP, the receiver of a communication can inform the sender that it
+did not understand what was communicated. This is accomplished by returning a not-understood message. As such, Figure 1 does not
+depict a not-understood communication as it can occur at any
+point in the IP. The communication of a not-understood within an interaction protocol may terminate the
+entire IP and termination of the interaction may imply that any commitments
+made during the interaction are null and void. 
+ At any point
+in the IP, the initiator of the IP may cancel the interaction protocol by
+initiating the meta-protocol shown in Figure 2 . The conversation-id parameter of the cancel interaction is identical
+to the conversation-id parameter of the interaction that the
+Initiator intends to cancel. The semantics of cancel should roughly be
+interpreted as meaning that the initiator is no longer interested in continuing
+the interaction and that it should be terminated in a manner acceptable to both
+the Initiator and the Participant. The Participant either informs the Initiator
+that the interaction is done using an inform-done or
+indicates the failure of the cancellation using a failure . 
+ Figure 2: FIPA Cancel Meta-Protocol 
+ This IP is a
+pattern for a simple interaction type. Elaboration on this pattern will almost
+certainly be necessary in order to specify all cases that might occur in an
+actual agent interaction. Real world issues such as the effects of cancelling
+actions, asynchrony, abnormal or unexpected IP termination, nested IPs, and the
+like, are explicitly not addressed here. 
+ 2         
+ References 
+ [Odell2001] Odell, James, Van Dyke Parunak, H. and Bauer, B.,
+ Representing Agent Interaction Protocols in UML . In: Agent-Oriented
+Software Engineering, Ciancarini, P. and Wooldridge, M., Eds., Springer, pp.
+121-140, Berlin, 2001. 
+ http://www.fipa.org/docs/input/f-in-00077/ 
+ 3         
+ Informative Annex
+A ChangeLog 
+ 3.1        
+ 2002/11/01 -
+version G by TC X2S 
+ Page 1, Figure 1: The communication
+labeled inform-ref was changed to inform-result for clarity;
+the purpose of this communication is to inform the initiator of a result and inform-result 
+implies inform-done 
+ Page 1, Figure 1: The not-understood 
+communication was removed 
+ Page 1, Figure 1: Reworked the
+protocol flow to make the agree optional which also involved changing the
+exclusive-or with the agree to a different AUML notation 
+ Page 1, Figure 1: To conform to UML
+2, the protocol name was placed in a boundary, x is removed from the diamonds (xor
+is now the default) and the template box was removed 
+ Page 1, line 41: Reworked and
+expanded the section description of the IP 
+ Page 1, line 50: Added a new
+section on Explanation of Protocol Flow 
+ Page 1, line 50: Reworked and
+expanded the section on Exceptions of Protocol Flow to incorporate a
+meta-protocol for cancel 
+ Page 1, line 50: Added a paragraph
+explaining the not-understood communication and its relationship with the IP 
+ 3.2        
+ 2002/12/03 -
+version H by FIPA Architecture Board 
+ Entire document: Promoted to Standard
+status 

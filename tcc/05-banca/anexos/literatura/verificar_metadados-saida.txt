@@ -1,0 +1,58 @@
+jin2025agentmd: 10.1038/s41467-025-64430-x
+   AgentMD: Empowering language agents for risk prediction with large-scale clinica | Nature Communications | v16 i1 | p/art 9377 | [[2025, 10, 23]] | 14 autores | 1º Qiao Jin | último Zhiyong Lu
+khan2024prevent: 10.1161/CIRCULATIONAHA.123.067626
+   Development and Validation of the American Heart Association’s PREVENT Equations | Circulation | v149 i6 | p/art 430-449 | [[2024, 2, 6]] | 28 autores | 1º Sadiya S. Khan | último for the Chronic Kidney Disease Prognosis Consortium and the American Heart Association Cardiovascular-Kidney-Metabolic Science Advisory Group
+lee2025shapllm: 10.1186/s12911-025-03239-6
+   A prompt framework for enhancing LLM-based explainability of medical machine lea | BMC Medical Informatics and Decision Making | v25 i1 | p/art 430 | [[2025, 11, 26]] | 8 autores | 1º Sujung Lee | último Taehoon Ko
+roeschl2026pipeline: 10.1093/ehjdh/ztag124
+   Development of an LLM pipeline exceeding physician-documented cardiovascular ris | European Heart Journal - Digital Health | v7 i7 | p/art ztag124 | [[2026, 7, 28]] | 10 autores | 1º Tobias Roeschl | último Alexander Meyer
+santos2026escllm: 10.1093/ehjdh/ztag073
+   Large language models approach clinician performance in ESC cardiovascular risk  | European Heart Journal - Digital Health | v7 i5 | p/art ztag073 | [[2026, 5, 18]] | 11 autores | 1º José Ferreira Santos | último Hélder Dores
+sbc2025dislipidemias: 10.36660/abc.20250640
+   Diretriz Brasileira de Dislipidemias e Prevenção da Aterosclerose – 2025 | Arquivos Brasileiros de Cardiologia | v122 i09 | p/art e20250640 | [[2025]] | 40 autores | 1º Fabiana Hanna Rached | último Jose Francisco Kerr Saraiva
+wang2025colacare: 10.1145/3696410.3714877
+   ColaCare: Enhancing Electronic Health Record Modeling through Large Language Mod | Proceedings of the ACM on Web Conference 2025 | vNone iNone | p/art 2250-2261 | [[2025, 4, 22]] | 12 autores | 1º Zixiang Wang | último Liantao Ma
+diao2024preventnhanes: 10.1001/jama.2024.12537
+   Projected Changes in Statin and Antihypertensive Therapy Eligibility With the AH | JAMA | v332 i12 | p/art 989 | [[2024, 9, 24]] | 10 autores | 1º James A. Diao | último Arjun K. Manrai
+anderson2024preventnhanes: 10.1001/jamainternmed.2024.1302
+   Atherosclerotic Cardiovascular Disease Risk Estimates Using the Predicting Risk  | JAMA Internal Medicine | v184 i8 | p/art 963 | [[2024, 8, 1]] | 3 autores | 1º Timothy S. Anderson | último Jeremy B. Sussman
+collins2024tripodai: 10.1136/bmj-2023-078378
+   TRIPOD+AI statement: updated guidance for reporting clinical prediction models t | BMJ | v385 iNone | p/art e078378 | [[2024, 4, 16]] | 34 autores | 1º Gary S Collins | último Patricia Logullo
+hevner2004dsr: 10.2307/25148625
+   Design Science in Information Systems Research1 | MIS Quarterly | v28 i1 | p/art 75-106 | [[2004, 3, 1]] | 4 autores | 1º Alan R. Hevner | último Sudha Ram
+jabbour2023jama: 10.1001/jama.2023.22295
+   Measuring the Impact of AI in the Diagnosis of Hospitalized Patients | JAMA | v330 i23 | p/art 2275 | [[2023, 12, 19]] | 8 autores | 1º Sarah Jabbour | último Michael W. Sjoding
+jacovi2020faithfulness: 10.18653/v1/2020.acl-main.386
+   Towards Faithfully Interpretable NLP Systems: How Should We Define and Evaluate  | Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics | vNone iNone | p/art 4198-4205 | [[2020]] | 2 autores | 1º Alon Jacovi | último Yoav Goldberg
+jennings2000abse: 10.1016/S0004-3702(99)00107-1
+   On agent-based software engineering | Artificial Intelligence | v117 i2 | p/art 277-296 | [[2000, 3]] | 1 autores | 1º Nicholas R. Jennings | último Nicholas R. Jennings
+kapoor2023leakage: 10.1016/j.patter.2023.100804
+   Leakage and the reproducibility crisis in machine-learning-based science | Patterns | v4 i9 | p/art 100804 | [[2023, 9]] | 2 autores | 1º Sayash Kapoor | último Arvind Narayanan
+vancalster2019calibration: 10.1186/s12916-019-1466-7
+   Calibration: the Achilles heel of predictive analytics | BMC Medicine | v17 i1 | p/art 230 | [[2019, 12]] | 6 autores | 1º On behalf of Topic Group ‘Evaluating diagnostic tests and prediction models’ of the STRATOS initiative | último Ewout W. Steyerberg
+wooldridge1995agents: 10.1017/S0269888900008122
+   Intelligent agents: theory and practice | The Knowledge Engineering Review | v10 i2 | p/art 115-152 | [[1995, 6]] | 2 autores | 1º Michael Wooldridge | último Nicholas R. Jennings
+asgari2025hallucination: 10.1038/s41746-025-01670-7
+   A framework to assess clinical safety and hallucination rates of LLMs for medica | npj Digital Medicine | v8 i1 | p/art 274 | [[2025, 5, 13]] | 7 autores | 1º Elham Asgari | último Dominic Pimenta
+isern2016agents (DOI ausente no fichamento): 10.1007/s10916-015-0376-2
+   A Systematic Literature Review of Agents Applied in Healthcare | Journal of Medical Systems | v40 i2 | p/art 43 | [[2015, 11, 21]] | 2 autores | 1º David Isern | último Antonio Moreno
+tang2024medagents (DOI ausente no fichamento): 10.18653/v1/2024.findings-acl.33
+   MedAgents: Large Language Models as Collaborators for Zero-shot Medical Reasonin | Findings of the Association for Computational Linguistics ACL 2024 | vNone iNone | p/art 599-621 | [[2024]] | 8 autores | 1º Xiangru Tang | último Mark Gerstein
+chan2025vies (DOI ausente no fichamento): 10.3389/fdgth.2025.1710594
+   Uncovering bias and variability in how large language models attribute cardiovas | Frontiers in Digital Health | v7 iNone | p/art 1710594 | [[2025, 12, 9]] | 2 autores | 1º Justine Tin Nok Chan | último Ray Kin Kwek
+
+== arXiv ==
+http://arxiv.org/abs/2502.00025v4 | publicado 2025-01-21 | Explainable AI for Mental Health Emergency Returns: Integrating LLMs w | 8 autores | comentário: 
+http://arxiv.org/abs/2505.12371v2 | publicado 2025-05-18 | MedAgentBoard: Benchmarking Multi-Agent Collaboration with Conventiona | 9 autores | comentário: Accepted by NeurIPS 2025 Datasets &amp; Benchmarks Track
+http://arxiv.org/abs/2503.13657v3 | publicado 2025-03-17 | Why Do Multi-Agent LLM Systems Fail? | 13 autores | comentário: ArXiv v3
+http://arxiv.org/abs/2506.01463v1 | publicado 2025-06-02 | Agentic AI and Multiagentic: Are We Reinventing the Wheel? | 1 autores | comentário: 
+http://arxiv.org/abs/2512.00163v1 | publicado 2025-11-28 | Measuring What LLMs Think They Do: SHAP Faithfulness and Deployability | 6 autores | comentário: 7 pages, 3 figures, 3 tables, AAAI 2026 Deployable AI Workshop
+http://arxiv.org/abs/2507.10644v4 | publicado 2025-07-14 | From Multi-Agent Systems and the Semantic Web to Agentic AI: A Unified | 4 autores | comentário: 
+http://arxiv.org/abs/2406.12036v4 | publicado 2024-06-17 | MedCalc-Bench: Evaluating Large Language Models for Medical Calculatio | 17 autores | comentário: Github link: https://github.com/ncbi-nlp/MedCalc-Bench HuggingFace link: https://huggingfa
+http://arxiv.org/abs/2607.28218v1 | publicado 2026-07-30 | Bridging Probabilistic LLMs and Deterministic Statistical Validation:  | 3 autores | comentário: 
+http://arxiv.org/abs/2505.02279v2 | publicado 2025-05-04 | A survey of agent interoperability protocols: Model Context Protocol ( | 4 autores | comentário: 
+http://arxiv.org/abs/2410.02551v2 | publicado 2024-10-03 | ColaCare: Enhancing Electronic Health Record Modeling through Large La | 12 autores | comentário: ACM TheWebConf 2025 Conference (WWW 2025) Research Track
+http://arxiv.org/abs/2503.17550v1 | publicado 2025-03-21 | An LLM-Powered Clinical Calculator Chatbot Backed by Verifiable Clinic | 4 autores | comentário: 10 pages, 6 tables, 1 figure
+http://arxiv.org/abs/2404.15155v3 | publicado 2024-04-22 | MDAgents: An Adaptive Collaboration of LLMs for Medical Decision-Makin | 10 autores | comentário: 
+http://arxiv.org/abs/2605.01189v3 | publicado 2026-05-02 | NEURON: A Neuro-symbolic System for Grounded Clinical Explainability | 6 autores | comentário: 
+http://arxiv.org/abs/2608.26109v1 | publicado 2026-05-21 | Standalone LLM and a Pre-specified Agentic Pipeline for Explaining ICU | 8 autores | comentário: 

@@ -1,0 +1,80 @@
+test_BUG_agravante_desconhecido_descartado_em_silencio (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+ok
+test_BUG_agravante_feminino_aceito_para_homem (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+ok
+test_BUG_creatinina_negativa_gera_500 (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 500 Internal Server Error"
+ok
+test_BUG_creatinina_zero_gera_500 (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 500 Internal Server Error"
+ok
+test_BUG_ldl_sem_validacao_de_faixa (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+ok
+test_BUG_limite_exibido_5_0_categoria_baixo (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+ok
+test_arredondamento_bancario_em_100_pessoas (test_api_varredura.TestContratoDaApi) ... ok
+test_idade_decimal_recusada (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+ok
+test_nan_recusado_como_fora_da_faixa (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+
+  [NaN colesterol_total] HTTP 422 {"detail":{"codigo":"fora_da_faixa","mensagens":["Colesterol total de nan mg/dL está fora da faixa em que a equação foi desenvolvida (130 a 320 mg/dL)."]}}
+ok
+test_tfge_e_creatinina_juntas_tfge_prevalece (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+ok
+test_virgula_decimal_recusada_pelo_pydantic (test_api_varredura.TestContratoDaApi) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+ok
+test_BUG_explicacao_pode_ser_injetada_sem_autenticacao (test_api_varredura.TestEndpointAntigo) ... INFO:main:Recebendo explicação para usuário vitima: {"texto": "forjado"}
+INFO:main:Explicação armazenada para usuário vitima
+INFO:httpx:HTTP Request: POST http://testserver/explanation/vitima "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET http://testserver/pending "HTTP/1.1 200 OK"
+ok
+test_BUG_timeout_408_vira_500 (test_api_varredura.TestEndpointAntigo) ... INFO:main:Recebendo dados do paciente: u1
+INFO:main:Enviando dados para JADE Agent: {'user_id': 'u1', 'age': 50, 'gender': 1, 'height': 165, 'weight': 60.0, 'ap_hi': 120, 'ap_lo': 80, 'cholesterol': 1, 'gluc': 1, 'smoke': 0, 'alco': 0, 'active': 1}
+INFO:main:Dados enviados com sucesso para JADE Agent
+ERROR:main:Erro interno: 408: Timeout: Não foi possível obter explicação do agente
+INFO:httpx:HTTP Request: POST http://testserver/predict "HTTP/1.1 500 Internal Server Error"
+
+  [/predict timeout] HTTP 500 {"detail":"Erro interno do servidor: 408: Timeout: Não foi possível obter explicação do agente"}
+ok
+test_BUG_ldl_nan_aceito_e_explicacao_falha_como_503 (test_api_varredura.TestExplicacao) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao/explicacao "HTTP/1.1 503 Service Unavailable"
+
+  [ldl=NaN] /api/avaliacao HTTP 200; /explicacao HTTP 503 Explicação indisponível no momento: cannot convert float NaN to integer
+ok
+test_erro_de_rede_vira_503_com_mensagem_crua (test_api_varredura.TestExplicacao) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao/explicacao "HTTP/1.1 503 Service Unavailable"
+
+  [rede] detail='Explicação indisponível no momento: <urlopen error [Errno -2] Name or service not known>'
+ok
+test_sem_configuracao_503 (test_api_varredura.TestExplicacao) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao/explicacao "HTTP/1.1 503 Service Unavailable"
+ok
+test_temperatura_fixa_no_codigo (test_api_varredura.TestExplicacao) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao/explicacao "HTTP/1.1 200 OK"
+ok
+test_limites (test_api_varredura.TestVarreduraDeFaixas) ... INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.215s
+
+OK

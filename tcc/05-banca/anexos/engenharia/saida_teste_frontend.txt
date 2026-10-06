@@ -1,0 +1,16 @@
+ok   vírgula e ponto decimais
+ok   vazio → null; lixo → NaN
+ok   separador de milhar "1.234,5" é recusado (NaN), não lido como 1,234
+ok   colesterol total: 130 e 320 aceitos; 129,9 e 320,1 recusados
+ok   idade 29 passa na validação (vai para "fora do escopo" pela pergunta), 17 pede conferência
+ok   LDL opcional: vazio vira null e é enviado como null
+ok   LDL maior que colesterol total é aceito no cliente (sem validação cruzada)
+ok   creatinina 0 é barrada no cliente (faixa 0,3–15), mas o servidor devolve 500 se chamado direto
+ok   BUG: resposta antiga "fator_especifico_mulher" sobrevive à troca de sexo e é enviada
+ok   BUG: categoria do escore recomputada com o risco ARREDONDADO diverge do servidor
+
+10 casos ok.
+Achados:
+- LDL 300 com CT 180 aceito no cliente (e no servidor).
+- Agravante feminino enviado com sexo=masculino após troca na revisão.
+- Com agravante, a tela diria "pelo cálculo seria intermediário" e a categoria final também intermediário (servidor: baixo→intermediário).

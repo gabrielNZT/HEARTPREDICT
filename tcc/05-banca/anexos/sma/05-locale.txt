@@ -1,0 +1,4 @@
+# Formatação dependente de Locale (JDK 17, locale padrão da máquina)
+pt_BR -> 0,42 | 27,5 | ROOT 0.42
+en_US -> 0.42 | 27.5 | ROOT 0.42
+# AgenteExplicador.java:148 e :170 usam String.format sem Locale

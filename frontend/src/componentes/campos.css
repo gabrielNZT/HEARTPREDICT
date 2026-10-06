@@ -1,0 +1,194 @@
+.campo,
+.grupo {
+  margin: 0 0 var(--e3);
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.campo__rotulo {
+  display: block;
+}
+
+.campo__subrotulo {
+  font-weight: 700;
+  margin-bottom: var(--e1);
+}
+
+/* A pergunta é o título da tela (GOV.UK, question pages) */
+.campo__titulo {
+  font-size: var(--texto-gg);
+  margin-bottom: var(--e1);
+  max-width: var(--medida);
+}
+
+.campo__dica {
+  color: var(--tinta-suave);
+  margin-bottom: var(--e2);
+}
+
+.campo__erro {
+  color: var(--erro);
+  font-weight: 700;
+  margin-bottom: var(--e1);
+}
+
+/* Barra lateral de erro: sinal além da cor (WCAG 1.4.1) */
+.campo--erro {
+  border-left: 4px solid var(--erro);
+  padding-left: var(--e2);
+}
+
+.campo__linha {
+  display: flex;
+  flex-wrap: wrap; /* unidade longa (mL/min/1,73 m²) desce de linha a 320 px (WCAG 1.4.10) */
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.campo__entrada {
+  font: inherit;
+  font-size: var(--texto-g);
+  min-height: 3.25rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--tinta);
+  background: var(--superficie);
+  border: 2px solid var(--linha);
+  border-radius: var(--raio);
+  max-width: 100%;
+  transition: border-color var(--t-retorno) var(--curva);
+}
+
+.campo__entrada:hover {
+  border-color: var(--tinta-suave);
+}
+
+.campo__entrada:focus-visible {
+  border-color: var(--acento);
+}
+
+.campo--erro .campo__entrada {
+  border-color: var(--erro);
+}
+
+.campo__unidade {
+  color: var(--tinta-suave);
+}
+
+.grupo__legenda {
+  padding: 0;
+}
+
+.grupo__opcoes {
+  display: grid;
+  gap: 0.75rem;
+  max-width: var(--medida);
+}
+
+.grupo__ou {
+  margin: var(--e1) 0;
+  color: var(--tinta-suave);
+}
+
+/* Cartão de opção: o cartão inteiro é o alvo de clique */
+.opcao {
+  position: relative;
+  display: flex;
+  gap: 0.875rem;
+  align-items: flex-start;
+  padding: 0.875rem 1rem;
+  min-height: var(--alvo-min);
+  background: var(--superficie);
+  border: 2px solid var(--linha);
+  border-radius: var(--raio);
+  cursor: pointer;
+  transition: border-color var(--t-retorno) var(--curva), background-color var(--t-retorno) var(--curva);
+}
+
+.opcao:hover {
+  border-color: var(--tinta-suave);
+}
+
+.opcao--marcada {
+  border-color: var(--acento);
+  background: var(--acento-claro);
+}
+
+.opcao:focus-within {
+  box-shadow: var(--foco);
+}
+
+.opcao input {
+  position: relative;
+  z-index: 1;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0.125rem 0 0;
+  accent-color: var(--acento);
+  flex: none;
+}
+
+.opcao input:focus-visible {
+  box-shadow: none;
+}
+
+.opcao__rotulo {
+  display: block;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Cartão inteiro clicável: o ::after do rótulo cobre o cartão */
+.opcao__rotulo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.opcao__dica {
+  display: block;
+  color: var(--tinta-suave);
+  font-size: var(--texto-p);
+  margin-top: 0.25rem;
+}
+
+.revelado {
+  margin: 0.75rem 0 0.25rem 1.25rem;
+  padding-left: 1.25rem;
+  border-left: 4px solid var(--linha-suave);
+}
+
+@media (max-width: 360px) {
+  .revelado {
+    margin-left: 0.5rem;
+    padding-left: 0.75rem;
+  }
+}
+
+.resumo-erros {
+  border: 3px solid var(--erro);
+  background: var(--erro-claro);
+  padding: var(--e2) var(--e3);
+  border-radius: var(--raio);
+  margin-bottom: var(--e4);
+  max-width: var(--medida);
+}
+
+.resumo-erros:focus-visible {
+  box-shadow: var(--foco);
+}
+
+.resumo-erros__titulo {
+  font-size: var(--texto-g);
+  margin-bottom: var(--e1);
+}
+
+.resumo-erros ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.resumo-erros a {
+  color: var(--erro);
+  font-weight: 700;
+}

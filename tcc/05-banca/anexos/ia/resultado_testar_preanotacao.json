@@ -1,0 +1,277 @@
+{
+ "VP": 6,
+ "FN": 13,
+ "FP": 5,
+ "VN": 2,
+ "recall": 0.3157894736842105,
+ "precisao": 0.5454545454545454,
+ "recall_por_tipo": {
+  "POL": "0/6",
+  "FORA": "2/5",
+  "NUM": "1/4",
+  "CAT": "3/3",
+  "REC": "0/1"
+ },
+ "casos": [
+  {
+   "caso": "C01",
+   "vinheta": "V07",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "texto fiel"
+  },
+  {
+   "caso": "C02",
+   "vinheta": "V01",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": true,
+   "flags": [
+    "NUM? 1% (risco = 0.3%)"
+   ],
+   "comentario": "'menos de 1%' é correto (risco 0,3%)"
+  },
+  {
+   "caso": "C03",
+   "vinheta": "V13",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": true,
+   "flags": [
+    "NUM? 5% (risco = 21.1%)",
+    "NUM? 5% (risco = 21.1%)",
+    "NUM? 20% (risco = 21.1%)",
+    "NUM? 20% (risco = 21.1%)"
+   ],
+   "comentario": "limiares da diretriz citados corretamente"
+  },
+  {
+   "caso": "C04",
+   "vinheta": "V05",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": true,
+   "flags": [
+    "FORA? Seu risco calculado é de 0,9%, mas a história familiar de doença cardiovascular prematura elevou sua categoria para risco intermediário, conforme a diretriz."
+   ],
+   "comentario": "agravante legítimo (regra disparada) — não é erro"
+  },
+  {
+   "caso": "C05",
+   "vinheta": "V02",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": true,
+   "flags": [
+    "FORA? O seu IMC não entra neste cálculo, embora a obesidade aumente o risco cardiovascular de forma geral."
+   ],
+   "comentario": "IMC declarado fora do cálculo + conhecimento geral (GER)"
+  },
+  {
+   "caso": "C06",
+   "vinheta": "V09",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "'por cento' por extenso"
+  },
+  {
+   "caso": "E01",
+   "vinheta": "V07",
+   "erro_real": true,
+   "tipo": "POL",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "polaridade invertida do HDL (phi<0)"
+  },
+  {
+   "caso": "E02",
+   "vinheta": "V04",
+   "erro_real": true,
+   "tipo": "POL",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "polaridade invertida com sinônimo 'elevar'"
+  },
+  {
+   "caso": "E03",
+   "vinheta": "V20",
+   "erro_real": true,
+   "tipo": "POL",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "cautela 'pode contribuir' com direção errada (PAS phi<0)"
+  },
+  {
+   "caso": "E04",
+   "vinheta": "V09",
+   "erro_real": true,
+   "tipo": "POL",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "negação: PAS tem phi>=eps, texto diz d=0"
+  },
+  {
+   "caso": "E05",
+   "vinheta": "V07",
+   "erro_real": true,
+   "tipo": "POL",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "anti-hipertensivo com phi>0 descrito como protetor (armadilha V07)"
+  },
+  {
+   "caso": "E06",
+   "vinheta": "V02",
+   "erro_real": true,
+   "tipo": "FORA",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "IMC sem palavra-chave 'imc' e sem verbo causal da lista"
+  },
+  {
+   "caso": "E07",
+   "vinheta": "V17",
+   "erro_real": true,
+   "tipo": "FORA",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "IMC por extenso"
+  },
+  {
+   "caso": "E08",
+   "vinheta": "V07",
+   "erro_real": true,
+   "tipo": "FORA",
+   "sinalizou": true,
+   "flags": [
+    "FORA? Sua obesidade pesa bastante nesse resultado."
+   ],
+   "comentario": "controle positivo de FORA"
+  },
+  {
+   "caso": "E09",
+   "vinheta": "V13",
+   "erro_real": true,
+   "tipo": "FORA",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "raça sem a palavra 'raça' (H3)"
+  },
+  {
+   "caso": "E10",
+   "vinheta": "V09",
+   "erro_real": true,
+   "tipo": "NUM",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "número inventado igual à lista branca 30%"
+  },
+  {
+   "caso": "E11",
+   "vinheta": "V09",
+   "erro_real": true,
+   "tipo": "NUM",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "frequência natural errada (deveria ser ~7 em 100)"
+  },
+  {
+   "caso": "E12",
+   "vinheta": "V01",
+   "erro_real": true,
+   "tipo": "NUM",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "log-odds com separador de milhar pt-BR (-1.567 lido como mil e quinhentos)"
+  },
+  {
+   "caso": "E13",
+   "vinheta": "V09",
+   "erro_real": true,
+   "tipo": "CAT",
+   "sinalizou": true,
+   "flags": [
+    "CAT? citou baixo (gabarito: intermediário)"
+   ],
+   "comentario": "categoria errada com 'mas ... baixo'"
+  },
+  {
+   "caso": "E14",
+   "vinheta": "V09",
+   "erro_real": false,
+   "tipo": "-",
+   "sinalizou": true,
+   "flags": [
+    "CAT? citou baixo/alto (gabarito: intermediário)"
+   ],
+   "comentario": "sinônimo 'moderado' + negações (correto)"
+  },
+  {
+   "caso": "E15",
+   "vinheta": "V12",
+   "erro_real": true,
+   "tipo": "CAT",
+   "sinalizou": true,
+   "flags": [
+    "CAT? citou intermediário (gabarito: alto)"
+   ],
+   "comentario": "ignorou a reclassificação por agravante (gabarito: alto) — meta correta de alto"
+  },
+  {
+   "caso": "E16",
+   "vinheta": "V14",
+   "erro_real": true,
+   "tipo": "REC",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "meta errada, mas '100' aparece no texto"
+  },
+  {
+   "caso": "E17",
+   "vinheta": "V11",
+   "erro_real": true,
+   "tipo": "FORA",
+   "sinalizou": true,
+   "flags": [
+    "FORA? Seus rins funcionando um pouco abaixo do normal aumentaram o risco, assim como seu colesterol LDL elevado."
+   ],
+   "comentario": "LDL causal (fora do modelo); TFGe correta"
+  },
+  {
+   "caso": "E18",
+   "vinheta": "V16",
+   "erro_real": true,
+   "tipo": "NUM",
+   "sinalizou": true,
+   "flags": [
+    "NUM? 15% (risco = 24.9%)"
+   ],
+   "comentario": "contrafactual numérico inventado (não calculado)"
+  },
+  {
+   "caso": "E19",
+   "vinheta": "V03",
+   "erro_real": true,
+   "tipo": "POL",
+   "sinalizou": false,
+   "flags": [],
+   "comentario": "idade < 55 tem phi<0 (armadilha de idade)"
+  },
+  {
+   "caso": "E20",
+   "vinheta": "V06",
+   "erro_real": true,
+   "tipo": "CAT",
+   "sinalizou": true,
+   "flags": [
+    "CAT? citou intermediário (gabarito: baixo)",
+    "REC? meta de LDL 115 não encontrada"
+   ],
+   "comentario": "erro de categoria perto do corte de 5%"
+  }
+ ]
+}

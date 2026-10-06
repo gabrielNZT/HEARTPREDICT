@@ -1,0 +1,91 @@
+# API JADE 4.6.0 (javap no jar oficial; revisão 6869 de 30-11-2022)
+== jade.proto.ProposeInitiator (public+protected)
+Compiled from "ProposeInitiator.java"
+public class jade.proto.ProposeInitiator extends jade.core.behaviours.FSMBehaviour {
+  protected final java.lang.String INITIATION_K;
+  protected final java.lang.String ALL_INITIATIONS_K;
+  public final java.lang.String REPLY_KEY;
+  public final java.lang.String ALL_RESPONSES_KEY;
+  protected static final java.lang.String PREPARE_INITIATIONS;
+  protected static final java.lang.String SEND_INITIATIONS;
+  protected static final java.lang.String RECEIVE_REPLY;
+  protected static final java.lang.String CHECK_IN_SEQ;
+  protected static final java.lang.String HANDLE_NOT_UNDERSTOOD;
+  protected static final java.lang.String HANDLE_OUT_OF_SEQ;
+  protected static final java.lang.String HANDLE_ALL_RESPONSES;
+  protected static final java.lang.String HANDLE_REJECT_PROPOSAL;
+  protected static final java.lang.String HANDLE_ACCEPT_PROPOSAL;
+  protected static final java.lang.String CHECK_SESSIONS;
+  protected static final java.lang.String DUMMY_FINAL;
+  protected jade.util.leap.Map sessions;
+  protected jade.proto.states.MsgReceiver replyReceiver;
+  protected jade.lang.acl.MessageTemplate replyTemplate;
+  protected java.lang.String[] toBeReset;
+  public jade.proto.ProposeInitiator(jade.core.Agent, jade.lang.acl.ACLMessage);
+  public jade.proto.ProposeInitiator(jade.core.Agent, jade.lang.acl.ACLMessage, jade.core.behaviours.DataStore);
+  protected void initializeDataStore(jade.lang.acl.ACLMessage);
+  protected void sendInitiations(java.util.Vector);
+  protected boolean checkInSequence(jade.lang.acl.ACLMessage);
+  protected int checkSessions(jade.lang.acl.ACLMessage);
+  protected java.util.Vector prepareInitiations(jade.lang.acl.ACLMessage);
+  protected void handleAcceptProposal(jade.lang.acl.ACLMessage);
+  protected void handleRejectProposal(jade.lang.acl.ACLMessage);
+  protected void handleNotUnderstood(jade.lang.acl.ACLMessage);
+  protected void handleOutOfSequence(jade.lang.acl.ACLMessage);
+  public void registerHandleAllResponses(jade.core.behaviours.Behaviour);
+  public void registerHandleAcceptProposal(jade.core.behaviours.Behaviour);
+  public void registerHandleRejectProposal(jade.core.behaviours.Behaviour);
+  public void registerHandleNotUnderstood(jade.core.behaviours.Behaviour);
+  public void registerHandleOutOfSequence(jade.core.behaviours.Behaviour);
+  protected void handleAllResponses(java.util.Vector);
+  public void reset();
+  public void reset(jade.lang.acl.ACLMessage);
+  public void onStart();
+  public void setDataStore(jade.core.behaviours.DataStore);
+  protected java.lang.String createConvId(java.util.Vector);
+  protected void adjustReplyTemplate(jade.lang.acl.ACLMessage);
+== jade.proto.ProposeResponder (public+protected)
+Compiled from "ProposeResponder.java"
+public class jade.proto.ProposeResponder extends jade.core.behaviours.FSMBehaviour implements jade.domain.FIPANames$InteractionProtocol {
+  public final java.lang.String PROPOSE_KEY;
+  public final java.lang.String RESPONSE_KEY;
+  protected static final java.lang.String RECEIVE_PROPOSE;
+  protected static final java.lang.String PREPARE_RESPONSE;
+  protected static final java.lang.String SEND_RESPONSE;
+  public static jade.lang.acl.MessageTemplate createMessageTemplate(java.lang.String);
+  public jade.proto.ProposeResponder(jade.core.Agent, jade.lang.acl.MessageTemplate);
+  public jade.proto.ProposeResponder(jade.core.Agent, jade.lang.acl.MessageTemplate, jade.core.behaviours.DataStore);
+  public void reset();
+  public void reset(jade.lang.acl.MessageTemplate);
+  protected jade.lang.acl.ACLMessage prepareResponse(jade.lang.acl.ACLMessage) throws jade.domain.FIPAAgentManagement.NotUnderstoodException, jade.domain.FIPAAgentManagement.RefuseException;
+  public void registerPrepareResponse(jade.core.behaviours.Behaviour);
+== jade.proto.AchieveREResponder (public+protected)
+Compiled from "AchieveREResponder.java"
+public class jade.proto.AchieveREResponder extends jade.core.behaviours.FSMBehaviour implements jade.domain.FIPANames$InteractionProtocol {
+  public final java.lang.String REQUEST_KEY;
+  public final java.lang.String RESPONSE_KEY;
+  public final java.lang.String RESULT_NOTIFICATION_KEY;
+  public static jade.lang.acl.MessageTemplate createMessageTemplate(java.lang.String);
+  public jade.proto.AchieveREResponder(jade.core.Agent, jade.lang.acl.MessageTemplate);
+  public jade.proto.AchieveREResponder(jade.core.Agent, jade.lang.acl.MessageTemplate, jade.core.behaviours.DataStore);
+  public void reset();
+  public void reset(jade.lang.acl.MessageTemplate);
+  protected jade.lang.acl.ACLMessage handleRequest(jade.lang.acl.ACLMessage) throws jade.domain.FIPAAgentManagement.NotUnderstoodException, jade.domain.FIPAAgentManagement.RefuseException;
+  protected jade.lang.acl.ACLMessage prepareResponse(jade.lang.acl.ACLMessage) throws jade.domain.FIPAAgentManagement.NotUnderstoodException, jade.domain.FIPAAgentManagement.RefuseException;
+  protected jade.lang.acl.ACLMessage prepareResultNotification(jade.lang.acl.ACLMessage, jade.lang.acl.ACLMessage) throws jade.domain.FIPAAgentManagement.FailureException;
+  public void registerHandleRequest(jade.core.behaviours.Behaviour);
+  public void registerPrepareResponse(jade.core.behaviours.Behaviour);
+  public void registerPrepareResultNotification(jade.core.behaviours.Behaviour);
+== ContractNetInitiator (iteração)
+  protected void handleAllResponses(java.util.Vector, java.util.Vector);
+  public void newIteration(java.util.Vector);
+== SSIteratedContractNetResponder existe:
+Compiled from "SSIteratedContractNetResponder.java"
+public class jade.proto.SSIteratedContractNetResponder extends jade.proto.SSContractNetResponder {
+== ProposeInitiator: uso de reply-by (timeout) e conversation-id (bytecode)
+      24: invokestatic  #83                 // Method jade/lang/acl/MessageTemplate.MatchConversationId:(Ljava/lang/String;)Ljade/lang/acl/MessageTemplate;
+      78: ldc           #89                 // String fipa-propose
+      87: invokevirtual #91                 // Method jade/lang/acl/ACLMessage.setConversationId:(Ljava/lang/String;)V
+     230: invokevirtual #107                // Method jade/lang/acl/ACLMessage.getReplyByDate:()Ljava/util/Date;
+     302: invokevirtual #110                // Method jade/proto/states/MsgReceiver.setDeadline:(J)V
+     239: invokevirtual #110                // Method jade/proto/states/MsgReceiver.setDeadline:(J)V

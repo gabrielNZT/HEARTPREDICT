@@ -1,0 +1,19 @@
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+.INFO:httpx:HTTP Request: OPTIONS http://testserver/api/avaliacao "HTTP/1.1 400 Bad Request"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao/explicacao "HTTP/1.1 403 Forbidden"
+.INFO:httpx:HTTP Request: POST http://testserver/predict "HTTP/1.1 404 Not Found"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 422 Unprocessable Entity"
+.INFO:httpx:HTTP Request: POST http://testserver/api/avaliacao "HTTP/1.1 200 OK"
+.
+----------------------------------------------------------------------
+Ran 15 tests in 0.057s
+
+OK

@@ -1,0 +1,1136 @@
+[
+ {
+  "id": "V01",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "branca",
+   "idade": 35,
+   "sexo": "feminino",
+   "colesterol_total": 180,
+   "hdl": 60,
+   "pas": 115,
+   "agravantes": []
+  },
+  "risco_pct": 0.3,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 0,3% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -1.5673,
+   "nao_hdl": -0.0692,
+   "hdl": -0.1541,
+   "pas": -0.3472,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "hdl",
+   "nao_hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V02",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 36,
+   "raca_cor": "preta",
+   "idade": 42,
+   "sexo": "masculino",
+   "colesterol_total": 210,
+   "hdl": 45,
+   "pas": 128,
+   "agravantes": []
+  },
+  "risco_pct": 1.4,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 1,4% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -0.9072,
+   "nao_hdl": 0.1422,
+   "hdl": 0.0589,
+   "pas": -0.0384,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "nao_hdl",
+   "hdl",
+   "pas",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V03",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 1,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "parda",
+   "idade": 38,
+   "sexo": "masculino",
+   "colesterol_total": 230,
+   "hdl": 38,
+   "pas": 135,
+   "agravantes": []
+  },
+  "risco_pct": 2.8,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 2,8% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -1.0465,
+   "nao_hdl": 0.2804,
+   "hdl": 0.142,
+   "pas": 0.1007,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.4782,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "tabagismo",
+   "nao_hdl",
+   "hdl",
+   "pas",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V04",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "amarela",
+   "idade": 48,
+   "sexo": "feminino",
+   "colesterol_total": 200,
+   "hdl": 70,
+   "pas": 118,
+   "agravantes": []
+  },
+  "risco_pct": 0.7,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 0,7% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -0.5478,
+   "nao_hdl": -0.019,
+   "hdl": -0.2765,
+   "pas": -0.2373,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "hdl",
+   "pas",
+   "nao_hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V05",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "indígena",
+   "idade": 45,
+   "sexo": "feminino",
+   "colesterol_total": 190,
+   "hdl": 55,
+   "pas": 125,
+   "agravantes": [
+    "historia_familiar_prematura"
+   ]
+  },
+  "risco_pct": 0.9,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 0,9% → baixo (Tabela 4.1)",
+   "agravante(s): história familiar de doença cardiovascular prematura → de baixo para intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -0.7397,
+   "nao_hdl": -0.0013,
+   "hdl": -0.0683,
+   "pas": -0.1028,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "hdl",
+   "tfge",
+   "nao_hdl"
+  ]
+ },
+ {
+  "id": "V06",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 34,
+   "raca_cor": "branca",
+   "idade": 58,
+   "sexo": "masculino",
+   "colesterol_total": 210,
+   "hdl": 44,
+   "pas": 140,
+   "agravantes": []
+  },
+  "risco_pct": 4.9,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 4,9% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.2006,
+   "nao_hdl": 0.1279,
+   "hdl": 0.06,
+   "pas": 0.155,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V07",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 35,
+   "raca_cor": "preta",
+   "idade": 50,
+   "sexo": "feminino",
+   "colesterol_total": 240,
+   "hdl": 55,
+   "pas": 160,
+   "agravantes": []
+  },
+  "risco_pct": 3.6,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 3,6% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -0.3062,
+   "nao_hdl": 0.1694,
+   "hdl": -0.0649,
+   "pas": 0.5481,
+   "anti_hipertensivo": 0.1968,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "pas",
+   "idade",
+   "anti_hipertensivo",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V08",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "parda",
+   "idade": 56,
+   "sexo": "masculino",
+   "colesterol_total": 220,
+   "hdl": 42,
+   "pas": 142,
+   "agravantes": []
+  },
+  "risco_pct": 5.7,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 5,7% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.0657,
+   "nao_hdl": 0.1813,
+   "hdl": 0.0808,
+   "pas": 0.1819,
+   "anti_hipertensivo": 0.194,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "anti_hipertensivo",
+   "pas",
+   "nao_hdl",
+   "hdl",
+   "idade",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V09",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 1,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "amarela",
+   "idade": 60,
+   "sexo": "feminino",
+   "colesterol_total": 230,
+   "hdl": 50,
+   "pas": 148,
+   "agravantes": []
+  },
+  "risco_pct": 6.6,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 6,6% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.3003,
+   "nao_hdl": 0.1195,
+   "hdl": 0.0033,
+   "pas": 0.3,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.4633,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "tabagismo",
+   "idade",
+   "pas",
+   "nao_hdl",
+   "tfge",
+   "hdl"
+  ]
+ },
+ {
+  "id": "V10",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 1,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "indígena",
+   "idade": 58,
+   "sexo": "masculino",
+   "colesterol_total": 190,
+   "hdl": 40,
+   "pas": 130,
+   "agravantes": []
+  },
+  "risco_pct": 4.0,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 4,0% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.2082,
+   "nao_hdl": 0.0829,
+   "hdl": 0.0982,
+   "pas": 0.0,
+   "anti_hipertensivo": 0.0,
+   "estatina": -0.0648,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "hdl",
+   "nao_hdl",
+   "estatina",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V11",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 52,
+   "imc": 25,
+   "raca_cor": "branca",
+   "idade": 63,
+   "sexo": "feminino",
+   "colesterol_total": 210,
+   "hdl": 62,
+   "pas": 136,
+   "agravantes": []
+  },
+  "risco_pct": 4.8,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 4,8% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.5336,
+   "nao_hdl": 0.0311,
+   "hdl": -0.1397,
+   "pas": 0.0954,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": 0.3033
+  },
+  "ranking": [
+   "idade",
+   "tfge",
+   "hdl",
+   "pas",
+   "nao_hdl"
+  ]
+ },
+ {
+  "id": "V12",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "preta",
+   "idade": 61,
+   "sexo": "masculino",
+   "colesterol_total": 215,
+   "hdl": 44,
+   "pas": 144,
+   "agravantes": [
+    "doenca_inflamatoria_cronica"
+   ]
+  },
+  "risco_pct": 6.3,
+  "categoria": "alto",
+  "regras_aplicadas": [
+   "escore PREVENT 6,3% → intermediário (Tabela 4.1)",
+   "agravante(s): doença inflamatória crônica → de intermediário para alto (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 70",
+   "nao_hdl": "< 100",
+   "reducao_ldl": "≥ 50%"
+  },
+  "atribuicao": {
+   "idade": 0.3945,
+   "nao_hdl": 0.1446,
+   "hdl": 0.0581,
+   "pas": 0.2073,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V13",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 1,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "parda",
+   "idade": 74,
+   "sexo": "masculino",
+   "colesterol_total": 240,
+   "hdl": 38,
+   "pas": 158,
+   "agravantes": []
+  },
+  "risco_pct": 21.1,
+  "categoria": "alto",
+  "regras_aplicadas": [
+   "escore PREVENT 21,1% → alto (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 70",
+   "nao_hdl": "< 100",
+   "reducao_ldl": "≥ 50%"
+  },
+  "atribuicao": {
+   "idade": 1.061,
+   "nao_hdl": 0.2368,
+   "hdl": 0.0976,
+   "pas": 0.3077,
+   "anti_hipertensivo": 0.181,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.3035,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "tabagismo",
+   "nao_hdl",
+   "anti_hipertensivo",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V14",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "amarela",
+   "idade": 72,
+   "sexo": "feminino",
+   "colesterol_total": 220,
+   "hdl": 52,
+   "pas": 165,
+   "agravantes": []
+  },
+  "risco_pct": 10.6,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 10,6% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 1.0331,
+   "nao_hdl": 0.0586,
+   "hdl": -0.0184,
+   "pas": 0.44,
+   "anti_hipertensivo": 0.1919,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "anti_hipertensivo",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V15",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "indígena",
+   "idade": 75,
+   "sexo": "masculino",
+   "colesterol_total": 180,
+   "hdl": 55,
+   "pas": 128,
+   "agravantes": []
+  },
+  "risco_pct": 10.4,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 10,4% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 1.4468,
+   "nao_hdl": -0.0363,
+   "hdl": -0.0372,
+   "pas": -0.0231,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "hdl",
+   "nao_hdl",
+   "pas",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V16",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 1,
+   "tfge": 48,
+   "imc": 25,
+   "raca_cor": "branca",
+   "idade": 70,
+   "sexo": "masculino",
+   "colesterol_total": 260,
+   "hdl": 35,
+   "pas": 170,
+   "agravantes": []
+  },
+  "risco_pct": 24.9,
+  "categoria": "alto",
+  "regras_aplicadas": [
+   "escore PREVENT 24,9% → alto (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 70",
+   "nao_hdl": "< 100",
+   "reducao_ldl": "≥ 50%"
+  },
+  "atribuicao": {
+   "idade": 0.705,
+   "nao_hdl": 0.3324,
+   "hdl": 0.1276,
+   "pas": 0.4767,
+   "anti_hipertensivo": 0.1714,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.3229,
+   "tfge": 0.2629
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "nao_hdl",
+   "tabagismo",
+   "tfge",
+   "anti_hipertensivo",
+   "hdl"
+  ]
+ },
+ {
+  "id": "V17",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 1,
+   "tfge": 95,
+   "imc": 38,
+   "raca_cor": "preta",
+   "idade": 76,
+   "sexo": "feminino",
+   "colesterol_total": 250,
+   "hdl": 45,
+   "pas": 155,
+   "agravantes": []
+  },
+  "risco_pct": 16.6,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 16,6% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 1.1698,
+   "nao_hdl": 0.1046,
+   "hdl": 0.0532,
+   "pas": 0.2884,
+   "anti_hipertensivo": 0.2018,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.4,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "tabagismo",
+   "pas",
+   "anti_hipertensivo",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V18",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "parda",
+   "idade": 40,
+   "sexo": "masculino",
+   "colesterol_total": 235,
+   "hdl": 50,
+   "pas": 120,
+   "ldl": 165,
+   "agravantes": []
+  },
+  "risco_pct": 1.1,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 1,1% → baixo (Tabela 4.1)",
+   "LDL-c 165 entre 160 e 189 → intermediário (seção 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -1.0704,
+   "nao_hdl": 0.2419,
+   "hdl": 0.0031,
+   "pas": -0.1968,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "nao_hdl",
+   "pas",
+   "tfge",
+   "hdl"
+  ]
+ },
+ {
+  "id": "V19",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "amarela",
+   "idade": 46,
+   "sexo": "feminino",
+   "colesterol_total": 285,
+   "hdl": 52,
+   "pas": 118,
+   "ldl": 200,
+   "agravantes": []
+  },
+  "risco_pct": 1.3,
+  "categoria": "alto",
+  "regras_aplicadas": [
+   "escore PREVENT 1,3% → baixo (Tabela 4.1)",
+   "LDL-c 200 ≥ 190 → alto (seção 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 70",
+   "nao_hdl": "< 100",
+   "reducao_ldl": "≥ 50%"
+  },
+  "atribuicao": {
+   "idade": -0.6135,
+   "nao_hdl": 0.3618,
+   "hdl": -0.0247,
+   "pas": -0.2435,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "nao_hdl",
+   "pas",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V20",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "indígena",
+   "idade": 53,
+   "sexo": "feminino",
+   "colesterol_total": 170,
+   "hdl": 75,
+   "pas": 105,
+   "agravantes": []
+  },
+  "risco_pct": 0.8,
+  "categoria": "baixo",
+  "regras_aplicadas": [
+   "escore PREVENT 0,8% → baixo (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 115",
+   "nao_hdl": "< 145",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -0.1672,
+   "nao_hdl": -0.1287,
+   "hdl": -0.3292,
+   "pas": -0.3488,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "pas",
+   "hdl",
+   "idade",
+   "nao_hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V21",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 110,
+   "imc": 25,
+   "raca_cor": "branca",
+   "idade": 68,
+   "sexo": "masculino",
+   "colesterol_total": 175,
+   "hdl": 58,
+   "pas": 122,
+   "agravantes": []
+  },
+  "risco_pct": 5.7,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 5,7% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.9664,
+   "nao_hdl": -0.0694,
+   "hdl": -0.0662,
+   "pas": -0.1055,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0271
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V22",
+  "entradas": {
+   "anti_hipertensivo": 1,
+   "estatina": 1,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 25,
+   "raca_cor": "preta",
+   "idade": 68,
+   "sexo": "feminino",
+   "colesterol_total": 195,
+   "hdl": 65,
+   "pas": 128,
+   "agravantes": []
+  },
+  "risco_pct": 5.2,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 5,2% → intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": 0.9746,
+   "nao_hdl": -0.017,
+   "hdl": -0.1651,
+   "pas": -0.0272,
+   "anti_hipertensivo": 0.2285,
+   "estatina": -0.0651,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0133
+  },
+  "ranking": [
+   "idade",
+   "anti_hipertensivo",
+   "hdl",
+   "estatina",
+   "pas",
+   "nao_hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V23",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 1,
+   "tfge": 95,
+   "imc": 33,
+   "raca_cor": "parda",
+   "idade": 57,
+   "sexo": "masculino",
+   "colesterol_total": 230,
+   "hdl": 40,
+   "pas": 150,
+   "agravantes": [
+    "sindrome_metabolica"
+   ]
+  },
+  "risco_pct": 8.6,
+  "categoria": "alto",
+  "regras_aplicadas": [
+   "escore PREVENT 8,6% → intermediário (Tabela 4.1)",
+   "agravante(s): síndrome metabólica → de intermediário para alto (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 70",
+   "nao_hdl": "< 100",
+   "reducao_ldl": "≥ 50%"
+  },
+  "atribuicao": {
+   "idade": 0.1167,
+   "nao_hdl": 0.2302,
+   "hdl": 0.0992,
+   "pas": 0.3147,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.386,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "tabagismo",
+   "pas",
+   "nao_hdl",
+   "idade",
+   "hdl",
+   "tfge"
+  ]
+ },
+ {
+  "id": "V24",
+  "entradas": {
+   "anti_hipertensivo": 0,
+   "estatina": 0,
+   "diabetes": 0,
+   "tabagismo": 0,
+   "tfge": 95,
+   "imc": 31,
+   "raca_cor": "amarela",
+   "idade": 33,
+   "sexo": "masculino",
+   "colesterol_total": 175,
+   "hdl": 48,
+   "pas": 112,
+   "agravantes": [
+    "historia_familiar_prematura"
+   ]
+  },
+  "risco_pct": 0.4,
+  "categoria": "intermediário",
+  "regras_aplicadas": [
+   "escore PREVENT 0,4% → baixo (Tabela 4.1)",
+   "agravante(s): história familiar de doença cardiovascular prematura → de baixo para intermediário (Tabela 4.1)"
+  ],
+  "metas": {
+   "ldl": "< 100",
+   "nao_hdl": "< 130",
+   "reducao_ldl": "≥ 30%"
+  },
+  "atribuicao": {
+   "idade": -1.6559,
+   "nao_hdl": -0.0429,
+   "hdl": 0.0274,
+   "pas": -0.3834,
+   "anti_hipertensivo": 0.0,
+   "estatina": 0.0,
+   "diabetes": 0.0,
+   "tabagismo": 0.0,
+   "tfge": -0.0068
+  },
+  "ranking": [
+   "idade",
+   "pas",
+   "nao_hdl",
+   "hdl",
+   "tfge"
+  ]
+ }
+]

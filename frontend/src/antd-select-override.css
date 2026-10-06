@@ -1,9 +1,0 @@
-/* Corrige a cor do texto do valor selecionado no Select do Ant Design */
-.ant-select-selection-item {
-  color: var(--neutral-900, #222) !important;
-}
-
-/* Garante contraste também para o dropdown */
-.ant-select-item-option-content {
-  color: var(--neutral-900, #222) !important;
-}

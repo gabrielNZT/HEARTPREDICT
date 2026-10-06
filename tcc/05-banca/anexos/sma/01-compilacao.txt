@@ -1,0 +1,26 @@
+# Compilação dos agentes JADE (29/09/2026)
+# mvn: ausente; java padrão do PATH: 11.0.21; javac padrão: 1.8.0_392; JDK 17.0.9 em /usr/lib/jvm/java-17-openjdk-amd64
+# Dependências baixadas manualmente: jade-4.6.0.jar (jade.tilab.com/maven, TLS não verificável -> curl -k), jackson 2.16.1 (Maven Central)
+# Comando: javac --release 17 -encoding UTF-8 -Xlint:all -cp <jars> $(find jade-agents/src -name '*.java')
+/home/gabriel_dev/work/gabriel/HEARTPREDICT/jade-agents/src/main/java/br/com/yourproject/agents/AgenteExplicador.java:18: warning: [serial] serializable class AgenteExplicador has no definition of serialVersionUID
+public class AgenteExplicador extends Agent {
+       ^
+/home/gabriel_dev/work/gabriel/HEARTPREDICT/jade-agents/src/main/java/br/com/yourproject/agents/AgenteGerenciadorPacientes.java:17: warning: [serial] serializable class AgenteGerenciadorPacientes has no definition of serialVersionUID
+public class AgenteGerenciadorPacientes extends Agent {
+       ^
+/home/gabriel_dev/work/gabriel/HEARTPREDICT/jade-agents/src/main/java/br/com/yourproject/agents/AgenteClassificador.java:38: warning: [serial] serializable class AgenteClassificador.ProcessarSolicitacaoClassificacao has no definition of serialVersionUID
+    private class ProcessarSolicitacaoClassificacao extends CyclicBehaviour {
+            ^
+/home/gabriel_dev/work/gabriel/HEARTPREDICT/jade-agents/src/main/java/br/com/yourproject/agents/AgenteClassificador.java:21: warning: [serial] serializable class AgenteClassificador has no definition of serialVersionUID
+public class AgenteClassificador extends Agent {
+       ^
+/home/gabriel_dev/work/gabriel/HEARTPREDICT/jade-agents/src/main/java/br/com/yourproject/agents/AgenteJulgador.java:26: warning: [serial] serializable class AgenteJulgador.EncaminharResultadoBehaviour has no definition of serialVersionUID
+    private class EncaminharResultadoBehaviour extends CyclicBehaviour {
+            ^
+/home/gabriel_dev/work/gabriel/HEARTPREDICT/jade-agents/src/main/java/br/com/yourproject/agents/AgenteJulgador.java:18: warning: [serial] serializable class AgenteJulgador has no definition of serialVersionUID
+public class AgenteJulgador extends Agent {
+       ^
+6 warnings
+# exit=0; 10 arquivos .class gerados
+
+# javac 1.8 (padrão do PATH): 'javac: invalid flag: --release' -> não compila com o ambiente padrão

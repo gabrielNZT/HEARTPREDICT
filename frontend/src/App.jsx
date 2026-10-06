@@ -1,172 +1,144 @@
-import { useState } from 'react';
-import { Spin, Skeleton } from 'antd';
-import { ChatWindow } from './components/ChatWindow';
-import { ConversationalForm } from './components/ConversationalForm';
-import { Header } from './components/Header';
-import { questions } from './components/ConversationalForm';
-import WelcomeScreen from './components/WelcomeScreen';
-import LoadingOverlay from './components/LoadingOverlay';
-import './styles/animations.css';
-import { useRiskAssessment } from './hooks/useRiskAssessment';
+import { useEffect, useState } from 'react';
+import { avaliar } from './api';
+import { Cabecalho, Rodape } from './componentes/Estrutura';
+import { MOTIVOS_FORA_DO_ESCOPO, NENHUMA, PERGUNTAS, opcoesVisiveis } from './conteudo/perguntas';
+import { TelaForaDoEscopo, TelaInicio, TelaPergunta, TelaRevisao } from './telas/Telas';
+import { TelaResultado } from './telas/TelaResultado';
+
+/*
+ * Cada etapa tem um endereço (#/p/idade, #/revisao...), para o botão "Voltar" do navegador funcionar.
+ * As respostas ficam só na memória da página: nada é salvo no navegador (interface-design.md §7).
+ */
+function lerRota() {
+  const partes = window.location.hash.replace(/^#\/?/, '').split('/');
+  return { tela: partes[0] || 'inicio', parametro: partes[1] };
+}
+
+function ir(caminho) {
+  window.location.hash = `#/${caminho}`;
+}
+
+const indiceDe = (id) => PERGUNTAS.findIndex((p) => p.id === id);
 
 export default function App() {
-  const [chatMessages, setChatMessages] = useState([
-    { text: questions[0].label, sender: 'system' },
-  ]);
-  const [formFinished, setFormFinished] = useState(false);
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const { loading, messages, sendPatientData } = useRiskAssessment();
-  const [started, setStarted] = useState(false);
+  const [rota, setRota] = useState(lerRota);
+  const [respostas, setRespostas] = useState({});
+  const [voltarParaRevisao, setVoltarParaRevisao] = useState(false);
+  const [resultado, setResultado] = useState(null);
+  const [enviando, setEnviando] = useState(false);
+  const [erroEnvio, setErroEnvio] = useState(null);
 
-  const handleFormStep = (value, errorMsg, patient_data = {}) => {
-    if (errorMsg) {
-      setChatMessages((prev) => [
-        ...prev,
-        { text: errorMsg, sender: 'system', error: true },
-      ]);
-      return;
-    }
-    setChatMessages((prev) => [
-      ...prev,
-      { text: value, sender: 'user' },
-    ]);
-    const updatedAnswers = { ...answers, [questions[step].key]: value };
-    setAnswers(updatedAnswers);
-    if (step < questions.length - 1) {
-      setStep(step + 1);
-      setTimeout(() => {
-        setChatMessages((prev) => [
-          ...prev,
-          { text: questions[step + 1].label, sender: 'system' },
-        ]);
-      }, 400);
-    } else {
-      setFormFinished(true);
-      setChatMessages((prev) => [
-        ...prev,
-        { text: 'Dados enviados. Aguarde a análise...', sender: 'system' },
-      ]);
-      sendPatientData(patient_data);
-    }
-  };
+  useEffect(() => {
+    const aoMudar = () => setRota(lerRota());
+    window.addEventListener('hashchange', aoMudar);
+    return () => window.removeEventListener('hashchange', aoMudar);
+  }, []);
 
-  // Atualiza chat com mensagens do backend
-  if (messages.length > 0 && formFinished && !chatMessages.some(m => m.sender === 'llm')) {
-    setChatMessages((prev) => [...prev, ...messages.map(msg => ({ ...msg, sender: 'llm' }))]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [rota]);
+
+  const primeiraSemResposta = PERGUNTAS.find(
+    (p) => (!p.opcional || p.obrigatorioSe?.(respostas)) && respostas[p.id] == null,
+  );
+
+  function responder(pergunta, valor) {
+    const novas = { ...respostas, [pergunta.id]: valor };
+    const invalidada = revalidarDependentes(novas);
+    setRespostas(novas);
+    setResultado(null);
+    if (pergunta.foraDoEscopo?.(valor)) return ir(`fora/${pergunta.id}`);
+    if (invalidada) return ir(`p/${invalidada}`); // pede de novo a resposta que deixou de valer
+    if (voltarParaRevisao) {
+      setVoltarParaRevisao(false);
+      return ir('revisao');
+    }
+    const proxima = PERGUNTAS[indiceDe(pergunta.id) + 1];
+    ir(proxima ? `p/${proxima.id}` : 'revisao');
   }
 
-  if (!started) {
-    return <WelcomeScreen onStart={() => setStarted(true)} />;
+  function recomecar() {
+    setRespostas({});
+    setResultado(null);
+    setErroEnvio(null);
+    setVoltarParaRevisao(false);
+    ir('');
+  }
+
+  async function confirmar() {
+    setEnviando(true);
+    setErroEnvio(null);
+    try {
+      setResultado(await avaliar(respostas));
+      ir('resultado');
+    } catch (e) {
+      setErroEnvio(e.message);
+    } finally {
+      setEnviando(false);
+    }
+  }
+
+  let tela;
+  if (rota.tela === 'p' && indiceDe(rota.parametro) >= 0) {
+    const i = indiceDe(rota.parametro);
+    const pergunta = PERGUNTAS[i];
+    tela = (
+      <TelaPergunta key={pergunta.id} pergunta={pergunta} indice={i + 1} total={PERGUNTAS.length}
+        respostas={respostas} aoResponder={(v) => responder(pergunta, v)}
+        aoVoltar={() => ir(i === 0 ? '' : `p/${PERGUNTAS[i - 1].id}`)} />
+    );
+  } else if (rota.tela === 'fora' && motivoValido(rota.parametro)) {
+    tela = <TelaForaDoEscopo motivo={rota.parametro} aoAlterar={() => ir(`p/${rota.parametro}`)} aoRecomecar={recomecar} />;
+  } else if (rota.tela === 'revisao' && !primeiraSemResposta) {
+    tela = (
+      <TelaRevisao perguntas={PERGUNTAS} respostas={respostas} enviando={enviando} erro={erroEnvio}
+        aoAlterar={(id) => { setVoltarParaRevisao(true); ir(`p/${id}`); }} aoConfirmar={confirmar} />
+    );
+  } else if (rota.tela === 'resultado' && resultado) {
+    tela = <TelaResultado resultado={resultado} respostas={respostas} aoRecomecar={recomecar} />;
+  } else if (rota.tela === 'revisao' && primeiraSemResposta && Object.keys(respostas).length) {
+    ir(`p/${primeiraSemResposta.id}`);
+  } else {
+    tela = (
+      <TelaInicio aoComecar={() => ir(primeiraSemResposta ? `p/${primeiraSemResposta.id}` : 'revisao')}
+        temRespostas={Object.keys(respostas).length > 0} aoRecomecar={recomecar} />
+    );
   }
 
   return (
-    <div
-      className="animate-fade-in"
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #e6f4ff 0%, #f0f9ff 50%, #ecfdf5 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-        position: 'relative',
-        overflow: 'hidden'
-      }}
-    >
-      {/* Elementos decorativos de fundo */}
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        left: '5%',
-        width: '200px',
-        height: '200px',
-        background: 'radial-gradient(circle, rgba(24, 144, 255, 0.1) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(60px)',
-        animation: 'float 8s ease-in-out infinite'
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: '20%',
-        right: '5%',
-        width: '250px',
-        height: '250px',
-        background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(80px)',
-        animation: 'float 10s ease-in-out infinite reverse'
-      }} />
-
-      <div
-        className="modern-card animate-scale-in"
-        style={{
-          width: '100%',
-          height: '100vh',
-          background: 'var(--gradient-card)',
-          boxShadow: 'var(--shadow-xl), var(--shadow-glass)',
-          padding: 'var(--space-12)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          backdropFilter: 'blur(20px)',
-          position: 'relative',
-          zIndex: 1,
-          borderRadius: 0,
-        }}
-      >
-        <Header />
-        <ChatWindow messages={chatMessages}>
-          {!formFinished && (
-            <ConversationalForm
-              step={step}
-              onStep={handleFormStep}
-            />
-          )}
-        </ChatWindow>
-        {loading && (
-          <div className="animate-pulse" style={{ 
-            marginTop: 'var(--space-8)', 
-            textAlign: 'center',
-            padding: 'var(--space-6)',
-            background: 'rgba(24, 144, 255, 0.05)',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px solid rgba(24, 144, 255, 0.1)'
-          }}>
-            <div className="modern-spinner" style={{ margin: '0 auto var(--space-4) auto' }} />
-            <div style={{ 
-              fontSize: '1.125rem',
-              fontWeight: 600,
-              color: 'var(--primary-600)',
-              marginBottom: 'var(--space-2)'
-            }}>
-              Analisando com IA...
-            </div>
-            <Skeleton 
-              active 
-              paragraph={{ rows: 2 }} 
-              style={{ marginTop: 'var(--space-4)' }} 
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Loading overlay durante processamento da IA */}
-      <LoadingOverlay 
-        isLoading={loading} 
-        message="Analisando seus dados com inteligência artificial..."
-      />
-
-      {/* Media queries para responsividade */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          div[style*='maxWidth: 700'] {
-            max-width: 100vw !important;
-            min-width: 320px !important;
-            border-radius: var(--radius-xl) !important;
-            padding: var(--space-6) !important;
-            margin: var(--space-4) !important;
-          }
-        }
-      `}</style>
-    </div>
+    <>
+      <a href="#conteudo" className="pular" onClick={(e) => {
+        e.preventDefault();
+        document.getElementById('conteudo')?.focus();
+      }}>Pular para o conteúdo</a>
+      <Cabecalho aoIrParaInicio={(e) => { e.preventDefault(); ir(''); }} />
+      <main id="conteudo" className="conteudo" tabIndex={-1}>{tela}</main>
+      <Rodape />
+    </>
   );
+}
+
+/**
+ * Remove opções que deixaram de valer após uma mudança (ex.: "situações da saúde da mulher" quando o
+ * sexo muda para masculino). Se a resposta ficar vazia, apaga-a e devolve o id da pergunta para
+ * ser respondida de novo (padrão "check answers" da GOV.UK: mudanças que afetam outras respostas).
+ */
+function revalidarDependentes(respostas) {
+  for (const p of PERGUNTAS) {
+    if (p.tipo !== 'multipla' || !Array.isArray(respostas[p.id])) continue;
+    const validos = new Set(opcoesVisiveis(p, respostas).map((o) => o.valor).concat([NENHUMA]));
+    const filtrada = respostas[p.id].filter((v) => validos.has(v));
+    if (filtrada.length === respostas[p.id].length) continue;
+    if (filtrada.length) {
+      respostas[p.id] = filtrada;
+    } else {
+      delete respostas[p.id];
+      return p.id;
+    }
+  }
+  return null;
+}
+
+function motivoValido(id) {
+  return Object.keys(MOTIVOS_FORA_DO_ESCOPO).includes(id);
 }

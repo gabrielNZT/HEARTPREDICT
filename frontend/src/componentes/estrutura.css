@@ -1,0 +1,160 @@
+.cabecalho {
+  border-bottom: 1px solid var(--linha-suave);
+  background: var(--papel);
+}
+
+.cabecalho__interno,
+.rodape__interno,
+.conteudo {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 var(--e3);
+}
+
+.cabecalho__interno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e2);
+  min-height: 4.5rem;
+  flex-wrap: wrap;
+}
+
+.cabecalho__marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--tinta);
+  text-decoration: none;
+  min-height: var(--alvo-min);
+}
+
+.cabecalho__marca:hover {
+  color: var(--tinta);
+}
+
+.cabecalho__nome {
+  display: block;
+  font-weight: 700;
+  font-size: var(--texto-m);
+  letter-spacing: -0.01em;
+}
+
+.cabecalho__descritor {
+  display: block;
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+  line-height: 1.2;
+}
+
+/* Selo em texto (sem ícone): deixa explícito que é um protótipo */
+.cabecalho__selo {
+  font-size: 0.875rem;
+  color: var(--tinta-suave);
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  padding: 0.125rem 0.75rem;
+}
+
+.conteudo {
+  padding-top: var(--e4);
+  padding-bottom: var(--e8);
+  min-height: calc(100vh - 16rem);
+}
+
+.rodape {
+  border-top: 1px solid var(--linha-suave);
+  padding: var(--e3) 0;
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+}
+
+.rodape p:last-child {
+  margin-bottom: 0;
+}
+
+/* Progresso em texto + barra (a barra sozinha não é acessível) */
+.progresso {
+  margin-bottom: var(--e3);
+}
+
+.progresso__texto {
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+  margin-bottom: var(--e1);
+}
+
+.progresso__trilho {
+  height: 6px;
+  background: var(--linha-suave);
+  border-radius: 999px;
+  overflow: hidden;
+  max-width: var(--medida);
+}
+
+.progresso__barra {
+  height: 100%;
+  background: var(--acento);
+  border-radius: 999px;
+  transition: width var(--t-dado) var(--curva);
+}
+
+/* Botões: alvo mínimo de 48 px; primário com 7,95:1 de contraste */
+.botao {
+  font: inherit;
+  font-weight: 700;
+  min-height: var(--alvo-min);
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--raio);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--t-retorno) var(--curva), transform var(--t-retorno) var(--curva);
+}
+
+.botao:active {
+  transform: translateY(1px);
+}
+
+.botao--primario {
+  background: var(--acento);
+  color: #fff;
+}
+
+.botao--primario:hover {
+  background: var(--acento-escuro);
+}
+
+.botao--secundario {
+  background: transparent;
+  color: var(--acento);
+  border-color: var(--acento);
+}
+
+.botao--secundario:hover {
+  background: var(--acento-claro);
+}
+
+.botao--texto {
+  background: none;
+  color: var(--acento);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding-left: 0;
+  padding-right: 0;
+  font-weight: 400;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--e2);
+  margin-top: var(--e4);
+}
+
+@media (max-width: 30rem) {
+  /* O selo não é escondido no celular: ele comunica que é um protótipo */
+  .acoes .botao--primario {
+    width: 100%;
+  }
+}

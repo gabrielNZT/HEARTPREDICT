@@ -17,6 +17,13 @@ if [ -z "$GEMINI_API_KEY" ]; then
     echo ""
 fi
 
+if [ -z "$GEMINI_MODEL" ]; then
+    echo "⚠️  AVISO: Variável GEMINI_MODEL não configurada"
+    echo "   Defina um modelo vigente, ex.: export GEMINI_MODEL='<id-do-modelo>'"
+    echo "   Lista oficial: https://ai.google.dev/gemini-api/docs/deprecations"
+    echo ""
+fi
+
 # Executa a plataforma JADE com todos os agentes incluindo o novo AgenteClassificador
 echo "Iniciando agentes: Gerenciador, Classificador, Julgador e Explicador..."
 java --add-exports java.xml/com.sun.org.apache.xerces.internal.jaxp=ALL-UNNAMED \

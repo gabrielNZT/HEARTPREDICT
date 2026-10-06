@@ -1,0 +1,358 @@
+/* ---------- Destaque do risco ---------- */
+.destaque {
+  background: var(--superficie);
+  border: 1px solid var(--linha-suave);
+  border-radius: calc(var(--raio) * 1.5);
+  padding: var(--e4) var(--e3);
+  margin-bottom: var(--e4);
+}
+
+.destaque__numero {
+  font-size: clamp(3rem, 12vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--e1);
+  color: var(--tinta);
+}
+
+.destaque__frase {
+  font-size: var(--texto-g);
+  margin-bottom: var(--e3);
+}
+
+/* ---------- Pictograma ---------- */
+.pictograma {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px 4px;
+  max-width: 22rem;
+  margin: var(--e2) 0 var(--e1);
+}
+
+.pessoa {
+  width: 100%;
+  height: auto;
+  fill: var(--superficie);
+  stroke: var(--sem-evento);
+  stroke-width: 1.1;
+}
+
+.pessoa--evento {
+  fill: var(--evento);
+  stroke: var(--evento);
+  animation: entrar var(--t-dado) var(--curva) both;
+}
+
+.legenda-pictograma {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e1) var(--e3);
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+  margin: 0;
+}
+
+.legenda-pictograma span::before {
+  content: '';
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  vertical-align: -0.05rem;
+}
+
+.legenda-pictograma .com::before {
+  background: var(--evento);
+}
+
+.legenda-pictograma .sem::before {
+  background: var(--superficie);
+  box-shadow: inset 0 0 0 1.5px var(--sem-evento); /* contorno, igual às figuras */
+}
+
+/* ---------- Seções ---------- */
+.bloco {
+  margin-bottom: var(--e6);
+}
+
+.bloco > h2 {
+  font-size: var(--texto-g);
+  padding-top: var(--e3);
+  border-top: 1px solid var(--linha-suave);
+}
+
+/* ---------- Escala de categoria ---------- */
+.escala {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 0;
+  margin: var(--e2) 0 var(--e3);
+  max-width: none;
+}
+
+.escala li + li {
+  margin-top: 0;
+}
+
+.escala__faixa {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+}
+
+.escala__cor {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.escala__faixa--0 .escala__cor { background: var(--risco-baixo); }
+.escala__faixa--1 .escala__cor { background: var(--risco-intermediario); }
+.escala__faixa--2 .escala__cor { background: var(--risco-alto); }
+
+/* A faixa atual ganha altura, contorno e rótulo: posição + texto, não só cor */
+.escala__faixa--atual .escala__cor {
+  height: 22px;
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.escala__rotulo {
+  font-weight: 700;
+  color: var(--tinta);
+  font-size: var(--texto-m);
+}
+
+.escala__marcador {
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.reclassificacao {
+  background: var(--superficie);
+  border-left: 4px solid var(--linha);
+  padding: var(--e2);
+  max-width: var(--medida);
+}
+
+/* ---------- Metas ---------- */
+.metas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--e2);
+  margin: var(--e2) 0;
+}
+
+.meta {
+  background: var(--superficie);
+  border: 1px solid var(--linha-suave);
+  border-radius: var(--raio);
+  padding: var(--e2);
+}
+
+.meta__rotulo {
+  font-size: var(--texto-p);
+  color: var(--tinta-suave);
+  margin: 0;
+}
+
+.meta__valor {
+  font-size: var(--texto-gg);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ---------- Fatores ---------- */
+.fatores__grupo {
+  margin-bottom: var(--e3);
+}
+
+.fatores__titulo {
+  font-size: var(--texto-m);
+  margin-bottom: var(--e1);
+}
+
+.fatores__lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: var(--medida);
+}
+
+.fator {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--linha-suave);
+}
+
+.fator + .fator {
+  margin-top: 0;
+}
+
+.fator__texto {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e2);
+  flex-wrap: wrap;
+  margin-bottom: 0.375rem;
+}
+
+.fator__nome {
+  font-weight: 700;
+}
+
+.fator__valor {
+  color: var(--tinta-suave);
+}
+
+.fator__trilho {
+  height: 8px;
+  background: var(--linha-suave);
+  border-radius: 999px;
+}
+
+.fator__barra {
+  height: 100%;
+  border-radius: 999px;
+  transform-origin: left;
+  animation: crescer var(--t-dado) var(--curva) both;
+}
+
+.fator__barra--mais { background: var(--evento); }
+.fator__barra--menos { background: var(--diminuiu); }
+
+@keyframes crescer {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.como-ler {
+  max-width: var(--medida);
+  margin-top: var(--e2);
+}
+
+.como-ler summary {
+  cursor: pointer;
+  color: var(--acento);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  min-height: var(--alvo-min);
+  display: flex;
+  align-items: center;
+}
+
+.como-ler[open] summary {
+  margin-bottom: var(--e1);
+}
+
+/* ---------- Explicação (IA) ---------- */
+.explicacao {
+  background: var(--superficie);
+  border: 1px solid var(--linha-suave);
+  border-radius: calc(var(--raio) * 1.5);
+  padding: var(--e3);
+  margin-bottom: var(--e6);
+}
+
+.explicacao h2 {
+  font-size: var(--texto-g);
+  margin-bottom: var(--e1);
+}
+
+/* Selo em texto: transparência sobre conteúdo gerado por IA (AI Act, art. 50) */
+.explicacao__selo {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--tinta);
+  border: 1px solid var(--tinta);
+  border-radius: 999px;
+  padding: 0.125rem 0.75rem;
+  margin-bottom: var(--e2);
+}
+
+.explicacao__aviso {
+  border-top: 1px solid var(--linha-suave);
+  padding-top: var(--e2);
+  margin-bottom: 0;
+}
+
+.linhas-fantasma span {
+  display: block;
+  height: 0.875rem;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--linha-suave) 0%, var(--papel) 50%, var(--linha-suave) 100%);
+  background-size: 200% 100%;
+  animation: brilho 1.4s linear infinite;
+  margin-bottom: 0.75rem;
+  max-width: var(--medida);
+}
+
+.linhas-fantasma span:last-child {
+  width: 60%;
+}
+
+@keyframes brilho {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.limites {
+  max-width: var(--medida);
+}
+
+/* ---------- Escala: marcação da faixa do número calculado quando há reclassificação ---------- */
+.escala__faixa--calculo .escala__cor {
+  height: 22px;
+  outline: 3px dashed var(--tinta-suave);
+  outline-offset: 2px;
+}
+
+.escala__marcador--calculo {
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.aviso-remedio {
+  max-width: var(--medida);
+  background: var(--superficie);
+  border-left: 4px solid var(--acento);
+  padding: var(--e2);
+  margin-top: var(--e3);
+}
+
+/* ---------- Impressão: resultado para levar ao médico ----------
+   Mantém o selo de protótipo e o rodapé (avisos de uso), a legenda, a escala e as barras
+   (print-color-adjust), e abre o "Como ler" (TelaResultado abre os <details> em beforeprint).
+   Parecer de IHC/Ética. */
+@media print {
+  .acoes,
+  .pular,
+  .explicacao__consentimento,
+  .como-ler summary {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .destaque,
+  .explicacao,
+  .meta,
+  .escala,
+  .fatores__grupo {
+    border-color: #999;
+    break-inside: avoid;
+  }
+  .pictograma,
+  .legenda-pictograma,
+  .escala,
+  .fator__trilho,
+  .cabecalho__selo {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

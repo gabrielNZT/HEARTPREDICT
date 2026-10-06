@@ -1,0 +1,18 @@
+== largura 1280
+inicio         violações: 0 [] | aprovadas: 29
+erro           violações: 0 [] | aprovadas: 44
+escolha        violações: 0 [] | aprovadas: 36
+renal          violações: 0 [] | aprovadas: 38
+multipla       violações: 0 [] | aprovadas: 36
+revisao        violações: 0 [] | aprovadas: 34
+resultado      violações: 0 [] | aprovadas: 41
+explicacao     violações: 0 [] | aprovadas: 41
+== largura 390
+inicio         violações: 0 [] | aprovadas: 29
+erro           violações: 0 [] | aprovadas: 44
+escolha        violações: 0 [] | aprovadas: 36
+renal          violações: 0 [] | aprovadas: 38
+multipla       violações: 0 [] | aprovadas: 36
+revisao        violações: 0 [] | aprovadas: 34
+resultado      violações: 0 [] | aprovadas: 41
+explicacao     violações: 0 [] | aprovadas: 41

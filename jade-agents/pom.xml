@@ -32,8 +32,6 @@
 
         <!-- Versões das dependências -->
         <jade.version>4.6.0</jade.version>
-        <paho.mqtt.version>1.2.5</paho.mqtt.version>
-        <postgresql.version>42.7.1</postgresql.version>
         <jackson.version>2.16.1</jackson.version>
         <slf4j.version>2.0.9</slf4j.version>
         <logback.version>1.4.14</logback.version>
@@ -54,20 +52,6 @@
             <groupId>com.tilab.jade</groupId>
             <artifactId>jade</artifactId>
             <version>${jade.version}</version>
-        </dependency>
-
-        <!-- ============ MQTT CLIENT ============ -->
-        <dependency>
-            <groupId>org.eclipse.paho</groupId>
-            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-            <version>${paho.mqtt.version}</version>
-        </dependency>
-
-        <!-- ============ BANCO DE DADOS ============ -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
         </dependency>
 
         <!-- ============ JSON PROCESSING ============ -->
