@@ -1,35 +1,46 @@
 # Índice da base de conhecimento do TCC
 
-> Arquivo **gerado automaticamente** por `tcc/tools/indexar.py` em 2026-09-29. Não edite à mão; edite os arquivos de origem e rode o script.
+> Arquivo **gerado automaticamente** por `tcc/tools/indexar.py` em 2026-10-06. Não edite à mão; edite os arquivos de origem e rode o script.
 
 ## Documentos do projeto
 
 | Documento | Status | Atualizado | Resumo |
 |---|---|---|---|
-| [Registro de decisões](00-projeto/decisoes.md) | vigente | 2026-09-29 | Decisões de projeto e de pesquisa, com data, motivo e fontes. Nunca apague; marque como substituída. |
+| [Registro de decisões](00-projeto/decisoes.md) | vigente | 2026-10-06 | Decisões de projeto e de pesquisa, com data, motivo e fontes. Nunca apague; marque como substituída. |
 | [Revisão de escopo e arquitetura para TCC de graduação](00-projeto/escopo-e-arquitetura.md) | vigente | 2026-09-29 | Avaliação de cada componente existente no repositório (fundamento e destino), redimensionamento do escopo para TCC de graduação (núcleo × extensões) e enquadramento honesto do uso de agentes. |
-| [Pendências e verificações](00-projeto/pendencias.md) | vigente | 2026-09-29 | O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e anote a data. |
+| [Pendências e verificações](00-projeto/pendencias.md) | vigente | 2026-10-06 | O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e anote a data. |
 | [Proposta do TCC (documento-mestre)](00-projeto/proposta.md) | rascunho | 2026-09-29 | Tese, pergunta de pesquisa, hipóteses, contribuições, arquitetura, protocolo experimental e escopo. Fonte única da verdade do projeto. |
 | [Próximos passos (triagem de pendências)](00-projeto/proximos-passos.md) | vigente | 2026-09-29 | Triagem das 59 pendências em riscos que podem mudar o rumo, bloqueios técnicos e itens que podem esperar; ordem de execução recomendada. |
 | [Síntese da leitura completa e correções](01-literatura/sintese-leitura.md) | vigente | 2026-09-29 | O que mudou no posicionamento depois de ler os artigos centrais na íntegra; correções de afirmações feitas antes. |
 | [Auditoria das decisões autorais](02-argumentacao/auditoria-decisoes-autorais.md) | vigente | 2026-09-29 | Separa o que é decisão autoral defensável, o que só se sustenta se for validado no TCC e o que era especulação ou erro (e como foi tratado). |
-| [Defesa do valor da pesquisa](02-argumentacao/defesa-valor.md) | rascunho | 2026-09-29 | Argumentação para a banca (relevância, lacuna, contribuição, rigor), já corrigida após a leitura completa. |
-| [Fundamentação por parte do projeto e brechas](02-argumentacao/fundamentacao-por-parte.md) | vigente | 2026-09-29 | Cada componente do projeto com seu fundamento (primário, secundário ou proposta própria) e as brechas que a banca pode explorar, com correções. |
-| [Justificativa do uso do JADE](02-argumentacao/justificativa-jade.md) | rascunho | 2026-09-29 | O que o JADE/FIPA agrega de concreto ao projeto (protocolo de proposta/aceitação para verificação, recusa tipada, rastro auditável, ablação por composição), com fundamento, custos e respostas à banca. |
+| [Defesa do valor da pesquisa](02-argumentacao/defesa-valor.md) | rascunho | 2026-10-06 | Argumentação para a banca (relevância, lacuna, contribuição, rigor), revista após a leitura completa e após a banca simulada (D030). |
+| [Fundamentação por parte do projeto e brechas](02-argumentacao/fundamentacao-por-parte.md) | vigente | 2026-10-06 | Cada componente do projeto com seu fundamento (primário, secundário ou proposta própria) e as brechas que a banca pode explorar, com correções. |
+| [Justificativa do uso do JADE](02-argumentacao/justificativa-jade.md) | vigente | 2026-10-06 | O que o JADE/FIPA agrega ao projeto (conversa protocolada, decisão de entrega tipada, rastro auditável) e o que não agrega (fidelidade), com o protocolo composto corrigido após a banca, custos, riscos e respostas prováveis. |
 | [Perguntas prováveis da banca](02-argumentacao/perguntas-banca.md) | rascunho | 2026-09-29 | Perguntas difíceis e respostas fundamentadas, com fontes. |
-| [Tabela comparativa de trabalhos relacionados](02-argumentacao/trabalhos-relacionados.md) | rascunho | 2026-09-29 | Comparação critério a critério entre os trabalhos mais próximos e a proposta; base do capítulo de Trabalhos Relacionados. |
-| [Interface — identidade visual, UX e justificativas](03-metodologia/interface-design.md) | vigente | 2026-09-29 | Especificação da nova interface (público-alvo, identidade, tipografia, cores com contraste medido, fluxo, apresentação do risco, animação, conteúdo, acessibilidade), com a justificativa e a fonte de cada decisão. |
-| [Definição operacional das métricas de fidelidade](03-metodologia/metricas-fidelidade.md) | rascunho | 2026-09-29 | Definições operacionais das 4 métricas novas (polaridade, exatidão numérica, variáveis fora do modelo, afirmações não sustentadas), com unidade de análise, gabarito, regras de decisão, agregação e validação. |
+| [Tabela comparativa de trabalhos relacionados](02-argumentacao/trabalhos-relacionados.md) | rascunho | 2026-10-06 | Comparação critério a critério entre os trabalhos mais próximos e a proposta; base do capítulo de Trabalhos Relacionados. |
+| [Interface — identidade visual, UX e justificativas](03-metodologia/interface-design.md) | vigente | 2026-10-06 | Especificação da nova interface (público-alvo, identidade, tipografia, cores com contraste medido, fluxo, apresentação do risco, animação, conteúdo, acessibilidade), com a justificativa e a fonte de cada decisão. |
+| [Definição operacional das métricas de fidelidade](03-metodologia/metricas-fidelidade.md) | rascunho | 2026-10-06 | Definições operacionais das 4 métricas novas (polaridade, exatidão numérica, variáveis fora do modelo, afirmações não sustentadas), com unidade de análise, gabarito, regras de decisão, agregação e validação. |
 | [Tecnologias e nível de detalhamento no TCC](03-metodologia/tecnologias.md) | rascunho | 2026-09-29 | Critério para decidir quanto justificar cada escolha tecnológica (método, arquitetura, infraestrutura), tabela das tecnologias do projeto e checklist de reprodutibilidade. |
+| [trechos-normativos](05-banca/anexos/etica/trechos-normativos.md) | — | — |  |
+| [Parecer de banca — correção clínica e epidemiológica (Cardiologia / Epidemiologia Clínica)](05-banca/parecer-cardiologia.md) | — | — |  |
+| [Parecer da banca — engenharia do repositório](05-banca/parecer-engenharia.md) | vigente | 2026-09-29 | Auditoria de engenharia de software do HEARTPREDICT (arquitetura, código, testes, reprodutibilidade, segurança, coerência doc × código, versionamento), com bugs confirmados por testes em anexos/engenharia/. |
+| [Parecer da banca — ética, proteção de dados e regulação](05-banca/parecer-etica.md) | vigente | 2026-09-29 | Auditoria dos aspectos éticos, legais e de proteção de dados do HeartPredict (LGPD, CEP/Conep, ANVISA, AI Act/PL 2338, termos dos provedores de LLM), com notas, problemas classificados, textos sugeridos e perguntas da banca. |
+| [Parecer da banca — Inteligência Artificial, LLMs e Explicabilidade (XAI)](05-banca/parecer-ia.md) | vigente | 2026-09-29 | Auditoria da parte de IA/LLM/XAI do TCC (novidade, Shapley exato, métricas, protocolo do piloto, verificador, escolha de LLMs, efeito teto), com verificações executadas e referências conferidas. |
+| [Parecer de banca — Interação Humano-Computador (nova interface)](05-banca/parecer-ihc.md) | — | — |  |
+| [Parecer da banca: revisão de literatura e integridade das citações](05-banca/parecer-literatura.md) | — | — |  |
+| [Parecer de banca — metodologia de pesquisa](05-banca/parecer-metodologia.md) | vigente | 2026-09-29 | Auditoria do desenho científico (pergunta, hipóteses, DSR, desenho experimental, métricas, estatística, piloto D023, viabilidade), com notas, problemas classificados, perguntas da banca, verificações executadas e cálculo de poder para McNemar. |
+| [Parecer da banca — parte de sistemas multiagentes (JADE/FIPA)](05-banca/parecer-sma.md) | parecer | 2026-09-29 | Auditoria da parte de agentes (conceito de agente, justificativa do JADE, protocolo FIPA-Propose, uso do MAST, código JADE, coerência texto × código, A2A/MCP), com notas, problemas classificados, perguntas da banca e verificações reproduzíveis. |
+| [verificacao-alegacoes](05-banca/verificacao-alegacoes.md) | — | — |  |
 
 ## Literatura
 
-**38 fichamentos** (completa: 9, parcial: 2, resumo: 27).
+**42 fichamentos** (completa: 9, parcial: 4, resumo: 29).
 
 | Chave | Ano | Veículo | Leitura | Relevância | Temas |
 |---|---|---|---|---|---|
 | [cemri2025mast](01-literatura/fichamentos/cemri2025mast.md) | 2025 | Advances in Neural Information Processing Systems 38 (NeurIPS 2025) - Datasets and Benchmarks Track | completa | central | multiagentes-llm, falhas-e-verificacao, engenharia-de-sistemas |
 | [fipa2002propose](01-literatura/fichamentos/fipa2002propose.md) | 2002 | FIPA (padrão; hoje sob o IEEE Computer Society) | resumo | central | protocolos-fipa, comunicacao-agentes |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | 2026 | arXiv preprint arXiv:2603.20003 | parcial | central | xai-shap, llm-explicacao, fidelidade, verificador, multiagente, trabalho-mais-proximo |
 | [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md) | 2025 | Nature Communications | completa | central | llm-ferramentas, calculadoras-clinicas, agentes-llm |
 | [khan2024prevent](01-literatura/fichamentos/khan2024prevent.md) | 2024 | Circulation | completa | central | risco-cardiovascular, escores-clinicos |
 | [khandekar2024medcalc](01-literatura/fichamentos/khandekar2024medcalc.md) | 2024 | Advances in Neural Information Processing Systems 37 (NeurIPS 2024) - Datasets and Benchmarks Track | completa | central | llm-calculo-clinico, benchmarks, llm-ferramentas |
@@ -45,11 +56,13 @@
 | [collins2024tripodai](01-literatura/fichamentos/collins2024tripodai.md) | 2024 | BMJ | resumo | alta | metodologia-predicao, relato |
 | [diao2024preventnhanes](01-literatura/fichamentos/diao2024preventnhanes.md) | 2024 | JAMA | resumo | alta | risco-cardiovascular, nhanes, dados-publicos |
 | [hevner2004dsr](01-literatura/fichamentos/hevner2004dsr.md) | 2004 | MIS Quarterly | resumo | alta | metodologia-pesquisa |
+| [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md) | 2024 | arXiv preprint arXiv:2412.10220 | parcial | alta | xai-shap, llm-explicacao, fidelidade, metricas |
 | [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md) | 2023 | JAMA | parcial | alta | vies-de-automacao, xai-clinica, fatores-humanos |
 | [jacovi2020faithfulness](01-literatura/fichamentos/jacovi2020faithfulness.md) | 2020 | Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (ACL 2020) | resumo | alta | fidelidade, fundamentos-xai |
 | [jennings2000abse](01-literatura/fichamentos/jennings2000abse.md) | 2000 | Artificial Intelligence | resumo | alta | fundamentos-sma, engenharia-de-software |
 | [kapoor2023leakage](01-literatura/fichamentos/kapoor2023leakage.md) | 2023 | Patterns | resumo | alta | metodologia-predicao, reprodutibilidade |
 | [lu2026prove](01-literatura/fichamentos/lu2026prove.md) | 2026 | arXiv preprint arXiv:2607.28218 | resumo | alta | falhas-e-verificacao, verificacao-deterministica |
+| [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md) | 2025 | American Journal of Preventive Cardiology | resumo | alta | risco-cardiovascular, prevent, validacao-externa, brasil |
 | [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md) | 2026 | European Heart Journal - Digital Health | resumo | alta | llm-risco-cv, risco-cardiovascular, portugues, trabalho-mais-proximo |
 | [turpin2023unfaithful](01-literatura/fichamentos/turpin2023unfaithful.md) | 2023 | Advances in Neural Information Processing Systems 36 (NeurIPS 2023) | resumo | alta | fidelidade, llm-explicacao |
 | [vancalster2019calibration](01-literatura/fichamentos/vancalster2019calibration.md) | 2019 | BMC Medicine | resumo | alta | metodologia-predicao, calibracao |
@@ -62,6 +75,7 @@
 | [isern2016agents](01-literatura/fichamentos/isern2016agents.md) | 2016 | Journal of Medical Systems | resumo | media | multiagentes-classicos, fundamentos-sma |
 | [kim2024mdagents](01-literatura/fichamentos/kim2024mdagents.md) | 2024 | Advances in Neural Information Processing Systems 37 (NeurIPS 2024) | resumo | media | multiagentes-llm, raciocinio-medico |
 | [kumar2025calcchatbot](01-literatura/fichamentos/kumar2025calcchatbot.md) | 2025 | arXiv preprint arXiv:2503.17550 | resumo | media | llm-ferramentas, calculadoras-clinicas |
+| [neuen2026multinational](01-literatura/fichamentos/neuen2026multinational.md) | 2026 | Nature Medicine | resumo | media | risco-cardiovascular, prevent, validacao-externa |
 | [petrova2025webofagents](01-literatura/fichamentos/petrova2025webofagents.md) | 2025 | arXiv preprint arXiv:2507.10644 | resumo | media | fundamentos-sma, protocolos-llm, posicionamento |
 | [tang2024medagents](01-literatura/fichamentos/tang2024medagents.md) | 2024 | Findings of the Association for Computational Linguistics: ACL 2024 | resumo | media | multiagentes-llm, raciocinio-medico |
 | [who2024lmm](01-literatura/fichamentos/who2024lmm.md) | 2024 | World Health Organization (Genebra) | resumo | media | etica-regulacao |
@@ -73,6 +87,7 @@
 - **agentes-llm**: [botti2025reinventing](01-literatura/fichamentos/botti2025reinventing.md), [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md)
 - **alucinacao**: [asgari2025hallucination](01-literatura/fichamentos/asgari2025hallucination.md)
 - **benchmarks**: [khandekar2024medcalc](01-literatura/fichamentos/khandekar2024medcalc.md), [zhu2025medagentboard](01-literatura/fichamentos/zhu2025medagentboard.md)
+- **brasil**: [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md)
 - **calculadoras-clinicas**: [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md), [kumar2025calcchatbot](01-literatura/fichamentos/kumar2025calcchatbot.md), [roeschl2026pipeline](01-literatura/fichamentos/roeschl2026pipeline.md)
 - **calibracao**: [vancalster2019calibration](01-literatura/fichamentos/vancalster2019calibration.md)
 - **comunicacao-agentes**: [ehtesham2025protocols](01-literatura/fichamentos/ehtesham2025protocols.md), [fipa2002propose](01-literatura/fichamentos/fipa2002propose.md)
@@ -84,40 +99,46 @@
 - **etica-regulacao**: [who2024lmm](01-literatura/fichamentos/who2024lmm.md)
 - **falhas-e-verificacao**: [cemri2025mast](01-literatura/fichamentos/cemri2025mast.md), [lu2026prove](01-literatura/fichamentos/lu2026prove.md)
 - **fatores-humanos**: [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md)
-- **fidelidade**: [almarri2025shapfin](01-literatura/fichamentos/almarri2025shapfin.md), [jacovi2020faithfulness](01-literatura/fichamentos/jacovi2020faithfulness.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [turpin2023unfaithful](01-literatura/fichamentos/turpin2023unfaithful.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
+- **fidelidade**: [almarri2025shapfin](01-literatura/fichamentos/almarri2025shapfin.md), [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md), [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md), [jacovi2020faithfulness](01-literatura/fichamentos/jacovi2020faithfulness.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [turpin2023unfaithful](01-literatura/fichamentos/turpin2023unfaithful.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
 - **fundamentos-sma**: [botti2025reinventing](01-literatura/fichamentos/botti2025reinventing.md), [isern2016agents](01-literatura/fichamentos/isern2016agents.md), [jennings2000abse](01-literatura/fichamentos/jennings2000abse.md), [petrova2025webofagents](01-literatura/fichamentos/petrova2025webofagents.md), [wooldridge1995agents](01-literatura/fichamentos/wooldridge1995agents.md)
 - **fundamentos-xai**: [jacovi2020faithfulness](01-literatura/fichamentos/jacovi2020faithfulness.md)
 - **hibrido-ml-llm**: [ahmed2025mentalhealth](01-literatura/fichamentos/ahmed2025mentalhealth.md), [chandrasekaran2026neuron](01-literatura/fichamentos/chandrasekaran2026neuron.md), [wang2025colacare](01-literatura/fichamentos/wang2025colacare.md)
 - **llm-calculo-clinico**: [khandekar2024medcalc](01-literatura/fichamentos/khandekar2024medcalc.md)
-- **llm-explicacao**: [ahmed2025mentalhealth](01-literatura/fichamentos/ahmed2025mentalhealth.md), [chandrasekaran2026neuron](01-literatura/fichamentos/chandrasekaran2026neuron.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [turpin2023unfaithful](01-literatura/fichamentos/turpin2023unfaithful.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
+- **llm-explicacao**: [ahmed2025mentalhealth](01-literatura/fichamentos/ahmed2025mentalhealth.md), [chandrasekaran2026neuron](01-literatura/fichamentos/chandrasekaran2026neuron.md), [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md), [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [turpin2023unfaithful](01-literatura/fichamentos/turpin2023unfaithful.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
 - **llm-ferramentas**: [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md), [khandekar2024medcalc](01-literatura/fichamentos/khandekar2024medcalc.md), [kumar2025calcchatbot](01-literatura/fichamentos/kumar2025calcchatbot.md), [roeschl2026pipeline](01-literatura/fichamentos/roeschl2026pipeline.md)
 - **llm-risco-cv**: [han2023llmukb](01-literatura/fichamentos/han2023llmukb.md), [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md)
 - **metodologia-pesquisa**: [hevner2004dsr](01-literatura/fichamentos/hevner2004dsr.md)
 - **metodologia-predicao**: [collins2024tripodai](01-literatura/fichamentos/collins2024tripodai.md), [kapoor2023leakage](01-literatura/fichamentos/kapoor2023leakage.md), [vancalster2019calibration](01-literatura/fichamentos/vancalster2019calibration.md)
+- **metricas**: [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md)
 - **ml-convencional**: [zhu2025medagentboard](01-literatura/fichamentos/zhu2025medagentboard.md)
+- **multiagente**: [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md)
 - **multiagentes-classicos**: [isern2016agents](01-literatura/fichamentos/isern2016agents.md)
 - **multiagentes-llm**: [cemri2025mast](01-literatura/fichamentos/cemri2025mast.md), [kim2024mdagents](01-literatura/fichamentos/kim2024mdagents.md), [tang2024medagents](01-literatura/fichamentos/tang2024medagents.md), [wang2025colacare](01-literatura/fichamentos/wang2025colacare.md), [zhu2025medagentboard](01-literatura/fichamentos/zhu2025medagentboard.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
 - **nhanes**: [anderson2024preventnhanes](01-literatura/fichamentos/anderson2024preventnhanes.md), [diao2024preventnhanes](01-literatura/fichamentos/diao2024preventnhanes.md)
 - **portugues**: [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md)
 - **posicionamento**: [botti2025reinventing](01-literatura/fichamentos/botti2025reinventing.md), [petrova2025webofagents](01-literatura/fichamentos/petrova2025webofagents.md)
+- **prevent**: [neuen2026multinational](01-literatura/fichamentos/neuen2026multinational.md), [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md)
 - **protocolos-fipa**: [fipa2002propose](01-literatura/fichamentos/fipa2002propose.md)
 - **protocolos-llm**: [ehtesham2025protocols](01-literatura/fichamentos/ehtesham2025protocols.md), [petrova2025webofagents](01-literatura/fichamentos/petrova2025webofagents.md)
 - **raciocinio-medico**: [kim2024mdagents](01-literatura/fichamentos/kim2024mdagents.md), [tang2024medagents](01-literatura/fichamentos/tang2024medagents.md)
 - **relato**: [collins2024tripodai](01-literatura/fichamentos/collins2024tripodai.md)
 - **reprodutibilidade**: [kapoor2023leakage](01-literatura/fichamentos/kapoor2023leakage.md)
-- **risco-cardiovascular**: [anderson2024preventnhanes](01-literatura/fichamentos/anderson2024preventnhanes.md), [chan2025vies](01-literatura/fichamentos/chan2025vies.md), [diao2024preventnhanes](01-literatura/fichamentos/diao2024preventnhanes.md), [han2023llmukb](01-literatura/fichamentos/han2023llmukb.md), [khan2024prevent](01-literatura/fichamentos/khan2024prevent.md), [roeschl2026pipeline](01-literatura/fichamentos/roeschl2026pipeline.md), [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md), [sbc2025dislipidemias](01-literatura/fichamentos/sbc2025dislipidemias.md)
+- **risco-cardiovascular**: [anderson2024preventnhanes](01-literatura/fichamentos/anderson2024preventnhanes.md), [chan2025vies](01-literatura/fichamentos/chan2025vies.md), [diao2024preventnhanes](01-literatura/fichamentos/diao2024preventnhanes.md), [han2023llmukb](01-literatura/fichamentos/han2023llmukb.md), [khan2024prevent](01-literatura/fichamentos/khan2024prevent.md), [neuen2026multinational](01-literatura/fichamentos/neuen2026multinational.md), [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md), [roeschl2026pipeline](01-literatura/fichamentos/roeschl2026pipeline.md), [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md), [sbc2025dislipidemias](01-literatura/fichamentos/sbc2025dislipidemias.md)
 - **seguranca-clinica**: [asgari2025hallucination](01-literatura/fichamentos/asgari2025hallucination.md)
 - **taxonomia-erros**: [asgari2025hallucination](01-literatura/fichamentos/asgari2025hallucination.md)
-- **trabalho-mais-proximo**: [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [roeschl2026pipeline](01-literatura/fichamentos/roeschl2026pipeline.md), [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md), [wang2025colacare](01-literatura/fichamentos/wang2025colacare.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
+- **trabalho-mais-proximo**: [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [roeschl2026pipeline](01-literatura/fichamentos/roeschl2026pipeline.md), [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md), [wang2025colacare](01-literatura/fichamentos/wang2025colacare.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
+- **validacao-externa**: [neuen2026multinational](01-literatura/fichamentos/neuen2026multinational.md), [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md)
 - **verificacao-deterministica**: [lu2026prove](01-literatura/fichamentos/lu2026prove.md)
+- **verificador**: [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md)
 - **vies-de-automacao**: [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md)
 - **vies-llm**: [chan2025vies](01-literatura/fichamentos/chan2025vies.md)
 - **xai-clinica**: [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md)
-- **xai-shap**: [ahmed2025mentalhealth](01-literatura/fichamentos/ahmed2025mentalhealth.md), [almarri2025shapfin](01-literatura/fichamentos/almarri2025shapfin.md), [chandrasekaran2026neuron](01-literatura/fichamentos/chandrasekaran2026neuron.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [wang2025colacare](01-literatura/fichamentos/wang2025colacare.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
+- **xai-shap**: [ahmed2025mentalhealth](01-literatura/fichamentos/ahmed2025mentalhealth.md), [almarri2025shapfin](01-literatura/fichamentos/almarri2025shapfin.md), [chandrasekaran2026neuron](01-literatura/fichamentos/chandrasekaran2026neuron.md), [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md), [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md), [lee2025shapllm](01-literatura/fichamentos/lee2025shapllm.md), [wang2025colacare](01-literatura/fichamentos/wang2025colacare.md), [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md)
 
 ### Leitura incompleta (verificar antes de citar números)
 
 - [fipa2002propose](01-literatura/fichamentos/fipa2002propose.md) — leitura: resumo
+- [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) — leitura: parcial
 - [sbc2025dislipidemias](01-literatura/fichamentos/sbc2025dislipidemias.md) — leitura: parcial
 - [botti2025reinventing](01-literatura/fichamentos/botti2025reinventing.md) — leitura: resumo
 - [chan2025vies](01-literatura/fichamentos/chan2025vies.md) — leitura: resumo
@@ -125,11 +146,13 @@
 - [collins2024tripodai](01-literatura/fichamentos/collins2024tripodai.md) — leitura: resumo
 - [diao2024preventnhanes](01-literatura/fichamentos/diao2024preventnhanes.md) — leitura: resumo
 - [hevner2004dsr](01-literatura/fichamentos/hevner2004dsr.md) — leitura: resumo
+- [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md) — leitura: parcial
 - [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md) — leitura: parcial
 - [jacovi2020faithfulness](01-literatura/fichamentos/jacovi2020faithfulness.md) — leitura: resumo
 - [jennings2000abse](01-literatura/fichamentos/jennings2000abse.md) — leitura: resumo
 - [kapoor2023leakage](01-literatura/fichamentos/kapoor2023leakage.md) — leitura: resumo
 - [lu2026prove](01-literatura/fichamentos/lu2026prove.md) — leitura: resumo
+- [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md) — leitura: resumo
 - [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md) — leitura: resumo
 - [turpin2023unfaithful](01-literatura/fichamentos/turpin2023unfaithful.md) — leitura: resumo
 - [vancalster2019calibration](01-literatura/fichamentos/vancalster2019calibration.md) — leitura: resumo
@@ -142,6 +165,7 @@
 - [isern2016agents](01-literatura/fichamentos/isern2016agents.md) — leitura: resumo
 - [kim2024mdagents](01-literatura/fichamentos/kim2024mdagents.md) — leitura: resumo
 - [kumar2025calcchatbot](01-literatura/fichamentos/kumar2025calcchatbot.md) — leitura: resumo
+- [neuen2026multinational](01-literatura/fichamentos/neuen2026multinational.md) — leitura: resumo
 - [petrova2025webofagents](01-literatura/fichamentos/petrova2025webofagents.md) — leitura: resumo
 - [tang2024medagents](01-literatura/fichamentos/tang2024medagents.md) — leitura: resumo
 - [who2024lmm](01-literatura/fichamentos/who2024lmm.md) — leitura: resumo
@@ -160,6 +184,13 @@ Afirmações extraídas das seções *Dados citáveis* dos fichamentos, com loca
 | [cemri2025mast](01-literatura/fichamentos/cemri2025mast.md) | C5 | Adicionar uma etapa de verificação do objetivo de alto nível ao ChatDev aumentou o sucesso em 15,6% (Seção 4; Apêndice H). |
 | [cemri2025mast](01-literatura/fichamentos/cemri2025mast.md) | C6 | Os autores argumentam que melhorar o LLM base não basta, pois muitas falhas vêm do projeto organizacional do sistema (Seção 5.3). |
 | [cemri2025mast](01-literatura/fichamentos/cemri2025mast.md) | C7 | Entre as estratégias estruturais, os autores citam protocolos de comunicação padronizados, quantificação de confiança e validação simbólica para raciocínio (Apêndice G). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C1 | Na linha de base, 31 de 100 narrativas continham algum erro de fidelidade; acurácias médias de posto, sinal e valor de 0,900, 0,958 e 0,990 (Seção 3.1, texto após a Tabela 2). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C2 | O avaliador de fidelidade extrai posto, sinal e valor com um LLM e compara com a tabela SHAP por regra, sem LLM (Seção 2.1, "The Faithful Evaluator"). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C3 | Os autores excluem do estudo os falsos positivos da extração, por ser impraticável verificá-los manualmente (Seção 2.4, nota 8). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C4 | Os erros de extração de um único LLM são o principal problema recorrente em todos os experimentos (Conclusão). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C5 | O desenho com crítico por regras tem desempenho comparável ao do crítico com LLM e é mais eficiente (Conclusão). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C6 | O agente de coerência melhora a qualidade linguística, mas prejudica a fidelidade das narrativas (Conclusão). |
+| [he2026agenticnarratives](01-literatura/fichamentos/he2026agenticnarratives.md) | C7 | As narrativas iniciais vieram da pior de quatro execuções do modelo gerador (Seção 2.4, "Baseline Experiment"). |
 | [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md) | C1 | AgentMD com GPT-4 obteve acurácia de 0,877 contra 0,409 do GPT-4 com chain-of-thought no RiskQA (N=350) (Results, Fig. 3c). |
 | [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md) | C2 | AgentMD com GPT-3.5 (0,546) superou GPT-4 com chain-of-thought (0,409) (Results, Fig. 3b–c). |
 | [jin2025agentmd](01-literatura/fichamentos/jin2025agentmd.md) | C3 | Em 698 notas reais de emergência, o processo de cálculo foi correto em 52,3% e parcialmente correto em 28,5% dos pares avaliados (Results, Fig. 4b). |
@@ -218,10 +249,18 @@ Afirmações extraídas das seções *Dados citáveis* dos fichamentos, com loca
 | [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md) | C4 | Ambos os geradores usaram o mesmo modelo local llama3.2:3b e receberam os dados do paciente e a probabilidade prevista, sem os valores SHAP no prompt (Methods 4.5). |
 | [zhu2026agenticexpl](01-literatura/fichamentos/zhu2026agenticexpl.md) | C5 | Trata-se de preprint não revisado por pares, com apenas 14 casos na comparação direta (Discussion, limitações). |
 | [diao2024preventnhanes](01-literatura/fichamentos/diao2024preventnhanes.md) | C1 | Em 7.765 adultos de 30 a 79 anos do NHANES (2011 a março de 2020), o PREVENT reclassificaria 53,0% para categorias de risco mais baixas em relação às PCE (Abstract). |
+| [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md) | C1 | As métricas Rank, Sign e Value Agreement comparam o posto, o sinal e o valor extraídos da narrativa com os da tabela SHAP (Seção III). |
+| [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md) | C2 | Quando o LLM recebe uma tabela SHAP com os sinais invertidos, até cerca de 30% dos sinais aparecem na narrativa "corrigidos" para o valor original, contra cerca de 4% esperados (Seção IV.2). |
+| [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md) | C3 | Os autores relacionam o fenômeno à preferência dos LLMs pelo conhecimento paramétrico em vez do contexto que o contradiz (Seção IV.2). |
+| [ichmoukhamedov2024story](01-literatura/fichamentos/ichmoukhamedov2024story.md) | C4 | Na validação, o extrator sinalizou as 60 narrativas manipuladas e errou em 1 de 53 narrativas humanas corretas (Seção III). |
 | [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md) | C1 | Em estudo randomizado com 457 clínicos, um modelo sistematicamente enviesado reduziu a acurácia diagnóstica em 11,3 p.p. (IC95% 7,2–15,5) em relação ao baseline de 73,0% (Abstract, Results). |
 | [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md) | C2 | Explicações do modelo enviesado não recuperaram significativamente o desempenho: diferença de 2,3 p.p. (IC95% −2,7 a 7,2) (Abstract, Results). |
 | [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md) | C3 | As explicações avaliadas eram mapas de calor baseados em imagem (Grad-CAM), não narrativas textuais (Methods). |
 | [jabbour2023jama](01-literatura/fichamentos/jabbour2023jama.md) | C4 | 66,7% dos participantes não sabiam que modelos de IA podem ser sistematicamente enviesados (Discussion). |
+| [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md) | C1 | No ELSA-Brasil (n = 11.077), o PREVENT teve AUC de 0,76 (IC95% 0,72–0,80) para DCVA em 5 anos (Resumo). |
+| [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md) | C2 | A razão entre risco predito e observado do PREVENT foi 1,21 (IC95% 1,07–1,51), melhor que a do escore da OMS, 1,57 (Resumo). |
+| [pedroso2025preventbrasil](01-literatura/fichamentos/pedroso2025preventbrasil.md) | C3 | O PREVENT melhorou a classificação em relação ao escore da OMS (NRI 0,19), com ganho maior em mulheres e em pessoas pretas ou pardas (Resumo). |
 | [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md) | C1 | Em 11 LLMs e 30 vinhetas em português e inglês, a recalculação determinística do SCORE2 com as variáveis extraídas pelos modelos elevou a concordância da categoria para κw 0,85–0,90, indicando que a execução do cálculo era a principal fonte de erro (Abstract). |
 | [santos2026escllm](01-literatura/fichamentos/santos2026escllm.md) | C2 | O desempenho foi amplamente consistente entre português e inglês (Abstract). |
 | [anderson2024preventnhanes](01-literatura/fichamentos/anderson2024preventnhanes.md) | C1 | Estudo transversal com 3.785 adultos de 40 a 75 anos do NHANES (2017 a março de 2020) aplicou as equações PREVENT para estimar elegibilidade a estatina (Abstract). |
+| [neuen2026multinational](01-literatura/fichamentos/neuen2026multinational.md) | C1 | O PREVENT foi validado em 44 coortes e 18 ensaios, somando 6,4 milhões de pessoas, com desempenho geralmente bom entre regiões (Resumo). |

@@ -38,10 +38,15 @@ Versão fixa, temperatura definida, N repetições, variância reportada, ≥2 m
 Um resultado negativo é contribuição (hipótese refutável) e dialoga com MedAgentBoard e Zhu 2026, que já mostraram ganhos inconsistentes ou negativos de decomposição.
 
 ## "Por que JADE?"
-**Resposta atualizada:** ver [justificativa-jade](justificativa-jade.md) (protocolo FIPA-Propose no ciclo de verificação, recusa tipada, rastro auditável, ablação por composição).
+O JADE não melhora a fidelidade; quem pode melhorá-la é o verificador, que é um módulo independente. O JADE dá forma padronizada à conversa: decisão de entrega como ato de fala tipado, prazos, `conversation-id` e rastro auditável. É uma escolha de engenharia, demonstrada por testes. O ciclo usa um FIPA-Request externo e uma instância de FIPA-Propose por rodada. Ver [justificativa-jade](justificativa-jade.md) e D032.
 
-*Resposta anterior:*
-O MAST recomenda protocolos de comunicação padronizados entre agentes; FIPA-ACL é um padrão consolidado. O conteúdo das mensagens é JSON validado por esquema. A contribuição é o padrão arquitetural, independente da plataforma. → cemri2025mast [C7]
+> A resposta antiga ("o MAST recomenda protocolos padronizados; FIPA-ACL é exatamente isso") estava errada e foi retirada. O registro do erro está em `sintese-leitura.md` §3.5 e na auditoria E4.
+
+## "Qual a diferença para He & Martens (2026)?"
+Eles já mostraram que um ciclo de crítica reduz narrativas infiéis. Este trabalho testa se o efeito se mantém em três condições que lá não existem: (1) a atribuição de referência é exata, e não o SHAP de um Random Forest tomado como fiel; (2) há regras de uma diretriz clínica e variáveis plausíveis que não entram no modelo; (3) o desfecho é decidido por anotação humana cega, e não pelo mesmo avaliador que atua no ciclo (lá, os falsos positivos ficam fora do estudo). → [he2026agenticnarratives](../01-literatura/fichamentos/he2026agenticnarratives.md) [C2][C3]; D030
+
+## "O PREVENT funciona em brasileiros?"
+Há validação no ELSA-Brasil: AUC 0,76 e razão predito/observado de 1,21, isto é, superestimação média de 21%, em horizonte de 5 anos. Perto dos cortes de 5% e 20%, a categoria pode mudar. A recalibração é trabalho futuro. Li só o resumo desse artigo. → [pedroso2025preventbrasil](../01-literatura/fichamentos/pedroso2025preventbrasil.md) [C1][C2]
 
 ## "Por que PREVENT e não Framingham?"
 É o escore recomendado pela diretriz brasileira vigente (SBC 2025). Limitação: foi desenvolvido na população dos EUA.

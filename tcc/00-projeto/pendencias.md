@@ -1,13 +1,60 @@
 ---
 titulo: Pendências e verificações
 status: vigente
-atualizado: 2026-09-29
+atualizado: 2026-10-06
 resumo: O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e anote a data.
 ---
 
 # Pendências
 
 > **Prioridades e ordem de execução:** ver [proximos-passos.md](proximos-passos.md) (riscos que mudam o rumo, bloqueios técnicos e piloto de viabilidade).
+
+## Da banca simulada (pareceres em `05-banca/`, 29/09 a 06/10/2026)
+
+Feito (código, com testes): regras da SBC e escopo (D026); prompt v2 e raça/cor (D027); consentimento, bloqueio do Gemini gratuito e fluxo legado desligado (D028); regra do piloto com IC (D029); defeitos de interface (P1–P9, P11 do parecer de IHC); fichamentos de He & Martens, Ichmoukhamedov, Pedroso e Neuen; justificativa do JADE reescrita (D032); rótulos de leitura corrigidos.
+
+**Pendências críticas (mudam o rumo ou bloqueiam a defesa)**
+- [ ] **Piloto:** anotar as respostas (orientando), sem ver a pré-anotação, e aplicar `resumir.py`.
+- [ ] **Tamanho da amostra** com a taxa de erro do piloto (D029).
+- [ ] **Validar o plano de análise (D029) com o orientador** — O006.
+- [ ] **Verificador como módulo Python** (D034), com extrator testado contra os 26 casos adversariais da banca; segundo extrator, diferente, para a avaliação.
+- [ ] **Executor único** das três configurações.
+- [ ] **JADE (D032):** serviço Python fino; `AchieveREResponder` no Calculador; `ProposeInitiator`/`ProposeResponder` no ciclo; `conversation-id` e `reply-by`; log JSON Lines; teste de ponta a ponta; versionar o jar; religar o Calculador ao PREVENT.
+- [ ] **Busca de literatura com protocolo** (parecer de Literatura, §6.3; 25–40 h). Até lá, a lacuna é escrita como "nos trabalhos lidos".
+- [ ] **Decidir com o orientador** as atividades com participantes (O005) e se "multiagente" é requisito (O004).
+
+**Metodologia**
+- [ ] Definir o C-isolado: com a equação no prompt ou com interpretador de código (B2).
+- [ ] Definir a temperatura do experimento (o piloto usa 0,7; a literatura de referência usa 0).
+- [ ] Seção de método no formato de Peffers et al. (2007) e tabela de ameaças à validade (Wohlin et al., 2012). Ler as duas fontes e Hevner (2004).
+- [ ] Sensibilidade da referência da atribuição com o NHANES real (B4) e contagem de afirmações que mudam de veredito entre convenções.
+- [ ] Controle "mais tentativas sem correção específica": incluir como 4ª condição ou declarar como limitação.
+- [ ] Anotação cega e ≥ 100 textos em dupla anotação para o κ.
+
+**Cálculo e clínica**
+- [ ] Conferir os coeficientes contra a Tabela S12 (inclui todo o modelo masculino e os termos de estatina, diabetes e TFGe < 60, que o caso publicado não exercita). Depende do download manual.
+- [ ] Testes com ≥ 10 perfis masculinos e perfis com estatina e TFGe < 60 contra a calculadora oficial da AHA.
+- [ ] Hipercolesterolemia familiar como exclusão; mensagem sobre risco em 30 anos para jovens; texto para ≥ 80 anos.
+- [ ] Ler o texto completo de Pedroso et al. (2025) e de Neuen et al. (2026).
+
+**Ética e regulação**
+- [ ] Aviso de privacidade completo (controlador, contato, finalidade, direitos) — precisa de dados do orientando e da instituição.
+- [ ] Mostrar na tela a empresa e o país do provedor antes do consentimento (endpoint pronto).
+- [ ] Conferir na fonte: termos da Groq; Lei 14.874/2024; Decreto 12.651/2025; RDC 657/2022 e 751/2022; termos de uso do NHANES.
+- [ ] Subseção "Enquadramento regulatório" (ANVISA) e subseção "Equidade" no texto do TCC.
+
+**Engenharia**
+- [ ] README: versões verificadas (Python, Node ≥ 20.19, JDK 17), `.env.example`, script único.
+- [ ] Núcleo como pacote instalável (hoje o gateway o importa por caminho).
+- [ ] Enxugar `ai-services/chronic-risk-service/requirements.txt` e `trigger/requirements.txt`.
+- [ ] Testes de `renal.py` contra valores de referência; teste *golden* do prompt; testes do front-end.
+- [ ] Remover do repositório artefatos de execução do JADE (`APDescription.txt`, `MTPs-Main-Container.txt`).
+- [ ] BibTeX: DOIs apontados pelo parecer de Literatura (Isern, Tang, Chan), "et al." indevido em Petrova, DOI de *preprint* em entradas NeurIPS; ensinar o `indexar.py validar` a detectar esses casos.
+
+**Interface**
+- [ ] Data e versão do cálculo na impressão.
+- [ ] Testes manuais de interface (orientando, ao final): fluxo no computador e no celular; explicação por IA com LLM configurado, estado nunca observado; impressão.
+- [ ] As duas últimas mudanças no front-end (nomes dos fatores e frase de frequência) não foram retestadas.
 
 ## Verificar antes de citar (metadados e números)
 - [ ] **jabbour2023jama** — abrir o PDF (JAMA 2023;330(23):2275–2284), conferir números, lista de autores e ler o texto completo.
@@ -47,9 +94,9 @@ resumo: O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e 
 - [ ] C1 (cont.): validar as métricas — protocolo de anotação, 2 anotadores, κ (seção 7 do documento).
 - [ ] Criar o glossário de termos → variáveis e o léxico de direção (métrica 1) antes de rodar o experimento.
 - [ ] Fichar FActScore (Min et al., EMNLP 2023) — https://arxiv.org/abs/2305.14251
-- [ ] Fichar a revisão de LLM-como-juiz em saúde (arXiv 2605.25273).
+- [ ] ~~Fichar a revisão de LLM-como-juiz em saúde (arXiv 2605.25273)~~ — saiu como fundamento (06/10/2026); o limiar de κ passa a se apoiar em Landis & Koch (1977) ou McHugh (2012), a ler.
 - [ ] Ler asgari2025hallucination na íntegra (subtipos de alucinação usados na métrica 4).
-- [ ] C5: cálculo de tamanho de amostra após piloto (poder para McNemar).
+- [ ] C5: cálculo de tamanho de amostra após piloto (poder para McNemar) — método definido em D029.
 - [ ] C6: buscar medida de inteligibilidade validada para o português ou retirar a métrica.
 - [ ] C8: fazer e documentar uma **busca estruturada** (bases, termos, datas, critérios) para sustentar a lacuna.
 - [ ] E6/E7: trocar dados de uso de LLM por médicos e de mortalidade por fontes primárias (preferencialmente brasileiras).
@@ -83,7 +130,8 @@ resumo: O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e 
 - [ ] Religar a explicação ao fluxo JADE com o Verificador (D021) e trocar o aviso "não verificado" pelo resultado real da verificação.
 - [ ] Remover o endpoint antigo `/predict` e os modelos Pydantic do dataset do Kaggle quando o JADE for migrado.
 
-## JADE (D021)
+## JADE (D021 → D032)
+> Lista substituída pela de D032, no topo deste arquivo. O protocolo correto é FIPA-Request externo + uma instância de FIPA-Propose por rodada; as "configurações pelos agentes ativos" foram retiradas.
 - [ ] Reescrever Explicador ↔ Julgador com `ProposeInitiator`/`ProposeResponder` (FIPA-Propose) e limite de rodadas.
 - [ ] Reescrever Gerenciador → Classificador com `AchieveREInitiator`/`AchieveREResponder`, com REFUSE para entrada inválida.
 - [ ] `conversation-id` por caso e log JSON Lines de todas as mensagens ACL.
@@ -91,14 +139,14 @@ resumo: O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e 
 - [ ] Ler na íntegra: Botti 2025, especificação FIPA SC00036, capítulo de protocolos do JADE Programmer's Guide.
 
 ## Brechas a tratar no desenho (B1–B7)
-- [ ] B1: definir a avaliação independente do verificador (anotação humana + extrator diferente).
+- [x] B1: definida em D029 e D034 (desfecho por anotação humana cega; extrator da avaliação diferente do extrator do verificador). Falta implementar.
 - [ ] B2: definir o baseline isolado forte (equação no prompt ou interpretador de código).
-- [ ] B3: restringir o teste de invariância a raça/etnia; sexo por taxa de fidelidade.
+- [x] B3: resolvida por D027 (raça/cor no cadastro; H3 exploratória).
 - [ ] B4: análise de sensibilidade da referência da atribuição (centralização × média NHANES).
 - [ ] B5: escolher a medida de inteligibilidade em português.
 
 ## Buscas a repetir
-- [ ] Repetir busca de trabalhos similares antes da qualificação e antes da defesa (última: 29/09/2026). Termos: "verifier" + "faithfulness" + "SHAP" + "LLM explanation" + "clinical risk"; "agentic explanation clinical prediction"; "PREVENT LLM".
+- [ ] Repetir busca de trabalhos similares antes da qualificação e antes da defesa (última: 29/09/2026, **não estruturada; não encontrou He & Martens 2026**). Acrescentar os termos "XAI narrative", "narrator critic", "sign agreement", "faithful evaluator". Termos anteriores: "verifier" + "faithfulness" + "SHAP" + "LLM explanation" + "clinical risk"; "agentic explanation clinical prediction"; "PREVENT LLM".
 
 ## Decisões pendentes com o orientador
 As pendências científicas P001–P004 foram resolvidas com base na literatura (D013–D016, 2026-09-29). Restam só questões institucionais e de cronograma (O001–O003 em [decisoes.md](decisoes.md)).

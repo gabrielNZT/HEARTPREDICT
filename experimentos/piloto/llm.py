@@ -42,7 +42,9 @@ def _post(url, corpo, cabecalhos, tentativas=5):
     dados = json.dumps(corpo).encode("utf-8")
     espera = 5
     for tentativa in range(tentativas):
-        req = urllib.request.Request(url, data=dados, headers=dict(cabecalhos, **{"Content-Type": "application/json"}))
+        # User-Agent próprio: o Cloudflare da Groq recusa o padrão "Python-urllib" (HTTP 403, código 1010).
+        req = urllib.request.Request(url, data=dados, headers=dict(
+            cabecalhos, **{"Content-Type": "application/json", "User-Agent": "heartpredict-piloto/2 (TCC; python-urllib)"}))
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
                 return json.loads(r.read().decode("utf-8"))

@@ -32,7 +32,7 @@ Leitura parcial: [jabbour2023jama](fichamentos/jabbour2023jama.md) (o texto comp
    - Lee et al. propõem, como trabalho futuro, "perform all calculations outside the LLM" + "a monitoring layer that flags or blocks" recomendações.
    - Zhu et al. (2026) concluem que o pipeline agêntico "should be paired with attribution-based checks".
 5. **O verificador precisa ser multinível e, onde possível, simbólico/determinístico.** MAST (Insight 3 e Apêndice G), PROVE (validadores programados para números).
-6. **Mais agentes não é igual a melhor.** MedAgentBoard (ganhos inconsistentes; papéis de especialidade rendem pouco), MAST (41–86,7% de falha), Zhu 2026 (pipeline agêntico **reduziu** a fidelidade ao SHAP).
+6. **Mais agentes não é igual a melhor.** MedAgentBoard (ganhos inconsistentes; papéis de especialidade rendem pouco), MAST (41–86,7% de falha), Zhu 2026 (alinhamento com o SHAP numericamente menor no pipeline agêntico, com n = 14 e intervalos sobrepostos: indício, não resultado).
 
 ## 3. O que a leitura completa **mudou**
 
@@ -42,22 +42,24 @@ Busca feita em 29/09/2026 encontrou trabalhos de 2025–2026 na mesma família (
 ### 3.2 Reformulação da contribuição (mais estreita e defensável)
 > **Avaliar empiricamente se um verificador de fidelidade — determinístico para números e polaridade, com LLM para coerência semântica — reduz explicações infiéis em relação a (a) um LLM isolado e (b) um LLM com a ferramenta de cálculo, no domínio de risco cardiovascular preventivo (PREVENT/SBC 2025), com métricas de fidelidade que vão além da presença das top-k variáveis (polaridade, números citados e afirmações não sustentadas).**
 
-Os elementos que, **juntos**, não aparecem em nenhum trabalho lido:
+> **Revisto em 06/10/2026 (D030).** A lista abaixo foi escrita antes de eu conhecer He & Martens (2026), que têm os itens 1, 2 (sinal e valor) e 3. A contribuição vigente está em [D030](../00-projeto/decisoes.md). A lista fica como registro.
+
+Os elementos que, **juntos**, não apareciam nos trabalhos lidos até 29/09/2026:
 1. Verificador explícito da **explicação** (não do cálculo) — ausente em AgentMD, ColaCare, Lee, Zhu 2026, Roeschl.
 2. Métricas de fidelidade com **polaridade + exatidão numérica** — Lee mede só top-3; Zhu mede Jaccard e direção do rótulo, não polaridade por variável.
 3. **Ablação do verificador** (config. 2 vs 3) — Zhu compara isolado vs pipeline, mas sem verificador; Lee não tem baseline.
-4. Domínio **cardiovascular preventivo** com **PREVENT** e **diretriz brasileira**, em **português**.
-5. **Avaliação de viés** por troca de atributo demográfico no mesmo pipeline.
+4. Domínio **cardiovascular preventivo** com **PREVENT** e **diretriz brasileira** (o idioma não é diferencial — D018).
+5. Análise **exploratória** de menções a raça/cor (D027).
 
 ### 3.3 Correção de desenho vinda do Zhu 2026
-Os agentes que explicam **devem receber o SHAP** e o número calculado. Sem isso, o LLM "adivinha" o que dirigiu o modelo (causa provável do Jaccard baixíssimo em Zhu 2026).
+Os agentes que explicam **devem receber o SHAP** e o número calculado. Sem isso, o LLM "adivinha" o que dirigiu o modelo. *(Conjectura minha: pode explicar o Jaccard baixo em Zhu 2026, mas o LLM isolado também não recebia o SHAP e teve Jaccard maior.)*
 
 ### 3.4 Correção de desenho vinda do Roeschl 2026 e do AgentMD
 - Extração/validação **componente a componente** com definições operacionais explícitas.
 - **Dados ausentes:** recusar ou pedir o dado, nunca supor (principal fonte de erro no AgentMD e alerta explícito em Zhu 2026).
 
-### 3.5 Argumento para manter o JADE ficou mais forte
-MAST (Apêndice G) recomenda **protocolos de comunicação padronizados** entre agentes para reduzir desalinhamento. FIPA-ACL (JADE) é exatamente isso. Isso transforma o JADE de "escolha de tecnologia" em **decisão de projeto justificada** — desde que as mensagens carreguem conteúdo estruturado (JSON com esquema), não texto livre.
+### 3.5 O MAST não justifica o JADE (corrigido)
+~~MAST recomenda protocolos padronizados; FIPA-ACL (JADE) é exatamente isso.~~ **Errado (auditoria E4; pareceres de SMA, Metodologia e Literatura).** O MAST cita "a standardized communication protocol" como estratégia complementar à verificação (Apêndice G), associa protocolos padronizados ao desalinhamento entre agentes e afirma que soluções centradas em protocolo são "often insufficient" (Insight 2). Também observa que esses erros ocorrem entre agentes do mesmo arcabouço. O MAST fundamenta o **verificador em mais de um nível**, não a escolha do JADE. A justificativa vigente do JADE é de engenharia: [justificativa-jade](../02-argumentacao/justificativa-jade.md) e D032.
 
 ## 4. Riscos que continuam abertos
 - **Risco de novidade:** o campo se move rápido. Repetir a busca por trabalhos similares antes da qualificação e antes da defesa. Termos: "verifier", "faithfulness", "SHAP", "LLM explanation", "clinical risk", "agentic".

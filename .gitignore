@@ -230,7 +230,7 @@ dist
 
 # Gatsby files
 .cache/
-public
+# (regra 'public' do Gatsby removida: ignorava frontend/public/, onde fica a marca da interface)
 
 # vuepress build output
 .vuepress/dist

@@ -1,7 +1,7 @@
 ---
 titulo: Registro de decisões
 status: vigente
-atualizado: 2026-09-29
+atualizado: 2026-10-06
 resumo: Decisões de projeto e de pesquisa, com data, motivo e fontes. Nunca apague; marque como substituída.
 ---
 
@@ -22,7 +22,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Fontes:** khandekar2024medcalc, jin2025agentmd, roeschl2026pipeline.
 
 ## D003 — Contribuição reformulada de forma mais estreita
-- **Data:** 2026-09-29 · **Status:** vigente
+- **Data:** 2026-09-29 · **Status:** vigente, **revista por D030** (a lacuna como estava escrita não se sustenta frente a He & Martens 2026)
 - **Decisão:** a novidade **não** é "usar LLM para explicar SHAP" (já existe: ColaCare, Lee 2025, NEURON, Zhu 2026). A novidade é **o verificador da explicação + métricas de polaridade e exatidão numérica + ablação do verificador**, no domínio cardiovascular/PREVENT/SBC em PT-BR.
 - **Motivo:** a leitura completa e a busca de 29/09/2026 mostraram o campo ativo.
 - **Fontes:** [sintese-leitura §3](../01-literatura/sintese-leitura.md).
@@ -60,7 +60,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Fontes:** [khan2024prevent](../01-literatura/fichamentos/khan2024prevent.md) [C4][C5][C6]; [sbc2025dislipidemias](../01-literatura/fichamentos/sbc2025dislipidemias.md) [C1].
 
 ## D010 — Gabarito de categoria: motor de regras SBC operacionalizado e versionado
-- **Data:** 2026-09-29 · **Status:** vigente (revisada no mesmo dia após conferir a versão em inglês da diretriz)
+- **Data:** 2026-09-29 · **Status:** vigente, **regras revistas por D026** (ordem das regras, Lp(a) > 180, arredondamento)
 - **Decisão:** a categoria de referência vem de um motor de regras determinístico baseado na Tabela 4.1. As ambiguidades foram resolvidas **pela própria diretriz**, sem depender de opinião:
   - **LDL-c 160 mg/dL:** entra como intermediário. O texto da seção 4.1 diz "entre 160 e 189" (PT) / "between 160 and 189" (EN); a tabela ("> 160-189") é a formulação ambígua.
   - **Meta do risco extremo:** < 40 mg/dL. Aparece assim na Tabela 5.1, no quadro de recomendações GRADE e no texto que abre a seção 5.2.5; o "> 40" é erro de digitação presente nas duas línguas.
@@ -72,7 +72,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Fontes:** [sbc2025dislipidemias](../01-literatura/fichamentos/sbc2025dislipidemias.md) (seção 4.1, Tabela 4.1, Tabela 5.1, seção 5.2.5; versões PT e EN).
 
 ## D011 — Escopo inicial das vinhetas
-- **Data:** 2026-09-29 · **Status:** vigente (confirmada pela diretriz)
+- **Data:** 2026-09-29 · **Status:** vigente, **complementada por D026** (exclusão de aterosclerose subclínica e LDL obrigatório com não-HDL ≥ 190)
 - **Decisão:** adultos de 30–79 anos, sem evento cardiovascular prévio, sem aterosclerose subclínica, sem diabetes e com LDL-c < 160 mg/dL. Casos com diabetes, LDL ≥ 160 e agravantes específicos entram como **casos de teste dirigidos** do verificador.
 - **Motivo:** é **exatamente** o domínio em que a diretriz manda usar o escore: "Para os adultos sem evento cardiovascular pregresso ou aterosclerose subclínica, sem DM e com LDL-c < 160 mg/dL, a categorização do risco cardiovascular aterosclerótico pode ser definida pelo uso de equações ou escores de risco" (seção 4.1). A faixa 30–79 anos é a do PREVENT.
 - **Fontes:** [sbc2025dislipidemias](../01-literatura/fichamentos/sbc2025dislipidemias.md) (seção 4.1); [khan2024prevent](../01-literatura/fichamentos/khan2024prevent.md) [C1].
@@ -103,7 +103,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **O que depende só de você:** qual modelo aberto cabe no seu hardware ou orçamento.
 
 ## D015 — Avaliação humana (resolve P003 em parte)
-- **Data:** 2026-09-29 · **Status:** vigente
+- **Data:** 2026-09-29 · **Status:** **enquadramento ético substituído por D031** (a resolução citada aqui estava errada)
 - **Decisão:**
   - **Obrigatória (validação das métricas):** anotação manual de uma amostra das explicações por **dois anotadores** (você + um colega), com **concordância medida por Cohen κ** e percentual de concordância simples. Serve para validar as métricas automáticas e o verificador (falsos positivos e negativos). Precedentes: MAST (κ = 0,88 entre humanos; κ = 0,77 humano × LLM); revisão de LLM-como-juiz em saúde (κ entre 0,59 e 0,88).
   - **Opcional (complemento):** pequena avaliação por médicos (Likert de utilidade e segurança), como em Lee 2025 (n = 7) e ColaCare (n = 12). É claramente complementar e não sustenta nenhuma hipótese sozinha.
@@ -117,7 +117,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **O que depende de você e do orientador:** se o cronograma comporta a extensão.
 
 ## D017 — H3 reformulada com mecanismo explícito
-- **Data:** 2026-09-29 · **Status:** vigente
+- **Data:** 2026-09-29 · **Status:** vigente, **operacionalizada por D027** (raça/cor entra no prompt; H3 passa a exploratória)
 - **Decisão:** H3 passa a ser: *"Como o PREVENT não usa raça/etnia, a configuração com verificador terá menos explicações que atribuem o risco a raça/etnia (afirmações não sustentadas) do que as configurações sem verificador."* A variação por sexo é analisada de forma **exploratória**, comparando taxas de fidelidade entre grupos, sem direção prevista.
 - **Motivo:** a versão anterior não tinha mecanismo — o verificador checa fidelidade, não viés. Ver [auditoria C9](../02-argumentacao/auditoria-decisoes-autorais.md).
 
@@ -138,7 +138,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Motivo:** o desenho acumulado tinha porte de mestrado; um TCC de graduação é avaliado pela coerência e viabilidade.
 
 ## D021 — JADE justificado por protocolos FIPA, rastro auditável e ablação por composição (resolve O004)
-- **Data:** 2026-09-29 · **Status:** vigente (substitui a justificativa "pragmática" de D006 e D019)
+- **Data:** 2026-09-29 · **Status:** **redação substituída por D032** (duas afirmações desta decisão estavam erradas; a escolha pelo JADE foi mantida)
 - **Decisão:** manter o JADE e **usá-lo de fato**: (1) Explicador ↔ Verificador via **FIPA-Propose** (PROPOSE / ACCEPT-PROPOSAL / REJECT-PROPOSAL, término após N rodadas); (2) Entrada → Classificador via **FIPA-Request**, com REFUSE para dado inválido ou ausente; (3) `conversation-id` por caso; (4) registro de todas as mensagens ACL como dado da pesquisa; (5) configurações experimentais definidas pelos agentes ativos.
 - **Motivo:** o protocolo com estados e término explícitos ataca modos de falha documentados pelo MAST (término, repetição, perda de histórico, verificação) e transforma a decisão do verificador em ato de fala tipado. Posicionamento: Botti 2025 (incorporar padrões de SMA aos agentes com LLM).
 - **O que não se afirma:** o JADE não melhora a fidelidade por si; quem melhora é o Verificador.
@@ -156,7 +156,7 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Fontes:** [proximos-passos §C](proximos-passos.md).
 
 ## D024 — Modelos de baixo custo ou gratuitos (atualiza D014)
-- **Data:** 2026-09-29 · **Status:** vigente
+- **Data:** 2026-09-29 · **Status:** vigente, **atualizada por D033 e restrita por D028**
 - **Decisão:** modelo **aberto** via **Groq** (plano gratuito, sem cartão; GPT-OSS 120B ou Llama 3.3 70B) + modelo **fechado** via **Gemini** (plano gratuito, linha Flash/Flash-Lite). **xAI Grok** fica como opção secundária: não é gratuito (US$ 25 de crédito inicial; o programa de US$ 150/mês exige gasto mínimo de US$ 5 e compartilhamento de dados) e é fechado.
 - **Motivo:** custo zero; o GPT-OSS e o Llama têm pesos abertos, o que atende à exigência de um modelo aberto (reprodutibilidade) sem depender da GPU local (RTX 3050 de 6 GB, insuficiente para modelos de porte médio).
 - **Limites (fontes secundárias; conferir no console):** Groq ≈ 30 req/min, 1.000 req/dia e 100 mil tokens/dia no Llama 3.3 70B e ≈ 200 mil tokens/dia nos GPT-OSS; Gemini varia por modelo e muda sem aviso (verificar no AI Studio).
@@ -168,8 +168,113 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Justificativas de design:** [interface-design](../03-metodologia/interface-design.md). **Evidências:** [04-evidencias/interface](../04-evidencias/interface/) (capturas e auditoria axe-core: 0 violações em 14 auditorias).
 - **Risco declarado:** enquanto durar a transição, a demonstração não exercita a arquitetura de agentes nem o verificador; a interface informa ao usuário que o texto não é verificado.
 
+## D026 — Regras da SBC e escopo revistos após a banca (atualiza D010 e D011)
+- **Data:** 2026-09-29 · **Status:** vigente
+- **Origem:** pareceres de Cardiologia (M2, M3, M4, M7, m2), Engenharia (C2) e IHC (P6). Cada regra foi conferida no texto da diretriz antes de entrar no código ([verificação](../05-banca/verificacao-alegacoes.md)).
+- **Decisão (implementada em `experimentos/piloto/sbc.py` e `backend-gateway/app/avaliacao.py`, com testes):**
+  1. **Arredondamento único.** A categoria é calculada sobre o risco arredondado a 0,1 ponto percentual, o mesmo valor exibido. Antes, 4,951% aparecia como "5,0% → baixo".
+  2. **Ordem das regras.** Escore → piso do LDL-c 160–189 (intermediário) → agravante sobe uma categoria → LDL-c ≥ 190 e Lp(a) > 180 mg/dL classificam como alto. Consequência: escore baixo + LDL-c 160–189 + agravante passa a **alto** (antes, intermediário). Base: seção 4.1 ("considerados de risco intermediário") e Tabela 4.1 ("risco intermediário, com presença de fator agravante" → alto).
+  3. **Lp(a) > 180 mg/dL (> 390 nmol/L) → alto** (Tabela 4.1; seção 4.4.1).
+  4. **Aterosclerose subclínica fora do escopo.** A interface pergunta por placa em exame de imagem e recusa o cálculo (a diretriz classifica esses casos direto como alto ou muito alto).
+  5. **LDL-c obrigatório quando o não-HDL é ≥ 190 mg/dL**, porque o escore só vale com LDL-c < 160.
+  6. **TFGe acima de 140** (calculada ou informada) é tratada como 140, limite da faixa de derivação do PREVENT, em vez de recusar pessoas com função renal normal.
+- **O que é interpretação minha:** os itens 2 (ordem) e 5 (limiar de 190 para exigir o LDL) e 6 (truncamento) não estão escritos literalmente na diretriz nem no artigo do PREVENT. São operacionalizações declaradas e entram na análise de sensibilidade prevista em D010.
+- **Não implementado:** hipercolesterolemia familiar como exclusão; risco em 30 anos para jovens; LDL-c basal de quem já usa estatina (hoje há só um aviso na tela).
+
+## D027 — Prompt do piloto v2 e raça/cor nas vinhetas (operacionaliza D017)
+- **Data:** 2026-09-29 · **Status:** vigente
+- **Origem:** pareceres de IA (M1, m7), Metodologia (m2, M3), Cardiologia (C2) e Ética (M5).
+- **Decisão (`experimentos/piloto/prompt.py`, versão `piloto-v2`):** números em formato brasileiro, sem ponto decimal; lista explícita das variáveis que entram no cálculo; IMC e raça/cor apresentados como "outros dados do cadastro (não entram no cálculo)"; contribuições com magnitude e direção por extenso; regra de segurança sobre medicamentos; TFGe da referência declarada.
+- **Raça/cor:** as 24 vinhetas recebem raça/cor autodeclarada nas cinco categorias do IBGE, em rodízio, para que nenhuma categoria fique associada a um perfil de risco.
+- **H3 passa a exploratória e descritiva,** sem teste confirmatório: o evento esperado é raro e o poder seria insuficiente (parecer de Metodologia, M3).
+- **Consequência para o desenho:** dizer ao LLM que o IMC e a raça/cor não entram no cálculo torna a tarefa mais fácil do que na v1. É deliberado: um erro que só aparece por ambiguidade do prompt não mede o LLM. A v1 fica registrada como condição "armadilha" para comparação, se houver orçamento.
+- **Limite:** o prompt é único. Os resultados podem depender da redação (ameaça à validade externa, a declarar).
+
+## D028 — Dados de pessoas reais: explicação opcional, consentimento e provedores
+- **Data:** 2026-09-29 · **Status:** vigente (a base legal e o aviso completo dependem de dados do orientando e da instituição)
+- **Origem:** parecer de Ética (C1, C2, M2), IHC (P12) e Engenharia (M8–M11). Termos do Gemini conferidos na fonte.
+- **Decisão (implementada, com testes):**
+  1. A explicação por IA **só é pedida depois de consentimento explícito** na tela de resultado; o cálculo não depende dela.
+  2. **O plano gratuito do Gemini não recebe dados de pessoas reais** (os termos proíbem dados sensíveis, permitem treino e revisão humana e vedam aconselhamento médico). O gateway recusa `LLM_PROVEDOR=gemini`, salvo declaração explícita de plano sem uso dos dados (`LLM_PLANO_SEM_USO_DOS_DADOS=1`).
+  3. O Gemini gratuito **continua permitido no experimento**, que só usa vinhetas sintéticas.
+  4. O fluxo legado (`/predict`, `/explanation`, `/pending`) fica **desligado por padrão**; CORS restrito às origens da interface; logs sem dados de paciente; chave do Gemini no cabeçalho.
+  5. Temperatura da interface configurável, padrão 0,2.
+- **Base legal pretendida:** consentimento específico e destacado (LGPD, art. 11, I; art. 33, VIII para a transferência internacional).
+- **Ainda falta:** aviso de privacidade completo (controlador, contato, finalidade, direitos); mostrar empresa e país do provedor antes do consentimento (o endpoint `/api/avaliacao/explicacao/provedor` existe, a tela ainda não o usa); conferir os termos da Groq na fonte (o parecer diz "not for consumer use"); seção de enquadramento ANVISA no texto do TCC.
+- **Regra para a defesa:** demonstração com perfis fictícios, sem dados de pessoas da plateia.
+
+## D029 — Plano de análise de H2 (pré-especificado)
+- **Data:** 2026-10-06 · **Status:** proposta registrada antes de qualquer resultado comparativo; **validar com o orientador**
+- **Origem:** parecer de Metodologia (CR1, CR2, CR3, M4, M6) e de IA (M2, M3). Cálculos da banca em `05-banca/anexos/metodologia/`.
+- **Contraste primário:** C-ferramenta × C-verificador, no mesmo LLM, pareado por vinheta.
+- **Desfecho primário:** explicação **entregue e totalmente fiel** (nenhuma afirmação incorreta ou não sustentada), decidido por **anotação humana cega** à configuração.
+- **Explicações bloqueadas:** contam como **falha** na análise primária (intenção de tratar). Reporta-se também o desfecho em três níveis (fiel / infiel / bloqueada) e uma análise de sensibilidade que as exclui.
+- **Unidade de análise:** a vinheta. Para o teste primário usa-se a **primeira repetição** de cada vinheta; as demais entram em análise de sensibilidade e na estimativa de variabilidade.
+- **Teste:** McNemar mid-p (Fagerland et al. 2013), com a diferença pareada e IC95%. **Holm** entre os 2 LLMs. H2 é considerada sustentada se os dois LLMs mostrarem efeito na mesma direção e ao menos um for significativo após a correção; resultado divergente é reportado como heterogeneidade.
+- **Efeito mínimo de interesse:** redução absoluta de 10 pontos percentuais na taxa de explicações não fiéis.
+- **Guarda contra "vencer dizendo menos":** métrica de **cobertura** (proporção das 3 variáveis de maior |φ| acima de ε mencionadas com a direção correta) e número de afirmações por texto, reportados por configuração. H2 não é declarada sustentada se a cobertura cair mais de 10 pontos percentuais.
+- **Verificador contra o padrão humano:** sensibilidade e especificidade do verificador, por tipo de erro.
+- **Tamanho da amostra:** fórmula de Connor (1987), com a taxa de erro de C-ferramenta (pA) medida no piloto e α = 0,025. Referência da banca: 92–202 vinhetas se pA = 20%; 360–1.381 se pA = 10%.
+- **Regra do piloto (substitui o limiar pontual de D023; implementada em `resumir.py`):** IC95% por conglomerado (reamostragem de vinhetas); segue se o limite inferior for ≥ 10%; ajusta a tarefa se o limite superior for < 10%; caso contrário, amplia o piloto. Taxas reportadas por vinheta.
+- **Limitações que este plano não resolve (a declarar):** não há controle de "mais tentativas sem correção específica", então o ganho não pode ser atribuído só ao feedback; prompt único; vinhetas escolhidas para provocar erro (a taxa do piloto não estima a de uso real).
+- **Em aberto:** C-isolado com ou sem a equação no prompt (H1 fica como verificação de sanidade, com amostra pequena); temperatura do experimento.
+
+## D030 — Contribuição reposicionada: replicação com extensão (revisa D003)
+- **Data:** 2026-10-06 · **Status:** vigente
+- **Origem:** parecer de IA (C1) e de Literatura (K1). Leitura própria de [he2026agenticnarratives](../01-literatura/fichamentos/he2026agenticnarratives.md) e [ichmoukhamedov2024story](../01-literatura/fichamentos/ichmoukhamedov2024story.md).
+- **O que deixa de ser afirmado:** que nenhum trabalho combina verificador da explicação, métricas de sinal e valor e ablação. He & Martens (2026) têm os três, em 5 LLMs e 5 bases (duas de saúde).
+- **O que o TCC acrescenta (cada item é uma limitação declarada ou observada naquele trabalho):**
+  1. **Referência exata.** A atribuição é calculada sem aproximação sobre um escore clínico publicado; lá, a referência é o SHAP de um Random Forest, tomado como fiel por hipótese.
+  2. **Regras de diretriz clínica:** categoria, reclassificação por agravante e meta, com distinção entre o alvo "risco calculado" e o alvo "categoria".
+  3. **Variáveis fora do modelo** tratadas como erro (IMC, raça/cor), com gabarito demonstrável.
+  4. **Desfecho independente do verificador.** Lá, a fidelidade final é medida pelo mesmo avaliador que atua no ciclo, e os falsos positivos ficam fora do estudo; aqui, o desfecho primário é anotação humana cega (D029).
+  5. **Atribuições contraintuitivas, mas verdadeiras** (remédio como marcador de doença; idade abaixo da referência), cenário em que Ichmoukhamedov et al. mostram que os LLMs tendem a "corrigir" o sinal.
+- **Pergunta de pesquisa reescrita:** *o ganho de fidelidade relatado para ciclos de crítica em bases genéricas se mantém quando a referência é exata, há regras de uma diretriz clínica e o desfecho é avaliado de forma independente do verificador?*
+- **Pendente:** busca de literatura com protocolo documentado (parecer de Literatura, §6.3). Até lá, a lacuna é escrita como "nos trabalhos lidos", nunca como "ninguém fez".
+
+## D031 — Enquadramento ético revisto (substitui o trecho de CEP de D015)
+- **Data:** 2026-10-06 · **Status:** vigente para o experimento; **em aberto, sem bloquear, para as atividades com participantes** (decisão do orientando: conversar com o orientador)
+- **Correção:** D015 citava a Res. CNS 510/2016, que trata de Ciências Humanas e Sociais. A norma de tramitação aplicável é a **Res. CNS 674/2022**, cujo art. 26, VIII, "a" exclui os TCCs da dispensa por atividade de ensino (conferido no texto). Marco legal: Lei 14.874/2024 e Decreto 12.651/2025 (citados pelo parecer; **ainda não conferidos por mim**).
+- **Por atividade:**
+  - vinhetas sintéticas → LLM → métricas: não envolve participantes; **sem CEP**;
+  - anotação pelo autor e por um colega: o colega atua como membro da equipe e nenhum dado sobre ele é analisado; **sem CEP**, documentar;
+  - NHANES (se for usado): dados públicos desidentificados; conferir os termos de uso do NCHS;
+  - **avaliação por médicos e teste de usabilidade:** exigem protocolo no CEP ou dispensa por escrito. **Ficam fora do caminho crítico** até a conversa com o orientador; se não houver tempo, saem do TCC e viram trabalho futuro.
+- **Demonstração:** não é pesquisa; rege-se pela LGPD (D028).
+
+## D032 — JADE: implementar em versão mínima (substitui a redação de D021)
+- **Data:** 2026-10-06 · **Status:** vigente · **Decisão do orientando**
+- **Origem:** parecer de SMA (revisão maior) e de Metodologia (M8).
+- **Erros de D021 que esta decisão corrige:**
+  1. O **FIPA-Propose tem uma única rodada** (SC00036H). O ciclo de correção é uma **composição**: um FIPA-Request externo abre e encerra o caso (é ele que admite FAILURE) e cada rodada é uma instância de FIPA-Propose sob o mesmo `conversation-id`. O limite de N rodadas é política do agente, não do padrão.
+  2. O **MAST não diz que protocolos padronizados "atacam por construção"** falhas de término e repetição. Ele associa protocolos padronizados à categoria de desalinhamento entre agentes e afirma que soluções centradas em protocolo são frequentemente insuficientes. Aqui, término e repetição são evitados pelo controle determinístico do laço, que se obtém também sem JADE.
+- **O que o JADE agrega (e o que não agrega):** atos de fala com semântica padronizada, `conversation-id` e prazos prontos, rastro auditável da conversa. **Não agrega fidelidade.** É defendido como propriedade de engenharia, demonstrada por testes, e não como fator do experimento. A afirmação de "ablação por composição" sai do texto.
+- **Arquitetura:**
+  - cálculo, prompt, cliente do LLM e verificador ficam em **Python**, como módulos únicos (D034);
+  - o **experimento roda em Python**, com as três configurações no mesmo executor;
+  - os agentes JADE usam os **mesmos módulos**, por um serviço HTTP fino, e implementam só a conversa;
+  - um único ponto de saída: nada é entregue sem ACCEPT-PROPOSAL (elimina o canal HTTP lateral do Explicador).
+- **Atributos de agente:** reatividade e habilidade social (após a ACL com protocolos). Autonomia e proatividade são fracas em todos; o Verificador "detém a decisão de entrega", não "tem autonomia".
+- **Riscos declarados:** JADE 4.6.0 é de 2022 e não está no Maven Central; o repositório oficial apresenta cadeia TLS incompleta. O jar será versionado no repositório (a LGPL permite).
+
+## D033 — LLMs do piloto (atualiza D024)
+- **Data:** 2026-10-06 · **Status:** vigente
+- **Fato:** em 06/10/2026 a Groq não lista mais o Llama 3.3 70B. Modelos de texto disponíveis na conta: `openai/gpt-oss-120b`, `openai/gpt-oss-20b` e `qwen/qwen3.8-27b`.
+- **Decisão:** piloto com **`openai/gpt-oss-120b`** e **`qwen/qwen3.8-27b`**, de desenvolvedores diferentes e ambos de pesos abertos. O Gemini entra quando houver chave, só com dados sintéticos (D028).
+- **Registro por execução:** ID do modelo, data, temperatura, versão e hash do prompt, `finish_reason`, uso de tokens e estado do repositório (`git describe --dirty`). Respostas vazias ou cortadas são refeitas e contadas à parte.
+- **Limite:** os dois modelos vêm do mesmo provedor, que pode servir versões quantizadas.
+
+## D034 — Verificador como módulo independente do LLM
+- **Data:** 2026-10-06 · **Status:** vigente (implementação em andamento)
+- **Decisão:** o verificador é um módulo Python sem dependência do LLM explicador. Entrada: texto e pacote de referência do caso. Saída: aceito ou lista estruturada de violações. O nível principal é determinístico.
+- **Não adotado:** verificador como ferramenta que o próprio LLM decide chamar. A verificação deixaria de ser garantida e o experimento mediria outra coisa. Fica como extensão possível.
+- **Exigência herdada da banca (B1):** o extrator usado na avaliação final é diferente do usado pelo verificador, e o desfecho primário é humano (D029).
+- **Teste de regressão:** os 26 textos adversariais do parecer de IA (`05-banca/anexos/ia/testar_preanotacao.py`).
+
 ## O que ainda precisa do orientador (institucional/cronograma, não científico)
 - **O001 — Cronograma:** a extensão com XGBoost (D016) e a avaliação com médicos (D015) cabem no semestre?
 - **O002 — Normas do curso:** formato do TCC, qualificação, exigências de CEP da instituição.
-- ~~O004 — JADE × workflow em Python~~ → resolvida por D021 (manter JADE com protocolos FIPA). Apresentar a justificativa ao orientador.
+- ~~O004 — JADE × workflow em Python~~ → resolvida por D032 (implementar em versão mínima). Confirmar com o orientador se "multiagente" é requisito do trabalho.
 - **O003 — Acesso a médicos:** se a avaliação opcional de D015 for feita, o orientador tem contatos?
+- **O005 — Atividades com participantes (D031):** a avaliação por médicos e o teste de usabilidade ficam no TCC? Os dois exigem CEP ou dispensa por escrito. Em aberto, sem bloquear o restante.
+- **O006 — Plano de análise (D029):** validar o desfecho primário, a regra das explicações bloqueadas e o efeito mínimo de interesse antes de rodar o experimento.

@@ -1,77 +1,123 @@
 ---
 titulo: Justificativa do uso do JADE
-status: rascunho
-atualizado: 2026-09-29
-resumo: O que o JADE/FIPA agrega de concreto ao projeto (protocolo de proposta/aceitação para verificação, recusa tipada, rastro auditável, ablação por composição), com fundamento, custos e respostas à banca.
+status: vigente
+atualizado: 2026-10-06
+resumo: O que o JADE/FIPA agrega ao projeto (conversa protocolada, decisão de entrega tipada, rastro auditável) e o que não agrega (fidelidade), com o protocolo composto corrigido após a banca, custos, riscos e respostas prováveis.
 ---
 
-# Por que JADE? O que ele agrega ao projeto
+# Por que JADE? O que ele agrega e o que não agrega
 
-## 1. O problema da justificativa anterior
-"O código já existia" e "o FIPA é um padrão" **não bastam**: nenhum dos dois mostra ganho para a pergunta de pesquisa. Além disso, no código atual os agentes trocam mensagens de forma *ad hoc* (filtros por remetente, sem `conversation-id`, sem protocolo), ou seja, **o JADE ainda não está sendo usado naquilo em que é bom**.
+> **Revisão de 06/10/2026.** A versão anterior tinha dois erros apontados pelo [parecer de SMA](../05-banca/parecer-sma.md) e conferidos por mim nas fontes: atribuía ao FIPA-Propose várias rodadas e um FAILURE final, e dizia que o MAST recomenda protocolos contra falhas de término. As duas afirmações foram retiradas. A decisão vigente é a [D032](../00-projeto/decisoes.md).
 
-A justificativa passa a ser: **usar o JADE para formalizar a interação entre os agentes com protocolos FIPA e atos de fala, tornando a verificação explícita, terminável e auditável.** Isso ataca diretamente modos de falha documentados em sistemas multiagente com LLM.
+## 1. Posição em uma frase
+O JADE **não melhora a fidelidade das explicações**. Quem pode melhorá-la é o verificador, que é um módulo Python independente (D034). O JADE dá à conversa entre os componentes uma forma padronizada, com decisão de entrega tipada, prazos e rastro auditável. É uma **propriedade de engenharia**, demonstrada por testes, e não um fator do experimento.
 
-## 2. O que o JADE agrega (4 contribuições concretas)
+## 2. Estado do código (honestidade)
+Em 06/10/2026 nada disto está implementado: os agentes trocam mensagens *ad hoc*, o Classificador chama o modelo antigo e a explicação sai por um canal HTTP lateral. Este documento descreve o **desenho a implementar**, não o sistema atual. O texto do TCC só pode afirmar o que estiver no código na data da entrega.
 
-### 2.1 O ciclo Explicador ↔ Verificador vira um protocolo formal (FIPA-Propose)
-| Passo | Ato de fala (performativa) | Significado |
+## 3. O protocolo (corrigido)
+
+### 3.1 Por que não é "um FIPA-Propose com várias rodadas"
+O FIPA-Propose tem **uma rodada**: o iniciador envia uma proposta e o participante "responds by either accepting or rejecting the proposal" (SC00036H, §1.1). O padrão não prevê nova proposta na mesma instância nem FAILURE ao final. A API do JADE confirma: `ProposeInitiator` só trata aceite, rejeição, não entendido, fora de sequência e fim das respostas.
+
+### 3.2 Protocolo composto adotado
+| Camada | Protocolo FIPA | Papel |
 |---|---|---|
-| 1 | Explicador → Verificador: **PROPOSE** (explicação) | "Proponho entregar esta explicação ao usuário" |
-| 2a | Verificador → Explicador: **ACCEPT-PROPOSAL** | Explicação fiel; pode ser entregue |
-| 2b | Verificador → Explicador: **REJECT-PROPOSAL** (lista estruturada de violações) | "Não; corrija: sinal do HDL invertido; IMC citado como causa" |
-| 3 | Nova PROPOSE na **mesma conversa** | Nova rodada de correção |
-| fim | Após N rejeições: **FAILURE** / bloqueio | Término explícito, sem laço infinito |
+| Externa | **FIPA-Request** (SC00026H) | Abre e encerra o caso. É ele que admite AGREE, REFUSE, FAILURE e INFORM |
+| Interna, repetida | **FIPA-Propose** (SC00036H), uma instância por rodada | O Explicador propõe "entregar a explicação v_r"; o Verificador aceita ou rejeita com a lista de violações |
 
-- **Fundamento:** o protocolo está especificado no padrão FIPA SC00036 ([fipa2002propose](../01-literatura/fichamentos/fipa2002propose.md)) e já implementado no JADE (`jade.proto.ProposeInitiator` / `ProposeResponder`).
-- **O que isso resolve:** o MAST ([cemri2025mast](../01-literatura/fichamentos/cemri2025mast.md)) documenta falhas como **não reconhecer a condição de término** (12,4%), **repetição de passos** (15,7%), **perda de histórico** (2,8%), **término prematuro** (6,2%) e **verificação ausente ou incorreta** (8,2% e 9,1%). Um protocolo com estados finitos, término explícito e `conversation-id` ataca essas falhas **por construção**, e o MAST recomenda protocolos de comunicação padronizados como estratégia estrutural (Apêndice G).
-- **Ganho conceitual:** a decisão do verificador deixa de ser texto livre e vira um **ato de fala tipado** (aceita/rejeita) com conteúdo estruturado. Isso é verificável por máquina e é o que o feedback externo precisa ser para a autocorreção funcionar (CRITIC; Huang et al. 2024).
+- Todas as mensagens de um caso levam o mesmo `conversation-id`, e o número da rodada vai no conteúdo.
+- O limite de N rodadas é **política do agente**, não do padrão. Esgotado o limite, o Explicador responde FAILURE ao pedido externo e o caso é **bloqueado**.
+- Toda mensagem de iniciação leva `reply-by`. Sem resposta no prazo, o caso é bloqueado: nada é entregue sem ACCEPT-PROPOSAL.
+- **Alternativa considerada:** FIPA Iterated Contract Net (SC00030H), que já prevê rodadas e existe no JADE (`ContractNetInitiator.newIteration`). Foi preterida porque seu sentido é a escolha entre vários concorrentes por chamada de propostas; aqui há um único participante e a proposta parte do Explicador.
 
-### 2.2 Recusa tipada para dados inválidos (FIPA-Request)
-O Agente de Entrada e o Classificador usam o protocolo FIPA-Request (`AchieveREInitiator` / `AchieveREResponder`), que prevê **AGREE / REFUSE / FAILURE / INFORM**.
-- Dado ausente ou fora das faixas do PREVENT → **REFUSE** com o motivo, em vez de supor um valor.
-- **Fundamento:** suposições sobre valores ausentes foram a principal causa de erro em notas reais no AgentMD ([jin2025agentmd](../01-literatura/fichamentos/jin2025agentmd.md) [C4]); Zhu 2026 recomenda expor a ausência de dados; o MAST lista "não pedir esclarecimento" como modo de falha (FM-2.2, 6,8%).
+### 3.3 Por que "propor" e não "informar"
+O Verificador conclui uma proposição ("a explicação é fiel ao cálculo"), cujo ato natural em FIPA seria *inform* ou a resposta a um *query-if*. Mantém-se o Propose porque o que está em jogo é uma **ação**: `entregar(explicação v_r)`, com a fidelidade como precondição. *Accept-proposal* significa que o participante quer que o iniciador execute a ação (SC00037J), e *reject-proposal* carrega "a further proposition which denotes the reason for the rejection", que é a lista de violações. A alternativa com FIPA-Query deixaria a decisão de entrega fora do protocolo.
 
-### 2.3 Rastro auditável como instrumento de pesquisa
-Toda mensagem ACL carrega performativa, remetente, destinatário, `conversation-id` e conteúdo. Registradas, essas mensagens formam um **rastro completo de cada caso**:
-- **Métricas do verificador:** rodadas até a aceitação, taxa de rejeição por tipo de violação, taxa de bloqueio, custo por caso.
-- **Análise de falhas no estilo MAST**, que trabalha justamente sobre rastros de execução.
-- **Demonstração na defesa:** o *Sniffer* do JADE mostra graficamente a troca de mensagens de um caso.
+### 3.4 Sequência
+```mermaid
+sequenceDiagram
+    participant G as Gateway
+    participant E as Agente de Entrada
+    participant C as Calculador
+    participant X as Explicador
+    participant V as Verificador
+    G->>E: caso (HTTP)
+    Note over E: conversation-id = id do caso
+    E->>C: REQUEST calcular [reply-by]
+    alt dado ausente ou fora da faixa
+        C-->>E: REFUSE (motivo tipado)
+    else ok
+        C-->>E: INFORM (risco, categoria, atribuição)
+    end
+    E->>X: REQUEST explicar [reply-by]
+    X-->>E: AGREE
+    loop rodada r = 1..N
+        X->>V: PROPOSE entregar(explicação v_r) [reply-by]
+        alt fiel
+            V-->>X: ACCEPT-PROPOSAL
+        else infiel
+            V-->>X: REJECT-PROPOSAL (violações)
+        else sem resposta no prazo
+            Note over X: caso bloqueado
+        end
+    end
+    alt aceita
+        X-->>E: INFORM (explicação verificada, rodadas)
+    else N rejeições, falha do LLM ou prazo
+        X-->>E: FAILURE (motivo)
+    end
+    E-->>G: resposta (verificado / bloqueado)
+```
 
-Isso atende à exigência de auditabilidade do AI Act (Art. 13) e do PL 2338/2023 citada na justificativa do TCC.
+## 4. O que o JADE agrega
 
-### 2.4 Ablação por composição de agentes
-As três configurações do experimento são **sociedades de agentes diferentes montadas com o mesmo código**:
-| Configuração | Agentes ativos |
-|---|---|
-| C-isolado | Entrada + Explicador (sem Classificador nem Verificador) |
-| C-ferramenta | Entrada + Classificador + Explicador |
-| C-verificador | Entrada + Classificador + Explicador + Verificador |
+### 4.1 Decisão de entrega como ato de fala tipado
+A decisão do Verificador deixa de ser texto livre e vira ACCEPT ou REJECT, com conteúdo estruturado e legível por máquina. Há um único ponto de saída: a explicação só chega ao Agente de Entrada depois do aceite.
 
-Como o código de cada agente é idêntico entre as configurações, **a diferença entre C-ferramenta e C-verificador é só a presença do Verificador**. Isso reforça a **validade interna** da comparação de H2. O registro de serviços do JADE (Directory Facilitator) permite montar cada configuração de forma declarativa. *(Honestidade: isso também pode ser feito sem JADE, com parâmetros; o JADE apenas torna natural.)*
+### 4.2 Recusa tipada na entrada
+O Calculador responde REFUSE, com motivo, a dado ausente ou fora da faixa, em vez de supor um valor. Suposições sobre valores ausentes foram a principal causa de erro em notas reais no AgentMD ([jin2025agentmd](../01-literatura/fichamentos/jin2025agentmd.md) [C4]). O gateway já faz essa recusa hoje, fora do JADE; o protocolo a formaliza.
 
-## 3. Posicionamento na literatura
-- **Botti (2025)** critica a onda de "Agentic AI" por reinventar conceitos de agentes e SMA e defende incorporar padrões de plataformas, linguagens de comunicação e coordenação aos agentes com LLM ([botti2025reinventing](../01-literatura/fichamentos/botti2025reinventing.md)). **O TCC faz exatamente isso:** agentes com LLM sobre uma plataforma e uma linguagem de comunicação padronizadas.
-- **Petrova et al. (2025)** descrevem a passagem da semântica "na plataforma" (SMA) para a semântica "no modelo" (LLMs) ([petrova2025webofagents](../01-literatura/fichamentos/petrova2025webofagents.md)). No TCC, as duas coexistem: **a semântica da interação fica no protocolo FIPA; a semântica do conteúdo fica no LLM.**
-- **Wooldridge & Jennings (1995)**: dos quatro atributos de agente, o sistema exibe claramente **habilidade social** (ACL/protocolos) e **reatividade**; o Verificador tem **autonomia** para aceitar ou rejeitar. A proatividade é limitada, o que deve ser declarado ([wooldridge1995agents](../01-literatura/fichamentos/wooldridge1995agents.md)).
+### 4.3 Rastro auditável
+Cada mensagem ACL registra performativa, emissor, receptor, `conversation-id`, rodada e conteúdo. Gravadas em JSON Lines, dão por caso: rodadas até o aceite, violações por tipo, bloqueios e tempos. O *Sniffer* do JADE mostra a conversa de um caso na defesa.
 
-## 4. O que o JADE **não** agrega (declarar)
-- Não melhora a qualidade do LLM nem a fidelidade por si só; o que melhora a fidelidade é o **Verificador**. O JADE dá **rigor de interação, término garantido, rastreabilidade e controle experimental**.
-- Não é a tecnologia da moda: a indústria migrou para A2A/MCP, mais leves e nativos da web ([ehtesham2025protocols](../01-literatura/fichamentos/ehtesham2025protocols.md); Petrova 2025).
-- Custos: Java ↔ Python via HTTP; plataforma madura, mas pouco atualizada (API atual 4.6.0).
+### 4.4 Tratamento de falha previsto no protocolo
+Prazo de resposta, mensagem não entendida e mensagem fora de sequência têm tratadores prontos nos comportamentos de protocolo do JADE.
 
-## 5. Respostas prováveis à banca
-- **"Por que não A2A ou MCP?"** O MCP liga agentes a **ferramentas**; o A2A delega **tarefas** entre agentes. O TCC precisa de uma **negociação com semântica explícita de aceitar/rejeitar e término definido**, que o FIPA-Propose especifica e o JADE implementa pronto. Trocar por A2A é possível e fica como trabalho futuro.
-- **"Isso é multiagente de verdade?"** É uma arquitetura orientada a agentes com interação protocolada. A interação central (proposta/aceitação/rejeição entre Explicador e Verificador) é multiagente no sentido de Wooldridge & Jennings; o restante é um fluxo com responsabilidades separadas. O texto do TCC não afirma autonomia além disso.
-- **"Um laço em Python não faria o mesmo?"** Faria o laço; não traria de graça o protocolo padronizado com estados e término, a recusa tipada, o `conversation-id` e o rastro de mensagens. Reimplementar isso seria "reinventar a roda" (Botti 2025).
+## 5. O que o JADE não agrega
+- **Fidelidade.** Depende da qualidade do verificador, não do protocolo.
+- **Prevenção de falhas de término e repetição.** Aqui elas são evitadas porque o laço é controlado por código, com limite N. **Um `for` em Python faz o mesmo.**
+- **O que o MAST de fato diz** ([cemri2025mast](../01-literatura/fichamentos/cemri2025mast.md)): associa "standardized communication protocols" à categoria de desalinhamento entre agentes e alerta que "solutions focused on context or communication protocols are often insufficient" (Insight 2). Observa ainda que os erros dessa categoria ocorrem mesmo entre agentes do mesmo arcabouço. Os percentuais de falha do MAST vêm de sistemas de programação e matemática e não se transferem a este domínio. **O MAST não é usado como justificativa do JADE.** Ele fundamenta o verificador em mais de um nível (Insight 3).
+- **Autonomia.** O Verificador de nível 1 é uma função determinística: ele **detém a decisão de entrega**, mas não tem objetivos próprios. Dos atributos de Wooldridge & Jennings, o sistema exibe reatividade e, depois de implementada a ACL com protocolos, habilidade social. Autonomia e proatividade são fracas em todos os agentes. O enquadramento é **arquitetura orientada a agentes com interação protocolada**, não sistema multiagente autônomo.
+- **Controle experimental.** O experimento roda em Python, com as três configurações no mesmo executor (D032). A afirmação anterior de "ablação por composição de agentes" foi retirada: C-isolado usa outro prompt, e rodar uma configuração em Python e outra em JADE introduziria diferenças além do verificador.
 
-## 6. Consequências no código
-1. Explicador ↔ Julgador/Verificador: trocar a troca *ad hoc* por `ProposeInitiator` / `ProposeResponder`.
-2. Gerenciador → Classificador: `AchieveREInitiator` / `AchieveREResponder`, com REFUSE para entrada inválida.
-3. `conversation-id` = identificador do caso em todas as mensagens.
-4. Registro estruturado (JSON Lines) de toda mensagem enviada e recebida.
-5. Parâmetro de configuração que define quais agentes sobem (as três configurações).
+## 6. Custos e riscos
+- Ponte Java ↔ Python por HTTP.
+- JADE 4.6.0 é de 2022, não está no Maven Central, e o repositório oficial apresenta cadeia TLS incompleta ([anexo 06 do parecer](../05-banca/anexos/sma/06-infra-externa.txt)). Mitigação: versionar o jar (a licença LGPL permite) e fixar o JDK 17.
+- O domínio fipa.org deixou de servir as especificações. As citações usam as cópias do Internet Archive, com data de acesso.
 
-## 7. Fontes
-[P] fipa2002propose · API JADE 4.6.0 (`ProposeInitiator`, `AchieveREInitiator`) · cemri2025mast · jin2025agentmd · zhu2026agenticexpl · Huang et al. 2024 · CRITIC 2024
-[S] botti2025reinventing · petrova2025webofagents · ehtesham2025protocols · wooldridge1995agents · jennings2000abse (lidos pelo resumo)
+## 7. Respostas prováveis à banca
+- **"Um laço em Python não faria o mesmo?"** Faria o controle do laço. Não traria a semântica padronizada dos atos de fala, os prazos e o `conversation-id` prontos nem a ferramenta de inspeção. O ganho é de forma e de auditabilidade, não de capacidade.
+- **"Por que não A2A?"** O A2A 1.0 também tem estados terminais de tarefa (`completed`, `failed`, `canceled`, `rejected`) e agrupa interações por `contextId`. A diferença defensável é outra: a FIPA tem atos de aceitar e rejeitar **uma proposta** com semântica formal e protocolos de negociação prontos; no A2A, isso ficaria como convenção no conteúdo. Migrar é trabalho futuro plausível.
+- **"Por que não MCP, LangGraph ou AutoGen?"** O MCP liga agentes a ferramentas, não coordena agentes; o Calculador poderia ser exposto por MCP sem mudar a tese. LangGraph e AutoGen implementam o mesmo laço avaliador-otimizador com condição de parada, sem atos de fala padronizados.
+- **"Isso é multiagente de verdade?"** É uma arquitetura orientada a agentes. A interação Explicador–Verificador é protocolada; o restante é um fluxo com responsabilidades separadas.
+- **"O experimento passa pelos agentes?"** Não. O experimento roda nos módulos Python que os agentes também usam. Um teste de equivalência mostra que, para o mesmo texto e o mesmo caso, o Verificador decide igual nos dois caminhos.
+
+## 8. Posicionamento na literatura
+- **Botti (2025, *preprint*)** defende incorporar padrões de plataformas e de linguagens de comunicação de SMA aos agentes com LLM ([botti2025reinventing](../01-literatura/fichamentos/botti2025reinventing.md)). O TCC está **em linha com essa posição**, em uma instância modesta (um ciclo de duas partes).
+- **Petrova et al. (2025)** descrevem a passagem da semântica "na plataforma" para a semântica "no modelo" ([petrova2025webofagents](../01-literatura/fichamentos/petrova2025webofagents.md)). Aqui a semântica da interação fica no protocolo, e a do conteúdo, no LLM.
+
+## 9. Consequências no código (D032)
+1. Serviço Python fino que expõe cálculo, geração e verificação (os mesmos módulos do experimento).
+2. Calculador: `AchieveREResponder`, com REFUSE e FAILURE.
+3. Explicador: responde ao REQUEST externo e inicia um `ProposeInitiator` por rodada.
+4. Verificador: `ProposeResponder`.
+5. `conversation-id` do caso e `reply-by` em todas as mensagens.
+6. Registro em JSON Lines de toda mensagem enviada e recebida.
+7. Teste de ponta a ponta: aceite na 1ª rodada, rejeição seguida de aceite, bloqueio após N rodadas, recusa na entrada e prazo estourado.
+
+## 10. Fontes e profundidade de leitura
+- **Conferidas no texto:** FIPA SC00036H, SC00026H, SC00030H e SC00037J (cópias do Internet Archive, em `05-banca/anexos/sma/`); MAST, Insight 2, Insight 3 e Apêndice G (`textos/cemri2025mast.txt`); AgentMD.
+- **Conferida por terceiro (parecer de SMA), não por mim:** API do JADE 4.6.0 por `javap`; estados do A2A 1.0.
+- **Lidas só pelo resumo:** Botti 2025, Petrova 2025, Ehtesham 2025, Wooldridge & Jennings 1995, Jennings 2000. São usadas como posicionamento, não como evidência. Ler na íntegra antes da defesa, com prioridade para Wooldridge & Jennings.
+- **A acrescentar:** Bellifemine, Caire & Greenwood (2007), referência canônica do JADE.

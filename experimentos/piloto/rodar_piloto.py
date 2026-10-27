@@ -24,7 +24,8 @@ DIR = Path(__file__).parent / "resultados"
 
 def commit_atual():
     try:
-        return subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=Path(__file__).parent,
+        # --dirty: marca quando o código em execução difere do commit (parecer de Engenharia, C1)
+        return subprocess.check_output(["git", "describe", "--always", "--dirty"], cwd=Path(__file__).parent,
                                        stderr=subprocess.DEVNULL).decode().strip()
     except Exception:
         return "desconhecido"

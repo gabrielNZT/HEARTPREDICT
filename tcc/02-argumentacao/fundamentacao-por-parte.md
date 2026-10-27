@@ -1,7 +1,7 @@
 ---
 titulo: Fundamentação por parte do projeto e brechas
 status: vigente
-atualizado: 2026-09-29
+atualizado: 2026-10-06
 resumo: Cada componente do projeto com seu fundamento (primário, secundário ou proposta própria) e as brechas que a banca pode explorar, com correções.
 ---
 
@@ -9,6 +9,7 @@ resumo: Cada componente do projeto com seu fundamento (primário, secundário ou
 
 Legenda do nível de fundamento:
 - **[P] Primário:** vem diretamente de artigo ou diretriz lido na íntegra.
+- **[P-pendente] Primário ainda não lido:** a fonte é primária e existe, mas **eu ainda não a li na íntegra** (só o resumo, ou nada). Não sustenta número nem afirmação específica no texto final até ser lida e fichada. *(Rótulo criado em 06/10/2026: a banca mostrou que eu marcava essas fontes como [P].)*
 - **[S] Secundário:** vem de fonte secundária, resumo ou analogia com outro domínio.
 - **[A] Autoral:** decisão minha de projeto; precisa ser justificada no texto ou testada.
 
@@ -38,7 +39,7 @@ Legenda do nível de fundamento:
 ## 3. Atribuição de referência (Shapley exato)
 | Elemento | Nível | Fonte |
 |---|---|---|
-| Valores de Shapley e SHAP | [P] | Shapley (1953); Lundberg & Lee, NeurIPS 2017 (a fichar) |
+| Valores de Shapley e SHAP | [P-pendente] | Shapley (1953); Lundberg & Lee, NeurIPS 2017; Sundararajan & Najmi, ICML 2020 (*baseline Shapley*, que é o método usado aqui). Nenhuma fichada |
 | Uso de modelos com atribuição conhecida como gabarito de fidelidade | [S] | Benchmarks sintéticos de XAI (Liu et al., 2021, arXiv:2106.12543; M4, NeurIPS 2023; OpenXAI, NeurIPS 2022) — a fichar |
 | Referência = valores de centralização do PREVENT | [A] | Escolha minha |
 | Escala = log-odds | [A] | Escolha minha |
@@ -55,7 +56,7 @@ Legenda do nível de fundamento:
 | LLM não calcula; ferramenta determinística calcula | [P] | Roeschl 2026; AgentMD; MedCalc-Bench |
 | Híbrido ML convencional + agentes LLM | [P] | MedAgentBoard (trabalho futuro recomendado); ColaCare |
 | Agentes por função, não por persona médica | [P] | MedAgentBoard, Apêndice H.4 |
-| Mensagens estruturadas entre agentes | [P] | MAST, Apêndice G |
+| Mensagens estruturadas entre agentes | [P] | MAST, Apêndice G (como estratégia complementar à verificação; **não** justifica a escolha do JADE — ver justificativa-jade §5) |
 | JADE/FIPA-ACL como forma de padronização | [S] | Analogia: o MAST cita MCP e A2A, não FIPA |
 
 **Brecha:** "por que JADE e não um framework atual?". **Correção:** apresentar o JADE como plataforma que já implementa um padrão de comunicação (FIPA), sem afirmar que o MAST o recomenda especificamente; deixar claro que a contribuição independe da plataforma.
@@ -65,8 +66,8 @@ Legenda do nível de fundamento:
 |---|---|---|
 | Verificação multinível | [P] | MAST, Insight 3 |
 | Números e lógica checados por código; LLM só para variação de linguagem | [S] | PROVE (preprint, outro domínio) |
-| **Autocorreção sem feedback externo não funciona** | [P] | Huang et al., ICLR 2024 (a fichar) |
-| **Autocorreção com feedback de ferramenta funciona** | [P] | CRITIC, Gou et al., ICLR 2024 (a fichar) |
+| **Autocorreção sem feedback externo não funciona** | [P-pendente] | Huang et al., ICLR 2024 (a fichar) |
+| **Autocorreção com feedback de ferramenta funciona** | [P-pendente] | CRITIC, Gou et al., ICLR 2024 (a fichar). Evidência lida: He & Martens 2026 (parcial) |
 | Número máximo de ciclos, bloqueio | [A] | Escolha minha |
 
 **Ponto forte:** o ciclo Explicador → Verificador → Explicador usa feedback **externo e específico** (ex.: "o sinal do HDL está invertido"), que é exatamente o cenário em que a literatura mostra que a correção funciona.
@@ -74,7 +75,7 @@ Legenda do nível de fundamento:
 ## 6. Dados
 | Elemento | Nível | Fonte |
 |---|---|---|
-| NHANES para calcular o PREVENT | [P] | Diao et al., JAMA 2024; Anderson et al., JAMA Intern Med 2024 (resumos) |
+| NHANES para calcular o PREVENT | [S] | Diao et al., JAMA 2024; Anderson et al., JAMA Intern Med 2024 (só os resumos) |
 | Casos sintéticos a partir de parâmetros controlados | [P] | AgentMD (RiskQA); MedCalc-Bench |
 | Estratificar por categoria, incluindo muitos casos de baixo risco | [P] | Lee 2025, Tabela 1 (menor consistência em verdadeiros negativos) |
 
@@ -89,13 +90,13 @@ Legenda do nível de fundamento:
 | Jaccard e direção | [P] | Zhu 2026 |
 | Polaridade por variável, exatidão numérica, variáveis fora do modelo | [A] | Proposta minha, inspirada nos erros relatados por Lee 2025 e na distinção de Jacovi & Goldberg |
 | Teste pareado (McNemar), bootstrap | [P] | Estatística padrão; bootstrap usado em Zhu 2026 e MedAgentBoard |
-| Concordância entre anotadores (κ) | [P] | MAST; revisão de LLM-como-juiz em saúde |
+| Concordância entre anotadores (κ) | [P] para o uso de κ (MAST); [P-pendente] para o limiar | MAST; o limiar de 0,60 deve ser justificado por Landis & Koch (1977) ou McHugh (2012), ainda não lidos. A "revisão de LLM-como-juiz em saúde" não foi fichada e saiu como fundamento |
 
 ## 8. Viés (H3)
 | Elemento | Nível | Fonte |
 |---|---|---|
 | Prompts pareados por atributo demográfico | [S] | Chan & Kwek 2025 (resumo) |
-| Justiça contrafactual | [P] | Kusner et al., NeurIPS 2017 (a fichar) |
+| Justiça contrafactual | [P-pendente] | Kusner et al., NeurIPS 2017 (a fichar) |
 
 ---
 

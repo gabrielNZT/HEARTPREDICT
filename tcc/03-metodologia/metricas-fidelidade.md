@@ -1,7 +1,7 @@
 ---
 titulo: Definição operacional das métricas de fidelidade
 status: rascunho
-atualizado: 2026-09-29
+atualizado: 2026-10-06
 resumo: Definições operacionais das 4 métricas novas (polaridade, exatidão numérica, variáveis fora do modelo, afirmações não sustentadas), com unidade de análise, gabarito, regras de decisão, agregação e validação.
 ---
 
@@ -14,7 +14,10 @@ resumo: Definições operacionais das 4 métricas novas (polaridade, exatidão n
 ## 0. Objeto e princípio
 
 - **Objeto avaliado:** o **texto final** entregue ao usuário (não o JSON intermediário — brecha B6).
-- **Princípio:** medir **fidelidade ao sistema de cálculo**, não correção clínica. Uma afirmação é fiel se é consistente com o que a ferramenta calculou e com as regras fornecidas ao modelo ([jacovi2020faithfulness](../01-literatura/fichamentos/jacovi2020faithfulness.md): fidelidade ≠ plausibilidade) **[P]**.
+- **Princípio:** medir **fidelidade ao sistema de cálculo**, não correção clínica. Uma afirmação é fiel se é consistente com o que a ferramenta calculou e com as regras fornecidas ao modelo. A distinção fidelidade ≠ plausibilidade vem de [jacovi2020faithfulness](../01-literatura/fichamentos/jacovi2020faithfulness.md) **[S]** (li só o resumo).
+- **Nome do construto (corrigido após a banca):** em Jacovi & Goldberg, *faithfulness* é refletir o raciocínio **do próprio modelo que explica**. Aqui o LLM explica **outro** sistema (o PREVENT e as regras da SBC). O construto medido é a **fidelidade ao modelo explicado**, isto é, a aderência do texto ao pacote de referência. Não se mede o processo interno do LLM. As métricas só se aplicam às configurações em que o LLM recebe o pacote (C-ferramenta e C-verificador); em C-isolado, o que se mede é **correção**.
+- **Convenções das quais "fiel" depende:** (1) método *baseline Shapley*, com um único ponto de referência; (2) referência = valores de centralização do PREVENT; (3) interações divididas igualmente entre as variáveis (simetria do Shapley); (4) escala de log-odds; (5) ε = 5% de Σ|φ|. A banca mostrou, com uma referência alternativa ilustrativa, inversão de sinal da PAS em 4 de 24 vinhetas e top-3 alterado em 14 de 24 (`05-banca/anexos/ia/`). Reportar quantas afirmações mudam de "correta" para "incorreta" entre convenções.
+- **Origem das métricas 1 e 2:** correspondem a *Sign Agreement* e *Value Agreement* de [ichmoukhamedov2024story](../01-literatura/fichamentos/ichmoukhamedov2024story.md), usadas também por [he2026agenticnarratives](../01-literatura/fichamentos/he2026agenticnarratives.md). O que se acrescenta: afirmação atômica como unidade, tolerância ε, distinção de alvo (§5.2), números do risco, das metas e das entradas, e variáveis fora do modelo.
 
 ## 1. Pacote de referência (gabarito) de cada vinheta
 
@@ -34,7 +37,7 @@ Para cada vinheta *v*, o sistema gera, de forma determinística, o pacote *R(v)*
 
 ## 2. Unidade de análise: a afirmação atômica
 
-- O texto é segmentado em **afirmações atômicas**, frases curtas que carregam uma única informação **[P]** (FActScore, Min et al., EMNLP 2023; mesma lógica de "cada sentença" em Asgari 2025 **[S]**).
+- O texto é segmentado em **afirmações atômicas**, frases curtas que carregam uma única informação **[P-pendente]** (FActScore, Min et al., EMNLP 2023 — existe, mas ainda não li; mesma lógica de "cada sentença" em Asgari 2025 **[S]**).
 - Cada afirmação recebe **um** tipo:
 
 | Tipo | Definição | Exemplo |
@@ -100,7 +103,7 @@ Todas as afirmações **NUM**. Cada número é ligado a um campo de *R(v)* (risc
 | **Metas e limiares da diretriz** | iguais ao valor da Tabela 5.1 / Tabela 4.1 para a categoria de referência |
 | Número **sem campo correspondente** em *R(v)* | incorreto (e conta também na métrica 4) |
 
-- **Tolerância de 5%:** a mesma usada pelo MedCalc-Bench para cálculos por equação **[P]**.
+- **Tolerância de 5%:** a mesma usada pelo MedCalc-Bench **[P]**. Escopo na fonte: calculadoras por equação de exames laboratoriais e físicos e de conversão de dose. Aplicá-la a um risco percentual derivado de equação é analogia minha **[A]**.
 - **Tolerância pela precisão do texto** **[A]**: "6%" (inteiro) aceita 5,5–6,5, porque um texto que arredonda para inteiro não deve ser penalizado pelo arredondamento. "Cerca de" não amplia a tolerância.
 
 ### 4.3 Fórmula
@@ -129,7 +132,7 @@ Sem essa distinção, fatores que a diretriz usa legitimamente na **reclassifica
 - **Taxa por explicação** = proporção de explicações com ≥ 1 afirmação fora do modelo (binária, adequada ao teste pareado de McNemar).
 - **Taxa por afirmação** = afirmações fora do modelo / afirmações DIR com alvo = risco calculado.
 
-**Fundamento:** é a operacionalização direta da distinção fidelidade × plausibilidade (Jacovi & Goldberg 2020 **[P]**), com gabarito objetivo porque a lista de preditores do PREVENT é publicada **[P]**. Também serve para H3: raça/etnia está nessa lista (D017).
+**Fundamento:** é a operacionalização direta da distinção fidelidade × plausibilidade (Jacovi & Goldberg 2020 **[S]**, só o resumo), com gabarito objetivo porque a lista de preditores do PREVENT é publicada **[P]**. Também serve para H3: raça/etnia está nessa lista (D017).
 
 ## 6. Métrica 4 — Afirmações não sustentadas
 
@@ -151,16 +154,33 @@ Caso contrário, é **não sustentada**. Subtipos registrados: (a) fato do pacie
 - **Taxa de não sustentação (micro)** = não sustentadas / afirmações avaliáveis.
 - **Explicação totalmente fiel (binária)** = 1 se zero afirmações não sustentadas → **desfecho principal para o teste pareado (McNemar)** entre configurações.
 
-**Fundamento:** definição de afirmação suportada por uma fonte (FActScore **[P]**) e de alucinação como conteúdo não sustentado pela fonte, com subtipos (Asgari 2025 **[S]**, lido só no resumo — ler antes de citar).
+**Fundamento:** definição de afirmação suportada por uma fonte (FActScore **[P-pendente]**) e de alucinação como conteúdo não sustentado pela fonte, com subtipos (Asgari 2025 **[S]**, lido só no resumo — ler antes de citar).
+
+## 6b. Métrica 5 — Cobertura (guarda contra omissão)
+
+**Por que existe.** O desfecho principal é "totalmente fiel". Um texto vago ("vários fatores influenciaram; converse com seu médico") é 100% fiel. Um verificador que rejeita e pede reescrita empurra o texto nessa direção. Sem uma medida de cobertura, H2 poderia ser confirmada porque as explicações passaram a dizer menos (pareceres de Metodologia, CR2, e de IA, M3).
+
+### 6b.1 Definição
+Seja *T* o conjunto das até **3 variáveis de maior |φ|** do caso, restritas às que têm |φ| ≥ ε.
+- **Cobertura** = nº de variáveis de *T* mencionadas no texto **com a direção correta** / |*T*|.
+- Se *T* é vazio, a métrica é "não aplicável".
+- Reporta-se também o **número de afirmações avaliáveis** por explicação.
+
+### 6b.2 Uso
+- Reportada por configuração, ao lado do desfecho principal.
+- H2 não é declarada sustentada se a cobertura média cair mais de 10 pontos percentuais de C-ferramenta para C-verificador (D029).
+- k = 3 segue Lee et al. (2025), que medem o trio principal **[P]**; a exigência de direção correta e o limiar de 10 pontos são autorais **[A]**.
 
 ## 7. Validação das métricas (obrigatória antes de usar os resultados)
 
 1. **Protocolo de anotação** escrito com estas definições e exemplos.
 2. **Dois anotadores** (A13) anotam de forma independente uma amostra estratificada por configuração e categoria de risco (tamanho a definir no piloto — C5).
-3. **Concordância:** Cohen κ por métrica e percentual de concordância simples; reportar também PABAK se as classes forem muito desbalanceadas **[P]** (revisão de LLM-como-juiz em saúde, 2026).
+3. **Concordância:** Cohen κ por métrica e percentual de concordância simples; reportar também PABAK se as classes forem muito desbalanceadas **[P-pendente]** (a revisão de LLM-como-juiz que eu citava aqui não foi fichada).
 4. **Extrator automático** (usado para escalar a avaliação a todas as vinhetas) comparado com o consenso humano: precisão/recall por tipo de afirmação e κ.
 5. **Independência (brecha B1):** o extrator de avaliação **não** pode ser o mesmo componente usado pelo verificador. Reportar separadamente "aprovado pelo verificador" e "fiel segundo a avaliação".
-6. **Critério de uso:** métrica com κ < 0,60 entre humanos → definição revisada e reanotada. Se continuar baixo, a métrica é reportada apenas de forma descritiva **[A]** (0,60 é o limite inferior da faixa relatada na revisão de 2026).
+6. **Critério de uso:** métrica com κ < 0,60 entre humanos → definição revisada e reanotada. Se continuar baixo, a métrica é reportada apenas de forma descritiva **[A]**. O limiar de 0,60 segue a convenção usual de concordância (Landis & Koch, 1977; McHugh, 2012) **[P-pendente]**: a fonte anterior, uma revisão de 2026, não foi lida e saiu.
+7. **Cegamento:** os anotadores não sabem de qual configuração veio o texto (identificadores aleatórios, ordem embaralhada). A coluna de pré-anotação automática fica oculta na primeira passada. O contraste primário é anotado também por alguém que não o autor.
+8. **Tamanho da dupla anotação:** com menos de 100 textos anotados em dobro, não dá para afirmar κ ≥ 0,60 com segurança (cálculo da banca: com 100 textos e κ real de 0,70, 95% dos κ amostrais ficam entre 0,52 e 0,85).
 
 ## 8. Resumo de agregação e testes
 
@@ -170,8 +190,9 @@ Caso contrário, é **não sustentada**. Subtipos registrados: (a) fato do pacie
 | 2. Exatidão numérica | proporção por explicação | idem |
 | 3. Fora do modelo | binária (≥ 1 ocorrência) | **McNemar** entre pares de configurações |
 | 4. Não sustentadas | binária "totalmente fiel" | **McNemar** (desfecho principal de H2) |
+| 5. Cobertura | proporção por explicação | diferença pareada com IC; condição de H2 (D029) |
 
-Todas com intervalos de confiança por bootstrap sobre as vinhetas. Repetições do mesmo caso são agregadas por vinheta antes do teste, para não inflar o tamanho da amostra **[A]** (a mesma vinheta repetida não é observação independente).
+Todas com intervalos de confiança por bootstrap sobre as vinhetas. A mesma vinheta repetida não é observação independente **[A]**. **Regra de agregação (D029):** o teste primário usa a primeira repetição de cada vinheta; as demais entram na análise de sensibilidade. Explicações bloqueadas contam como falha na análise primária. Teste: McNemar mid-p, com Holm entre os 2 LLMs.
 
 ## 9. Parâmetros autorais e sensibilidade
 
@@ -184,5 +205,7 @@ Todas com intervalos de confiança por bootstrap sobre as vinhetas. Repetições
 | Limiar de κ | 0,60 | — |
 
 ## 10. Referências usadas
-[P] khandekar2024medcalc (tolerância de 5%; tipos de erro) · lee2025shapllm (erros de polaridade; alucinação numérica) · zhu2026agenticexpl (direção) · khan2024prevent (preditores do modelo) · jacovi2020faithfulness (fidelidade × plausibilidade) · roeschl2026pipeline · FActScore (Min et al., EMNLP 2023 — **a fichar**) · revisão LLM-como-juiz em saúde (arXiv 2605.25273 — **a fichar**)
-[S] asgari2025hallucination (ler na íntegra)
+[P] khandekar2024medcalc (tolerância de 5%; tipos de erro) · lee2025shapllm (erros de polaridade; alucinação numérica) · zhu2026agenticexpl (direção) · khan2024prevent (preditores do modelo) · roeschl2026pipeline
+[P], leitura parcial: he2026agenticnarratives · ichmoukhamedov2024story (origem de sinal e valor)
+[P-pendente] (existem, não li): FActScore (Min et al., EMNLP 2023) · Landis & Koch (1977) · McHugh (2012) · Sundararajan & Najmi (ICML 2020)
+[S] jacovi2020faithfulness (só o resumo) · asgari2025hallucination (só o resumo)

@@ -1,11 +1,23 @@
 ---
 titulo: Interface — identidade visual, UX e justificativas
 status: vigente
-atualizado: 2026-09-29
+atualizado: 2026-10-06
 resumo: Especificação da nova interface (público-alvo, identidade, tipografia, cores com contraste medido, fluxo, apresentação do risco, animação, conteúdo, acessibilidade), com a justificativa e a fonte de cada decisão.
 ---
 
 # Interface: especificação e justificativas
+
+> **Atualização de 06/10/2026 (após o [parecer de IHC](../05-banca/parecer-ihc.md)).** Correções de atribuição feitas no texto: 7:1 (é do WCAG, não da NN/g), WCAG 1.4.12 e 2.4.11, Zipkin sobre frequências, GOV.UK, AI Act, escala tipográfica, ColorBrewer e a marca. Mudanças na interface registradas em D026 e D028:
+> - a opção "Nenhuma destas" impedia concluir a avaliação (corrigido; os roteiros de evidência não passavam por esse caminho);
+> - trocar o sexo na revisão refaz a pergunta dos agravantes, como manda o padrão *Check answers* do GOV.UK;
+> - a escala marca separadamente a faixa do número e a categoria da diretriz;
+> - pictograma: figuras sem evento em contorno, 3,3:1 contra o fundo (antes, 1,85:1);
+> - uso de remédio aparece como a condição tratada, com aviso visível para não parar o remédio;
+> - explicação por IA só com consentimento; nova pergunta de exclusão (placa em exame de imagem), total de 14 perguntas;
+> - impressão mantém avisos, cores e o "Como ler"; foco visível em cores forçadas; pergunta renal cabe em 320 px.
+>
+> **Ressalvas que continuam:** Zikmund-Fisher et al. (2014) mostram melhor memorização com figuras humanas, mas **não** vantagem entre pessoas com baixo letramento numérico, e usaram figuras do mesmo sexo do participante. "Cerca de 3 minutos" não foi medido. A animação de carregamento dura 1,4 s em repetição, fora da faixa de 100–300 ms, que vale para transições. **Não houve teste com usuários** (depende de CEP — D031); o protocolo mínimo está no parecer de IHC, §7. A auditoria axe-core não substitui esse teste e não cobre lógica de fluxo.
+
 
 Regra deste documento: **cada decisão tem uma justificativa** — uma fonte [F], uma medida [M] ou uma decisão de projeto do TCC [D]. Nada é escolhido "porque fica bonito".
 
@@ -21,7 +33,7 @@ Regra deste documento: **cada decisão tem uma justificativa** — uma fonte [F]
 | Problema | Por que é problema |
 |---|---|
 | Emojis em todos os rótulos (👋 🩺 🧪 🍷 🏃 🎂) | Ícones sem função reduzem a clareza e a credibilidade; ícones só ajudam quando o significado é inequívoco ou acompanha texto [F: NN/g, *Icon Usability*; *Trustworthiness in Web Design*] |
-| Metáfora de chat para um formulário médico | Esconde o progresso, mistura perguntas e respostas no mesmo fluxo visual e dificulta revisar respostas; o padrão validado para formulários de baixa confiança é uma pergunta por página com revisão final [F: GOV.UK] |
+| Metáfora de chat para um formulário médico | Esconde o progresso, mistura perguntas e respostas no mesmo fluxo visual e dificulta revisar respostas; o padrão recomendado pelo GOV.UK é começar com uma pergunta por página, com revisão final [F: GOV.UK, *Structuring forms*]. *(A expressão anterior, "padrão validado para formulários de baixa confiança", não está na fonte e foi retirada.)* |
 | "Tecnologia IA de Ponta", texto em degradê, bolhas flutuantes | Linguagem de marketing e decoração competem com a informação; texto em degradê tem contraste variável |
 | Rótulos dentro dos campos (placeholders) | Somem ao digitar e têm baixo contraste [F: NN/g, *Placeholders in Form Fields Are Harmful*] |
 | Pergunta o nome | Dado desnecessário ao cálculo; viola o princípio da necessidade [F: LGPD, art. 6º, III] |
@@ -35,13 +47,13 @@ Regra deste documento: **cada decisão tem uma justificativa** — uma fonte [F]
 A interface se inspira em um **laudo bem diagramado**: papel claro, tinta escura, uma única cor de ação e números em destaque. É o gênero de documento que o público já associa a resultados de saúde, sem recorrer aos clichês do setor (coração, eletrocardiograma, estetoscópio, azul "tecnológico" em degradê). A autenticidade vem de a identidade **nascer da função principal do produto** — comunicar "quantas pessoas em 100".
 
 ### 3.2 Marca
-- **Símbolo:** uma grade 10 × 10 de pontos com um ponto destacado — a síntese do pictograma de 100 pessoas que é o coração da tela de resultado. A marca e a forma de comunicar o risco são a mesma ideia.
+- **Símbolo:** uma grade de pontos com um ponto destacado, que remete ao pictograma. **Divergência apontada pela banca:** o arquivo `marca.svg` desenha 4 × 4 pontos (1 em 16), não 10 × 10 como este documento dizia. A 32 px uma grade de 100 pontos não seria legível; a marca é uma alusão, não uma representação de "1 em 100". — a síntese do pictograma de 100 pessoas que é o coração da tela de resultado. A marca e a forma de comunicar o risco são a mesma ideia.
 - **Nome:** "HeartPredict" composto só em tipografia, com o descritor em português "Risco cardiovascular em 10 anos". O descritor existe porque o público é brasileiro e o nome do projeto está em inglês.
 
 ### 3.3 Tipografia
 - **Atkinson Hyperlegible Next** (Braille Institute, 2025): projetada para distinguir letras e números parecidos (I/l/1, O/0) em leitores com baixa visão; suporta mais de 150 idiomas, com os diacríticos do português; licença OFL [F: Braille Institute, 2025]. Hospedada no próprio projeto (pacote `@fontsource-variable`), sem requisição ao Google — privacidade e funcionamento offline.
 - **Corpo 18 px** (1,125 rem): texto pequeno é o problema de leitura mais persistente entre idosos [F: NN/g]; a GOV.UK usa 19 px no corpo em telas grandes.
-- **Escala 1,25** (18 → 22,5 → 28 → 35 px), altura de linha 1,5 (atende ao critério de espaçamento de texto, WCAG 1.4.12) e **linha de no máximo ~65 caracteres** para leitura confortável.
+- **Escala 1,25**. Tamanhos **medidos pela banca** no navegador: 18 → 25,3 → 31,6 → 39,5 px (o `html{font-size:112.5%}` multiplica todos os `rem`; os valores 22,5/28/35 que constavam aqui estavam errados, e as notas saem com 18 px, não 16). Altura de linha 1,5. *(Correção: a altura de linha não "atende" ao WCAG 1.4.12; esse critério exige que o conteúdo suporte o espaçamento definido pelo usuário, o que é verificado por teste.)* e **linha de no máximo ~65 caracteres** para leitura confortável.
 - **Algarismos tabulares** nos números do resultado, para que valores e unidades fiquem alinhados.
 - **Zero com traço ("0" distinto de "O")**: característica de desenho da fonte para leitores com baixa visão; mantido de propósito, pois números de exame são o conteúdo principal.
 
@@ -50,7 +62,7 @@ A interface se inspira em um **laudo bem diagramado**: papel claro, tinta escura
 |---|---|---|---|
 | `--papel` | #F7F4EE | Fundo | — (quente e levemente escuro, reduz o ofuscamento do branco puro) |
 | `--superficie` | #FFFDF9 | Cartões e campos | — |
-| `--tinta` | #17222E | Texto principal | **14,7:1** sobre papel (acima do 7:1 do AAA, recomendado para idosos [F: NN/g]) |
+| `--tinta` | #17222E | Texto principal | **14,7:1** sobre papel (acima do 7:1 do nível AAA, WCAG 1.4.6; a NN/g aponta texto pequeno e de baixo contraste como problema para idosos, mas **não** recomenda uma razão de contraste) |
 | `--tinta-suave` | #44505C | Texto secundário | **7,5:1** |
 | `--acento` | #0E5A5E | Botões, links, foco, progresso | **7,2:1** sobre papel; texto branco sobre ele **7,95:1** |
 | `--erro` | #A4231B | Mensagens de erro | **6,8:1** |
@@ -60,7 +72,7 @@ A interface se inspira em um **laudo bem diagramado**: papel claro, tinta escura
 
 Justificativas:
 - **Ação em verde-petróleo, não em vermelho nem em azul-tecnologia:** separa "o que clicar" de "o que é risco" e evita o tom de alarme. O vermelho fica reservado a erros.
-- **Categoria em escala sequencial de um só matiz quente (claro → escuro)**, e não em semáforo verde-amarelo-vermelho: dados ordinais pedem escala sequencial por luminosidade, que também é segura para daltonismo [F: Harrower e Brewer 2003, ColorBrewer]. O semáforo depende da distinção vermelho/verde, a mais afetada pelo daltonismo.
+- **Categoria em escala sequencial de um só matiz quente (claro → escuro)**, e não em semáforo verde-amarelo-vermelho: dados ordinais pedem escala sequencial por luminosidade, que também é segura para daltonismo [F: Harrower e Brewer 2003, princípio do ColorBrewer; as cores usadas aqui **não** são uma paleta do ColorBrewer]. O semáforo depende da distinção vermelho/verde, a mais afetada pelo daltonismo.
 - **A cor nunca é o único sinal:** cada categoria tem rótulo em texto e posição na escala (WCAG 1.4.1).
 
 ### 3.5 Ícones
@@ -88,11 +100,11 @@ Detalhes de interação:
 ## 5. Tela de resultado (pirâmide invertida)
 Ordem = ordem de importância para o usuário.
 1. **Frase-resumo** com o risco absoluto: "Seu risco estimado de infarto ou AVC nos próximos 10 anos é de 6%."
-2. **Frequência natural + pictograma de 100 pessoas**, com os eventos agrupados no início da grade: "Em 100 pessoas com os mesmos dados, cerca de 6 teriam um infarto ou AVC em 10 anos." Risco absoluto e frequências naturais melhoram a compreensão em relação a percentuais isolados ou riscos relativos, e pictogramas ajudam especialmente pessoas com baixo letramento numérico [F: Zipkin et al. 2014; Galesic et al. 2009].
+2. **Frequência natural + pictograma de 100 pessoas**, com os eventos agrupados no início da grade: "Em 100 pessoas com os mesmos dados, cerca de 6 teriam um infarto ou AVC em 10 anos." Formatos de risco absoluto e recursos visuais melhoram a compreensão [F: Zipkin 2014]. **Ressalva:** a mesma revisão considera **inconclusiva** a comparação entre frequência e percentual; por isso a tela mostra os dois. A vantagem das frequências naturais é sustentada por Gigerenzer e Hoffrage (1995) e Trevena et al. (2013), ainda não lidos por mim. *(Redação anterior, mais forte que a fonte:)* ~~Risco absoluto e frequências naturais melhoram a compreensão em relação a percentuais isolados ou riscos relativos~~, e pictogramas ajudam especialmente pessoas com baixo letramento numérico [F: Zipkin et al. 2014; Galesic et al. 2009].
 3. **Categoria da Diretriz SBC 2025** em escala de três faixas iguais (a escala é ordinal, não proporcional) com marcador. Se um agravante reclassificou, a tela diz "O cálculo indica baixo; a história familiar eleva para intermediário" [D010].
 4. **Meta de LDL-c** da categoria.
 5. **O que mais pesou**, em palavras ("aumentou", "diminuiu", "pouco influenciou") e barras proporcionais à contribuição, com "Como ler" recolhível explicando a pessoa de referência [D012]. O limiar de "pouco influenciou" é o mesmo da métrica de polaridade (5%).
-6. **Explicação em linguagem simples**, marcada como **"Texto gerado por inteligência artificial"** e com o aviso de que **ainda não passa pelo verificador** do projeto. Transparência sobre conteúdo gerado por IA é exigência do AI Act, art. 50 [F]; declarar a ausência do verificador é coerente com o próprio TCC. Carrega **depois** do cálculo, para o número aparecer imediatamente.
+6. **Explicação em linguagem simples**, marcada como **"Texto gerado por inteligência artificial"** e com o aviso de que **ainda não passa pelo verificador** do projeto. Rotular o conteúdo gerado por IA é **boa prática**, inspirada no art. 50 do AI Act. O regulamento não se aplica a este protótipo (não é colocado no mercado da União Europeia e é pesquisa) e, quando se aplica, exige do fornecedor marcação legível por máquina; declarar a ausência do verificador é coerente com o próprio TCC. Carrega **depois** do cálculo, para o número aparecer imediatamente.
 7. **Limites do resultado:** calibrado na população dos EUA, não é diagnóstico, conversar com o médico [khan2024prevent; SBC 2025 §4.2].
 8. **Ações:** "Imprimir ou salvar em PDF" (para levar ao médico) e "Fazer nova avaliação".
 
@@ -111,7 +123,7 @@ Ordem = ordem de importância para o usuário.
 ## 8. Acessibilidade (checklist)
 - [x] `lang="pt-BR"`; um `h1` por tela; landmarks (`header`, `main`, `footer`).
 - [x] Contrastes medidos (seção 3.4).
-- [x] Foco visível de 3 px em `--acento` com recuo (WCAG 2.4.11/2.4.13).
+- [x] Foco visível de 3 px em `--acento` com recuo (WCAG 2.4.7, Foco visível; a aparência do foco é o 2.4.13, nível AAA. O 2.4.11 trata de foco não encoberto e estava citado por engano.) Em cores forçadas, o foco usa `outline`.
 - [x] Alvos com no mínimo 48 px de altura (acima dos 24 px do WCAG 2.5.8).
 - [x] Opções de resposta como cartões clicáveis inteiros, com `input` nativo por baixo (teclado e leitor de tela funcionam sem código extra).
 - [x] Erros ligados ao campo por `aria-describedby`; resumo de erros com foco.

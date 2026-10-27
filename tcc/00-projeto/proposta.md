@@ -22,23 +22,25 @@ LLMs já são usados para interpretar risco clínico, mas erram cálculos e prod
 - Multiagentes não são automaticamente melhores ([zhu2025medagentboard](../01-literatura/fichamentos/zhu2025medagentboard.md), [cemri2025mast](../01-literatura/fichamentos/cemri2025mast.md)).
 
 ## 4. Pergunta de pesquisa
-> Um agente verificador de fidelidade — determinístico para números e polaridade, com LLM para coerência semântica — reduz explicações infiéis sobre o risco cardiovascular, em comparação com um LLM isolado e com um LLM que usa a ferramenta de cálculo sem verificação?
+> O ganho de fidelidade relatado para ciclos de crítica em bases genéricas se mantém quando a atribuição de referência é exata, há regras de uma diretriz clínica e o desfecho é avaliado de forma independente do verificador? Em termos operacionais: um verificador **determinístico** de fidelidade reduz as explicações não fiéis sobre o risco cardiovascular, em comparação com um LLM que recebe o cálculo pronto e não é verificado?
+
+*(Reescrita em 06/10/2026 — D030. O nível do verificador que usa LLM para coerência semântica é extensão e virou pergunta secundária condicional; a versão anterior da pergunta não era respondível pelo núcleo.)*
 
 ## 5. Hipóteses
 - **H1 (verificação de sanidade):** LLM + ferramenta (PREVENT determinístico) tem maior concordância de categoria de risco com a diretriz SBC 2025 do que o LLM isolado.
-- **H2 (contribuição central):** a configuração com verificador tem **maior fidelidade** (polaridade, números e top-k SHAP) e **menos afirmações não sustentadas** do que LLM + ferramenta sem verificador.
-- **H3 (equidade, D017):** como o PREVENT não usa raça/etnia, a configuração com verificador terá menos explicações que atribuem o risco a raça/etnia do que as configurações sem verificador. Diferenças por sexo são analisadas de forma exploratória (taxas de fidelidade por grupo).
+- **H2 (contribuição central):** a configuração com verificador produz **mais explicações entregues e totalmente fiéis** do que LLM + ferramenta sem verificador, **sem perda de cobertura**. Desfecho, teste e regra para as explicações bloqueadas: D029.
+- **H3 (exploratória, D017 e D027):** descrever com que frequência as explicações atribuem o risco a raça/cor, que consta do cadastro mas não entra no PREVENT, com e sem verificador. Sem teste confirmatório: o evento esperado é raro. Diferenças por sexo também são exploratórias.
 
 Todas as hipóteses podem ser refutadas; um resultado negativo em H2 também é contribuição.
 
 ## 6. Contribuições
-- **C1 – Arquitetura:** padrão com separação entre cálculo (ferramenta determinística + ML) e linguagem (LLM), e um verificador híbrido multinível.
-- **C2 – Protocolo e métricas de fidelidade:** top-k SHAP (comparável com Lee 2025) + **polaridade por variável** + **exatidão numérica** + **afirmações não sustentadas** + consistência entre execuções + viés contrafactual.
-- **C3 – Evidência empírica:** comparação controlada de 3 configurações × ≥2 LLMs.
+- **C1 – Arquitetura:** separação entre cálculo (ferramenta determinística) e linguagem (LLM), com um verificador determinístico independente do LLM (D034).
+- **C2 – Protocolo e métricas de fidelidade:** top-k SHAP (comparável com Lee 2025) + **polaridade por variável** + **exatidão numérica** + **afirmações não sustentadas** + **cobertura**. Polaridade e exatidão correspondem a Sign e Value Agreement (Ichmoukhamedov et al., 2024); o que este trabalho acrescenta é a afirmação atômica, a distinção de alvo (risco × categoria) e as variáveis fora do modelo. Consistência entre execuções é extensão.
+- **C3 – Evidência empírica:** replicação com extensão de He & Martens (2026): comparação controlada de 3 configurações × ≥ 2 LLMs, com referência exata e desfecho por anotação humana cega.
 - **C4 – Artefatos abertos:** código, vinhetas alinhadas à SBC 2025, logs de execução. (O idioma português não é apresentado como contribuição — D018.)
 
 ## 7. Enquadramento metodológico
-Design Science Research ([hevner2004dsr](../01-literatura/fichamentos/hevner2004dsr.md)): artefato + avaliação rigorosa. Relato da parte de ML segundo TRIPOD+AI ([collins2024tripodai](../01-literatura/fichamentos/collins2024tripodai.md)), com calibração ([vancalster2019calibration](../01-literatura/fichamentos/vancalster2019calibration.md)) e auditoria de leakage ([kapoor2023leakage](../01-literatura/fichamentos/kapoor2023leakage.md)).
+Design Science Research ([hevner2004dsr](../01-literatura/fichamentos/hevner2004dsr.md), lido só no resumo): artefato + avaliação por **experimento controlado**. A seção de método do TCC deve seguir as seis atividades de Peffers et al. (2007) e trazer a tabela de ameaças à validade em quatro classes (Wohlin et al., 2012); nenhuma das duas fontes foi lida ainda. TRIPOD+AI, calibração e auditoria de *leakage* só se aplicam à extensão com modelo treinado (D016).
 
 ## 8. Arquitetura (alvo)
 

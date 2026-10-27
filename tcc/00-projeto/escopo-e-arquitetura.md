@@ -41,10 +41,12 @@ Inspeção do repositório em 29/09/2026.
 
 **Como enquadrar sem se expor:**
 - Não vender o trabalho como "sistema multiagente autônomo". Descrever como **arquitetura orientada a agentes, implementada em JADE, em que cada agente encapsula uma responsabilidade**, e o ciclo Explicador–Verificador é a interação central.
-- Justificar o JADE **pragmaticamente**: código já existente; comunicação padronizada (FIPA-ACL); separação de responsabilidades facilita trocar componentes (ex.: trocar o LLM). Declarar que a **pergunta de pesquisa não depende da plataforma**.
+- ~~Justificar o JADE pragmaticamente (código já existente).~~ Substituído por D032: o JADE é defendido como engenharia (conversa protocolada, decisão de entrega tipada, rastro auditável). Declarar que a **pergunta de pesquisa não depende da plataforma**.
 - Citar MedAgentBoard e MAST para mostrar consciência de que **complexidade de agentes precisa ser justificada** — o trabalho usa o **mínimo necessário**.
 
-**Atualização (D021):** a justificativa foi fortalecida — o JADE passa a ser usado para protocolos FIPA (Propose/Request), recusa tipada, rastro auditável e ablação por composição. Ver [justificativa-jade](../02-argumentacao/justificativa-jade.md).
+**Atualização (D032, 06/10/2026):** o JADE será implementado em versão mínima, com FIPA-Request externo e uma instância de FIPA-Propose por rodada. A lógica fica em módulos Python, e o experimento roda em Python. A "ablação por composição" foi retirada. Ver [justificativa-jade](../02-argumentacao/justificativa-jade.md).
+
+> **Estado do código em 06/10/2026:** a tabela da seção 2 descreve a inspeção de 29/09. Desde então, a interface foi refeita, o gateway ganhou `POST /api/avaliacao` com o núcleo PREVENT/SBC, e o fluxo gateway → JADE com *polling* ficou desligado por padrão (D025, D028). Os agentes JADE ainda não foram religados ao núcleo novo.
 
 ~~**Alternativa (para discutir com o orientador — O004):**~~ implementar tudo como workflow em Python, sem JADE. Seria mais simples, mas muda o enquadramento original do trabalho ("multiagente"). As duas opções são defensáveis; a atual (manter JADE com enquadramento honesto) aproveita mais o que já existe.
 
