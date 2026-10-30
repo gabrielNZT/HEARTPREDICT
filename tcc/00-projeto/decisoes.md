@@ -271,6 +271,22 @@ Formato: **D### — título** · data · status (vigente / substituída por D###
 - **Exigência herdada da banca (B1):** o extrator usado na avaliação final é diferente do usado pelo verificador, e o desfecho primário é humano (D029).
 - **Teste de regressão:** os 26 textos adversariais do parecer de IA (`05-banca/anexos/ia/testar_preanotacao.py`).
 
+## D035 — Anotação do piloto: só humana, na 1ª repetição de cada vinheta
+- **Data:** 2026-10-30 · **Status:** vigente · registrada **antes** de qualquer anotação
+- **Decisão:** o orientando anota manualmente, sem pré-anotação nem veredito automático, a **1ª repetição** de cada vinheta nos dois modelos: 48 respostas (`experimentos/piloto/planilha_cega.py gerar … --repeticao 1`). As repetições 2 e 3 ficam guardadas e não entram na regra do piloto.
+- **Motivo:** a 1ª repetição já é a unidade da análise primária (D029); reduz o esforço a um terço sem nova questão metodológica. Com uma repetição por vinheta, o IC por conglomerado de `resumir.py` equivale ao IC por resposta.
+- **Não adotado:** anotar com o veredito da máquina à vista e só "confirmar" (viés de automação; ver jabbour2023jama) e usar o verificador como anotador (repete a falha que D030 aponta em He & Martens). Anotação automática validada contra uma amostra humana cega fica como opção para o experimento final, junto com a dupla anotação para o κ.
+- **Apoio à anotação:** a planilha traz a coluna `fatores(gabarito)`, que só reorganiza a atribuição (aumentaram / diminuíram / desprezíveis, com ε = 5% de Σ|φ|); não julga a resposta. Guia: [guia-anotacao-piloto](../03-metodologia/guia-anotacao-piloto.md).
+- **Limite:** um anotador, sem κ; serve para decidir o rumo (D023), não como resultado do TCC.
+
+## D036 — Meta de não-HDL-c na explicação (prompt piloto-v3, verificador-v2)
+- **Data:** 2026-10-30 · **Status:** vigente · tomada **antes** de qualquer anotação do piloto
+- **Fato:** o prompt `piloto-v2` fornecia e pedia só a meta de LDL-c. Na SBC 2025, o não-HDL-c é **meta coprimária** junto ao LDL-c (`01-literatura/textos/sbc2025dislipidemias.txt`, l. 282), e as recomendações dão as duas metas para cada categoria (l. 371–375; Tabela 5.1). Além disso, o PREVENT usa o não-HDL, não o LDL, e na interface o LDL é opcional. A omissão não tinha decisão registrada; era simplificação do prompt.
+- **Decisão (do orientando):** corrigir já, em vez de declarar como limitação do piloto. Prompt `piloto-v3`: fornece e pede as metas de LDL-c **e** de não-HDL-c, com a redução mínima do LDL-c. Verificador `verificador-v2`: confere cada meta pelo alvo citado (LDL ou não-HDL), acusa metas trocadas e exige as duas como conteúdo obrigatório.
+- **Consequências:** as execuções do piloto com `piloto-v2` (gpt-oss de 06/10; Qwen de 26/10) ficam como histórico e **não entram** na decisão do piloto; o piloto é refeito com `piloto-v3` nos dois modelos. A planilha cega de 30/10 (v2, sem nenhuma anotação) foi apagada. A explicação da interface passa a usar o v3 pelo gateway; a tela de resultado já mostrava as duas metas.
+- **Fora do escopo:** ApoB (meta complementar na SBC 2025, l. 283) não entra: não é coletada no cadastro.
+- **Correção junto:** o verificador ignorava o número 100 como "número livre" mesmo na frase da meta (meta de LDL-c do intermediário e de não-HDL-c do alto); agora ele é conferido como meta.
+
 ## O que ainda precisa do orientador (institucional/cronograma, não científico)
 - **O001 — Cronograma:** a extensão com XGBoost (D016) e a avaliação com médicos (D015) cabem no semestre?
 - **O002 — Normas do curso:** formato do TCC, qualificação, exigências de CEP da instituição.

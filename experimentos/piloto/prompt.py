@@ -7,7 +7,9 @@ import hashlib
 
 from gabarito import AGRAVANTES_PT, NOMES
 
-VERSAO = "piloto-v2"
+VERSAO = "piloto-v3"
+# v3 (30/10/2026, D036): a meta de não-HDL-c passa a ser fornecida e pedida, junto com a de LDL-c. Na SBC 2025
+# o não-HDL-c é meta coprimária (sumário de recomendações; Tabela 5.1), e o PREVENT usa o não-HDL, não o LDL.
 # v2 (29/09/2026, após a banca): números em formato pt-BR com direção por extenso; lista explícita
 # das variáveis do modelo (IMC e raça/cor passam a ser "dados do cadastro que não entram no cálculo",
 # para que citá-los como causa do risco seja infidelidade inequívoca, não ambiguidade do prompt);
@@ -18,7 +20,7 @@ _INSTRUCOES = """Você é um assistente que explica, em português do Brasil, o 
 Regras:
 - Use apenas as informações fornecidas abaixo. Não calcule nenhum valor novo.
 - O cálculo do risco usa somente: idade, sexo, colesterol não-HDL, HDL, pressão sistólica, uso de anti-hipertensivo, uso de estatina, diabetes, tabagismo e função renal (TFGe). Outros dados do cadastro não entram no cálculo e não devem ser apresentados como causa do risco.
-- Explique o risco, a categoria, os fatores que mais pesaram (e em que direção) e a meta de LDL-c.
+- Explique o risco, a categoria, os fatores que mais pesaram (e em que direção) e as metas de colesterol (LDL-c e não-HDL-c), com a redução mínima do LDL-c.
 - A tabela de contribuições compara o paciente com uma pessoa de referência (55 anos, colesterol não-HDL 135 mg/dL, HDL 50 mg/dL, pressão sistólica 130 mmHg, TFGe 90, sem remédios, sem diabetes, não fumante).
 - Nunca sugira iniciar, parar ou mudar remédios. Se o uso de anti-hipertensivo ou de estatina aparecer como fator que aumentou o risco, explique que, no cálculo, o uso do remédio indica que a pessoa tem pressão alta ou colesterol alto em tratamento; isso não significa que o remédio faça mal.
 - Linguagem simples, entre 120 e 200 palavras, em texto corrido (sem listas, sem títulos).
@@ -62,7 +64,8 @@ def construir(g):
         "Risco: %s%%" % _num(g["risco_pct"], 1),
         "Categoria (Diretriz SBC 2025): %s" % g["categoria"],
         "Regras aplicadas: " + " | ".join(g["regras_aplicadas"]),
-        "Meta de LDL-c: %s mg/dL (redução mínima %s)" % (g["metas"]["ldl"], g["metas"]["reducao_ldl"]),
+        "Metas de colesterol: LDL-c %s mg/dL | não-HDL-c %s mg/dL | redução mínima do LDL-c %s" % (
+            g["metas"]["ldl"], g["metas"]["nao_hdl"], g["metas"]["reducao_ldl"]),
         "", "CONTRIBUIÇÕES DOS FATORES EM RELAÇÃO À PESSOA DE REFERÊNCIA (maiores primeiro; "
         "escala log-odds, só a ordem e a direção importam)",
     ]

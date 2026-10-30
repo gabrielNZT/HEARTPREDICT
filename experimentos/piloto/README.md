@@ -19,7 +19,7 @@ Configuração testada: **C-ferramenta** — o LLM recebe dados do paciente, ris
 | `resumir.py` | Taxa de explicações com erro (IC 95% de Wilson) e regra de decisão |
 | `test_prevent.py` | Testes: reproduz os 6 valores publicados no artigo do PREVENT |
 
-Nenhuma dependência além do Python 3.8+.
+Nenhuma dependência além do Python 3.8+, exceto `planilha_cega.py`, que usa `openpyxl` para gerar e ler a planilha .xlsx.
 
 ## Como rodar
 ```bash
@@ -41,12 +41,17 @@ python3 rodar_piloto.py --provedor gemini --modelo <id de um Gemini Flash/Flash-
 ```
 24 vinhetas × 3 repetições = 72 chamadas por modelo.
 
-Depois:
+Depois, anotação **cega** (sem pré-anotação, modelo nem repetição; ordem aleatória):
 ```bash
-python3 preanotar.py resultados/<arquivo>.jsonl     # gera <arquivo>_anotacao.csv
-# preencher as colunas H_* (definições em tcc/03-metodologia/metricas-fidelidade.md)
-python3 resumir.py resultados/<arquivo>_anotacao.csv
+python3 planilha_cega.py gerar resultados/<a>.jsonl resultados/<b>.jsonl --repeticao 1   # D035; gera anotacao_cega_<carimbo>.xlsx e _CHAVE.csv
+# preencher as colunas H_* (definições em tcc/03-metodologia/metricas-fidelidade.md) SEM abrir o _CHAVE.csv
+python3 planilha_cega.py revelar resultados/anotacao_cega_<carimbo>.xlsx    # junta com a chave → _revelada.csv
+python3 resumir.py resultados/anotacao_cega_<carimbo>_revelada.csv
 ```
+Guia de anotação: `tcc/03-metodologia/guia-anotacao-piloto.md`.
+`preanotar.py` fica para depois da anotação (comparar heurística × humano), nunca antes.
+
+Prompt vigente: `piloto-v3` (D036, metas de LDL-c e não-HDL-c). As execuções com `piloto-v2` (`20261006-011741_groq_openai-gpt-oss-120b.jsonl`, `20261026-225229_groq_qwen-qwen3.8-27b.jsonl` e a interrompida `20261006-012816_groq_qwen-qwen3.8-27b.jsonl`) ficam como histórico e não entram na decisão do piloto, que é refeito com o v3.
 
 ## Parâmetros do piloto (registrar no TCC)
 - Temperatura 0,7 (a mesma do sistema atual); 3 repetições; máximo de 2048 tokens.

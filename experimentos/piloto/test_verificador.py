@@ -71,15 +71,16 @@ class TestCasosDaBanca(unittest.TestCase):
 
 class TestRegras(unittest.TestCase):
     def test_texto_vago_e_fiel_mas_nao_aceito(self):
-        # Guarda contra "vencer dizendo menos": sem risco, categoria, meta e fatores, não é entregue.
+        # Guarda contra "vencer dizendo menos": sem risco, categoria, metas e fatores, não é entregue.
         r = verificador.verificar("Vários fatores influenciaram o resultado. Converse com seu médico.", G["V07"])
         self.assertTrue(r["fiel"])
         self.assertFalse(r["aceito"])
-        self.assertEqual(len(r["omissoes"]), 4)
+        self.assertEqual(len(r["omissoes"]), 5)  # risco, categoria, meta de LDL-c, meta de não-HDL-c, fatores
 
     def test_remedio_como_marcador_e_aceito(self):
         t = ("Seu risco é de 3,6%, na categoria de risco baixo. A pressão sistólica e o uso de anti-hipertensivo, que indica "
-             "pressão alta em tratamento, aumentaram o risco. A meta de LDL-c é abaixo de 115 mg/dL.")
+             "pressão alta em tratamento, aumentaram o risco. A meta de LDL-c é abaixo de 115 mg/dL e a de não-HDL-c, "
+             "abaixo de 145 mg/dL.")
         r = verificador.verificar(t, G["V07"])
         self.assertEqual(r["violacoes"], [])
         self.assertTrue(r["aceito"])
@@ -98,6 +99,22 @@ class TestRegras(unittest.TestCase):
         sem_tolerancia = verificador.verificar(t, G["V07"], exigir_conteudo=False, fracao_epsilon=0.0)
         self.assertEqual(com_tolerancia["violacoes"], [])
         self.assertEqual([v["tipo"] for v in sem_tolerancia["violacoes"]], ["POL"])
+
+    def test_metas_de_ldl_e_nao_hdl(self):
+        # D036: as duas metas são conferidas pelo alvo mais próximo (V09: intermediário, LDL < 100, não-HDL < 130).
+        base = "Seu risco é de 6,6%, risco intermediário. O tabagismo foi o fator que mais aumentou seu risco. "
+        certo = verificador.verificar(base + "Suas metas são LDL-c abaixo de 100 mg/dL e não-HDL-c abaixo de 130 mg/dL.", G["V09"])
+        self.assertEqual(certo["violacoes"], [])
+        self.assertNotIn("meta", " ".join(certo["omissoes"]))
+        trocado = verificador.verificar(base + "Sua meta de LDL-c é abaixo de 130 mg/dL e a de não-HDL-c, abaixo de 100 mg/dL.",
+                                        G["V09"], exigir_conteudo=False)
+        self.assertEqual([v["tipo"] for v in trocado["violacoes"]], ["META", "META"])
+        errado = verificador.verificar(base + "Meta de LDL-c abaixo de 100 mg/dL e de não-HDL-c abaixo de 145 mg/dL.",
+                                       G["V09"], exigir_conteudo=False)
+        self.assertEqual([(v["tipo"], v["esperado"]) for v in errado["violacoes"]], [("META", 130.0)])
+        so_ldl = verificador.verificar(base + "Sua meta de LDL-c é abaixo de 100 mg/dL.", G["V09"])
+        self.assertTrue(so_ldl["fiel"])
+        self.assertIn("não-HDL-c", " ".join(so_ldl["omissoes"]))
 
     def test_mensagem_de_correcao_lista_os_erros(self):
         r = verificador.verificar("Seu risco é de 9,9%, risco alto.", G["V07"])

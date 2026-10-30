@@ -1,6 +1,6 @@
 # Índice da base de conhecimento do TCC
 
-> Arquivo **gerado automaticamente** por `tcc/tools/indexar.py` em 2026-10-06. Não edite à mão; edite os arquivos de origem e rode o script.
+> Arquivo **gerado automaticamente** por `tcc/tools/indexar.py` em 2026-10-30. Não edite à mão; edite os arquivos de origem e rode o script.
 
 ## Documentos do projeto
 
@@ -8,7 +8,7 @@
 |---|---|---|---|
 | [Registro de decisões](00-projeto/decisoes.md) | vigente | 2026-10-06 | Decisões de projeto e de pesquisa, com data, motivo e fontes. Nunca apague; marque como substituída. |
 | [Revisão de escopo e arquitetura para TCC de graduação](00-projeto/escopo-e-arquitetura.md) | vigente | 2026-09-29 | Avaliação de cada componente existente no repositório (fundamento e destino), redimensionamento do escopo para TCC de graduação (núcleo × extensões) e enquadramento honesto do uso de agentes. |
-| [Pendências e verificações](00-projeto/pendencias.md) | vigente | 2026-10-06 | O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e anote a data. |
+| [Pendências e verificações](00-projeto/pendencias.md) | vigente | 2026-10-30 | O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e anote a data. |
 | [Proposta do TCC (documento-mestre)](00-projeto/proposta.md) | rascunho | 2026-09-29 | Tese, pergunta de pesquisa, hipóteses, contribuições, arquitetura, protocolo experimental e escopo. Fonte única da verdade do projeto. |
 | [Próximos passos (triagem de pendências)](00-projeto/proximos-passos.md) | vigente | 2026-09-29 | Triagem das 59 pendências em riscos que podem mudar o rumo, bloqueios técnicos e itens que podem esperar; ordem de execução recomendada. |
 | [Síntese da leitura completa e correções](01-literatura/sintese-leitura.md) | vigente | 2026-09-29 | O que mudou no posicionamento depois de ler os artigos centrais na íntegra; correções de afirmações feitas antes. |
@@ -18,6 +18,7 @@
 | [Justificativa do uso do JADE](02-argumentacao/justificativa-jade.md) | vigente | 2026-10-06 | O que o JADE/FIPA agrega ao projeto (conversa protocolada, decisão de entrega tipada, rastro auditável) e o que não agrega (fidelidade), com o protocolo composto corrigido após a banca, custos, riscos e respostas prováveis. |
 | [Perguntas prováveis da banca](02-argumentacao/perguntas-banca.md) | rascunho | 2026-09-29 | Perguntas difíceis e respostas fundamentadas, com fontes. |
 | [Tabela comparativa de trabalhos relacionados](02-argumentacao/trabalhos-relacionados.md) | rascunho | 2026-10-06 | Comparação critério a critério entre os trabalhos mais próximos e a proposta; base do capítulo de Trabalhos Relacionados. |
+| [Guia de anotação do piloto](03-metodologia/guia-anotacao-piloto.md) | vigente | 2026-10-30 | Instruções práticas e exemplos inventados para anotar as 48 respostas do piloto (D035). Versão simplificada de metricas-fidelidade.md. |
 | [Interface — identidade visual, UX e justificativas](03-metodologia/interface-design.md) | vigente | 2026-10-06 | Especificação da nova interface (público-alvo, identidade, tipografia, cores com contraste medido, fluxo, apresentação do risco, animação, conteúdo, acessibilidade), com a justificativa e a fonte de cada decisão. |
 | [Definição operacional das métricas de fidelidade](03-metodologia/metricas-fidelidade.md) | rascunho | 2026-10-06 | Definições operacionais das 4 métricas novas (polaridade, exatidão numérica, variáveis fora do modelo, afirmações não sustentadas), com unidade de análise, gabarito, regras de decisão, agregação e validação. |
 | [Tecnologias e nível de detalhamento no TCC](03-metodologia/tecnologias.md) | rascunho | 2026-09-29 | Critério para decidir quanto justificar cada escolha tecnológica (método, arquitetura, infraestrutura), tabela das tecnologias do projeto e checklist de reprodutibilidade. |

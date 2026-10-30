@@ -1,7 +1,7 @@
 ---
 titulo: Pendências e verificações
 status: vigente
-atualizado: 2026-10-06
+atualizado: 2026-10-30
 resumo: O que precisa ser conferido, lido ou decidido. Marque [x] ao concluir e anote a data.
 ---
 
@@ -15,9 +15,20 @@ Feito (código, com testes): regras da SBC e escopo (D026); prompt v2 e raça/co
 
 **Pendências críticas (mudam o rumo ou bloqueiam a defesa)**
 - [ ] **Piloto:** anotar as respostas (orientando), sem ver a pré-anotação, e aplicar `resumir.py`.
+  - [x] Execução completa (2026-10-26): `gpt-oss-120b` 72/72 (commit `03c2712-dirty`, 06/10) e `qwen3.8-27b` 72/72 (commit limpo `d3712eb`, 26/10; refeita inteira porque a de 06/10 parou em 16/72). Prompt idêntico nas 24 vinhetas (mesmo hash); nenhuma resposta vazia, cortada ou com erro.
+  - [x] Planilha cega gerada (2026-10-30, D035): `experimentos/piloto/planilha_cega.py --repeticao 1` → `resultados/anotacao_cega_20261030-153928.xlsx` (48 respostas = 1ª repetição × 24 vinhetas × 2 modelos, embaralhadas, sem modelo nem pré-anotação; coluna `fatores(gabarito)` com aumentaram/diminuíram/desprezíveis; chave em `_CHAVE.csv`). Substitui a planilha de 144 de 26/10, apagada sem anotação. Fluxo gerar → revelar → `resumir.py` testado com dados falsos. Em .xlsx desde 30/10 (o CSV quebrava colunas no LibreOffice); altura de linha fixa, S/N com lista; conferido que o LibreOffice lê 17 colunas em todas as linhas.
+  - [x] Guia de anotação com exemplos inventados: `tcc/03-metodologia/guia-anotacao-piloto.md` (2026-10-30).
+  - [x] Prompt `piloto-v3` e verificador `verificador-v2` com a meta de não-HDL-c (D036, 2026-10-30; 22 testes do verificador, testes de SBC/PREVENT e 18 do gateway passando). As execuções e a planilha acima (v2) ficam obsoletas; a planilha v2 foi apagada sem anotação.
+  - [ ] **Refazer as execuções com `piloto-v3`** nos dois modelos, a partir de um commit limpo.
+  - [ ] Gerar a nova planilha cega (`planilha_cega.py gerar … --repeticao 1`).
+  - [ ] **Anotar** a planilha (orientando) sem abrir a chave; depois `planilha_cega.py revelar` e `resumir.py`.
+  - [ ] Declarar no TCC: origens diferentes das duas execuções (commit sujo × limpo, mesmo prompt) e cegueira só quanto ao rótulo (o estilo pode denunciar o modelo).
 - [ ] **Tamanho da amostra** com a taxa de erro do piloto (D029).
 - [ ] **Validar o plano de análise (D029) com o orientador** — O006.
 - [ ] **Verificador como módulo Python** (D034), com extrator testado contra os 26 casos adversariais da banca; segundo extrator, diferente, para a avaliação.
+  - [x] Módulo `experimentos/piloto/verificador.py` (nível 1, determinístico) e `test_verificador.py` com os 26 casos (2026-10-06; 21 testes passando em 2026-10-25). Acertar esses casos não valida o extrator.
+  - [ ] Segundo extrator, diferente, para a avaliação (B1).
+  - [ ] Não rodar o verificador nas respostas do piloto antes de terminar a anotação cega.
 - [ ] **Executor único** das três configurações.
 - [ ] **JADE (D032):** serviço Python fino; `AchieveREResponder` no Calculador; `ProposeInitiator`/`ProposeResponder` no ciclo; `conversation-id` e `reply-by`; log JSON Lines; teste de ponta a ponta; versionar o jar; religar o Calculador ao PREVENT.
 - [ ] **Busca de literatura com protocolo** (parecer de Literatura, §6.3; 25–40 h). Até lá, a lacuna é escrita como "nos trabalhos lidos".

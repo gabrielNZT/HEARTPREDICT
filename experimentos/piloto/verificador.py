@@ -23,7 +23,7 @@ import unicodedata
 
 import prevent
 
-VERSAO = "verificador-v1"
+VERSAO = "verificador-v2"  # v2 (D036): meta de não-HDL-c conferida e exigida, como a de LDL-c
 FRACAO_EPSILON = 0.05  # ε = 5% de Σ|φ| (metricas-fidelidade.md §3.3)
 
 # ---------------------------------------------------------------- glossário (ordem = prioridade)
@@ -74,7 +74,7 @@ NAO_AFIRMA = (r"\bcontrol\w+|\bmant(er|enha|endo|em)\b|\bpar(ar|e|ando) de\b|\bd
 GERAL = r"de (forma|modo|maneira) geral|\bem geral\b|na populacao|\bgeralmente\b|\bcostuma\w*\b|de modo amplo"
 EXCLUI = (r"nao (entra|entram|faz parte|fazem parte|e usad[oa]|sao usad[oa]s|foi considerad[oa]|foram considerad[oa]s"
           r"|e considerad[oa]|participa|participam|influenci\w+|pes\w+|cont\w+|interfer\w+|e levad[oa]|sao levad[oa]s)")
-ALVO_CATEGORIA = r"\bcategoria\b|\bclassific\w+|\breclassific\w+|\bdiretriz\b|\bagravante\w*|\bmeta\b|\bpassa (a|para)\b"
+ALVO_CATEGORIA = r"\bcategoria\b|\bclassific\w+|\breclassific\w+|\bdiretriz\b|\bagravante\w*|\bmetas?\b|\bpassa (a|para)\b"
 
 CATEGORIAS = {"baixo": "baixo", "baixa": "baixo", "intermediario": "intermediário", "intermediaria": "intermediário",
               "moderado": "intermediário", "moderada": "intermediário", "medio": "intermediário", "alto": "alto",
@@ -172,6 +172,17 @@ def _origens_numericas(g):
     return o
 
 
+def _alvo_da_meta(antes, depois):
+    """A qual meta o número se refere: a menção de LDL ou de não-HDL mais próxima antes dele; senão, a primeira depois."""
+    ultimas = {alvo: max((m.end() for m in re.finditer(padrao, antes)), default=-1)
+               for alvo, padrao in (("meta de LDL", r"\bldl"), ("meta de não-HDL", r"nao-?hdl"))}
+    if max(ultimas.values()) >= 0:
+        return max(ultimas, key=ultimas.get)
+    if re.search(r"^\W*(mg/dl)?\W*(de |do |para o |para )?(colesterol )?nao-?hdl", depois):
+        return "meta de não-HDL"
+    return "meta de LDL"
+
+
 def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
     violacoes, afirmacoes, omissoes = [], [], []
     risco = g["risco_pct"]
@@ -182,7 +193,7 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
     regra_ldl = any("LDL-c" in r for r in g["regras_aplicadas"][1:])
     categoria_do_escore = "baixo" if risco < 5 else ("intermediário" if risco < 20 else "alto")
     direcoes_ditas = {}  # variável → conjunto de direções afirmadas (para a cobertura)
-    citou = {"risco": False, "categoria": False, "meta": False}
+    citou = {"risco": False, "categoria": False, "meta de LDL": False, "meta de não-HDL": False}
 
     def violar(tipo, trecho, mensagem, **extra):
         violacoes.append(dict(tipo=tipo, trecho=trecho, mensagem=mensagem, **extra))
@@ -204,7 +215,7 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
                                    or (var == "lipoproteína(a)" and "lpa_elevada" in agravantes)
                                    or (var == "PCR" and "pcr_us_elevada" in agravantes)):
                 continue
-            if var == "LDL" and re.search(r"\bmeta\b|\balvo\b|\bobjetivo\b", norm):
+            if var == "LDL" and re.search(r"\bmetas?\b|\balvo\b|\bobjetivo\b", norm):
                 continue
             afirmacoes.append(dict(tipo="FORA", variavel=var, trecho=original))
             violar("FORA", original, "O texto apresenta %s como causa do risco calculado, mas essa informação não entra "
@@ -250,7 +261,7 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
                     c, g["categoria"]), encontrado=c, esperado=g["categoria"])
 
         # ---------------- NUM e META: todo número precisa ter origem
-        em_meta = re.search(r"\bmeta\b|\balvo\b|\bobjetivo\b|\bideal\b", norm) is not None
+        em_meta = re.search(r"\bmetas?\b|\balvo\b|\bobjetivo\b|\bideal\b", norm) is not None
         for m in re.finditer(NUMERO, norm):
             bruto = m.group(0)
             apos = norm[m.end():m.end() + 28]
@@ -275,7 +286,8 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
                 else:
                     citou["risco"] = True
                 continue
-            if v in NUMEROS_LIVRES and not percentual:
+            # 100 é número livre ("em 100 pessoas"), mas também é meta (LDL-c do intermediário, não-HDL-c do alto).
+            if v in NUMEROS_LIVRES and not percentual and not (em_meta and v in (origens["meta de LDL"], origens["meta de não-HDL"])):
                 continue
 
             if percentual:
@@ -291,7 +303,7 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
                     continue
                 if v in (5.0, 20.0) and re.search(r"\bcorte\b|\blimi\w+|\bfaixa\b|\bentre\b|abaixo de|acima de|menos de|mais de|a partir de|\bate\b", norm):
                     continue
-                if v == origens["redução mínima de LDL"] and re.search(r"\bredu\w+|\bdiminu\w+|\bbaixar\b", norm) and re.search(r"\bldl|\bcolesterol|\bmeta\b", norm):
+                if v == origens["redução mínima de LDL"] and re.search(r"\bredu\w+|\bdiminu\w+|\bbaixar\b", norm) and re.search(r"\bldl|\bcolesterol|\bmetas?\b", norm):
                     continue
                 violar("NUM", original, "O texto cita %s%%, que não corresponde ao risco calculado (%s%%) nem a outro valor "
                        "fornecido. Use só os números fornecidos." % (bruto, _fmt(risco, 1)), encontrado=v, esperado=risco)
@@ -300,16 +312,21 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
             # Meta de colesterol: o número ligado a "meta" tem de ser o da categoria.
             if em_meta and re.match(r"\s*(mg|$|[.,;)]|\s*e\b)", apos) and 30 <= v <= 200 and not re.search(r"\banos\b|mmhg", apos):
                 afirmacoes.append(dict(tipo="META", valor=v, trecho=original))
-                alvo = "meta de não-HDL" if re.search(r"nao-?hdl", antes + norm[m.end():m.end() + 20]) else "meta de LDL"
-                validos = {origens["meta de LDL"], origens["meta de não-HDL"]} | ({origens.get("LDL")} - {None}) | {
-                    origens["não-HDL"], origens["colesterol total"], origens["HDL"], 145.0, 160.0, 190.0}
-                if v == origens[alvo] or v == origens["meta de LDL"]:
-                    citou["meta"] = True
+                alvo = _alvo_da_meta(norm[max(0, m.start() - 60):m.start()], norm[m.end():m.end() + 25])
+                outra = "meta de LDL" if alvo == "meta de não-HDL" else "meta de não-HDL"
+                valores_do_paciente = ({origens.get("LDL")} - {None}) | {
+                    origens["não-HDL"], origens["colesterol total"], origens["HDL"], 160.0, 190.0}
+                if v == origens[alvo]:
+                    citou[alvo] = True
                     continue
-                if v in validos:
+                # Valor do próprio paciente, ou o limiar de LDL-c de 145 mg/dL do risco baixo (Tabela 5.1, nota),
+                # citado na frase da meta. 145 também é a meta de não-HDL-c do risco baixo: só vale no alvo LDL.
+                if v != origens[outra] and (v in valores_do_paciente or (v == 145.0 and alvo == "meta de LDL")):
                     continue
-                violar("META", original, "O texto cita %s mg/dL junto à meta, mas a meta de LDL-c para a categoria %s é %s mg/dL." % (
-                    bruto, g["categoria"], g["metas"]["ldl"]), encontrado=v, esperado=origens["meta de LDL"])
+                rotulo = "LDL-c" if alvo == "meta de LDL" else "não-HDL-c"
+                violar("META", original, "O texto cita %s mg/dL como meta de %s, mas a meta de %s para a categoria %s é %s mg/dL." % (
+                    bruto, rotulo, rotulo, g["categoria"], g["metas"]["ldl" if alvo == "meta de LDL" else "nao_hdl"]),
+                    encontrado=v, esperado=origens[alvo])
                 continue
 
             if any(abs(v - ref) <= tol(ref) for ref in origens.values()):
@@ -330,8 +347,10 @@ def verificar(texto, g, exigir_conteudo=True, fracao_epsilon=FRACAO_EPSILON):
             omissoes.append("O texto não informa o risco calculado (%s%%)." % _fmt(risco, 1))
         if not citou["categoria"]:
             omissoes.append("O texto não informa a categoria de risco (%s)." % g["categoria"])
-        if not citou["meta"]:
+        if not citou["meta de LDL"]:
             omissoes.append("O texto não informa a meta de LDL-c (%s mg/dL)." % g["metas"]["ldl"])
+        if not citou["meta de não-HDL"]:
+            omissoes.append("O texto não informa a meta de não-HDL-c (%s mg/dL)." % g["metas"]["nao_hdl"])
         if principais and not certas:
             omissoes.append("O texto não diz quais fatores mais pesaram. Os principais são: %s." % ", ".join(
                 NOMES[v] for v in principais))
